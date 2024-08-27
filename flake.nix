@@ -21,21 +21,19 @@
 	};
   in
   {
-	
-    homeConfigurations."${username}@${host}" = home-manager.lib.homeManagerConfiguration {
-	pkgs = nixpkgs.legacyPackages.${system};
-	extraSpecialArgs = {
-		inherit inputs;
-		inherit username;
-		inherit host;
-		inherit system;
-	};
-	modules = [ ./home.nix ];
-    };
 
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
 	system = "x86_64-linux";
-    	modules = [ ./configuration.nix ];
+    	modules = [ 
+		./configuration.nix
+		
+		home-manager.nixosModules.home-manager {
+			home-manager.useGlobalPkgs = true;
+			home-manager.useUserPkgs = true;
+			
+			home-manager.users.xander = import ./home.nix;
+		}
+	];
     };
 
   };
