@@ -102,7 +102,6 @@
     sddm
     wofi
     terminator
-    concatstrings
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
