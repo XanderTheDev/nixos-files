@@ -8,7 +8,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      <home-manager/nixos>
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -83,7 +82,6 @@
     ];
   };
 
-  home-manager.users.xander = import ./home.nix;
   home-manager.useGlobalPkgs = true;
   home-manager.backupFileExtension = "backup";
   
