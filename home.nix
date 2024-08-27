@@ -70,9 +70,13 @@
     # EDITOR = "emacs";
   };
 
-  home.file."~/.config/hypr/hyprland.conf".source = ./configs/hyprland.conf;
-  
-  #wayland.windowManager.hyprland.settings = import ./hyprland.nix;
+  wayland.windowManager.hyprland = {
+	enable = true;
+	xwayland.enable = true;
+	systemd.enable = true;
+	
+	extraConfig = concatStrings [ import ./configs/hyprland.conf ]
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
