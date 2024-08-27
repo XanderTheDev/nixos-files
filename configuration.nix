@@ -8,7 +8,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.default
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -82,9 +81,6 @@
     packages = with pkgs; [
     ];
   };
-
-  home-manager.useGlobalPkgs = true;
-  home-manager.backupFileExtension = "backup";
   
   nixpkgs.config.allowUnfree = true;
   
