@@ -3,12 +3,38 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.05";
+    home-manager = {
+	url = "github:nix-community/home-manager";
+	inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs }:{
+  outputs = { self, nixpkgs, home-manager }:
+  let
+	system = "x86_64-linux";
+	host = "nixos";
+	username = "xander";
+	
+	pkgs = import nixpkgs {
+		inherit system;
+		config.allowUnfree = true;
+	};
+  in
+  {
+	
+    homeConfigurations."${username}@${host}" = home-manager.lib.homeManagerConfiguration {
+	pkgs = nixpkgs.legacyPackages.${system};
+	extraSpecialArgs = {
+		inherit inputs;
+		inherit username;
+		inherit host;
+		inherit system;
+	};
+	modules = [ ./home.nix ];
+    };
 
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-	system = "x86_64-linux";
+	system = ${system};
     	modules = [ ./configuration.nix ];
     };
 
