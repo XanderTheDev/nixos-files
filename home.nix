@@ -74,8 +74,6 @@
 	enable = true;
 	xwayland.enable = true;
 	systemd.enable = true;
-
-	sfsfg
 	
 	extraConfig = concatStrings [ ./configs/hyprland.conf ];
   };
