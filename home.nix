@@ -75,7 +75,7 @@
 	xwayland.enable = true;
 	systemd.enable = true;
 	
-	extraConfig = concatStrings [ import ./configs/hyprland.conf ]
+	extraConfig = concatStrings [ import ./configs/hyprland.conf ];
   };
 
   # Let Home Manager install and manage itself.
