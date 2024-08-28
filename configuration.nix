@@ -86,21 +86,20 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    killall
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    w3m
-    git
     brave
+    git
+    gparted
+    killall
     librewolf
     neofetch
-    gparted
     python311
-    waybar
-    wofi
     sddm
-    wofi
     terminator
+    vim
+    w3m
+    waybar
+    wget
+    wofi
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
