@@ -88,6 +88,7 @@
     killall
     librewolf
     neofetch
+    nerdfonts
     python311
     sddm
     terminator
