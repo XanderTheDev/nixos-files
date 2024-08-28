@@ -19,7 +19,7 @@
     "custom/space" = {
 	orientation = "horizontal";
 	format = " ";
-  #  };
+    };
    # "group/hardware" = {
 #	orientation = "horizontal";
 #	modules = ["cpu" "temperature" "battery"];
