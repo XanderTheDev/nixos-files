@@ -5,12 +5,12 @@
     spacing = 10; # Gaps between modules (4px)
     modules-left = ["hyprland/workspaces" "hyprland/window" "wlr/taskbar"];
     modules-center = [];
-    modules-right = ["network" "group/laptop" "clock" "group/hardware" "tray" "custom/power_button" "custom/space"];
+    modules-right = ["network" "pulseaudio" "backlight" "clock" "cpu" "temperature" "battery" "tray" "custom/power_button" "custom/space"];
     
-    "group/laptop" = {
-	orientation = "horizontal";
-	modules = ["pulseaudio" "backlight"];
-    };
+    #"group/laptop" = {
+#	orientation = "horizontal";
+#	modules = ["pulseaudio" "backlight"];
+ #   };
     "custom/power_button" = {
 	orientation = "horizontal";
 	format = "⏻";
@@ -19,11 +19,11 @@
     "custom/space" = {
 	orientation = "horizontal";
 	format = " ";
-    };
-    "group/hardware" = {
-	orientation = "horizontal";
-	modules = ["cpu" "temperature" "battery"];
-    };	
+  #  };
+   # "group/hardware" = {
+#	orientation = "horizontal";
+#	modules = ["cpu" "temperature" "battery"];
+ #   };	
     "tray" = {
         # icon-size = 21;
         spacing = 10;
