@@ -89,6 +89,8 @@ with lib;
 	settings = [ ./configs/waybar/waybar.nix ];
   };
 
+  home.file."~/.config/waybar/style.css".text = ./configs/waybar/waybarstyle.css;
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
