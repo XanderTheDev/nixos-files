@@ -88,7 +88,6 @@
     killall
     librewolf
     neofetch
-    nerdfonts
     python311
     sddm
     terminator
@@ -98,6 +97,10 @@
     wget
     wofi
     xdg-desktop-portal-hyprland
+  ];
+
+  fonts.packages = with pkgs; [
+	nerdfonts
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
