@@ -84,7 +84,7 @@ with lib;
   
   programs.waybar = {
 	enable = true;
-	settings = [ ./configs/waybar/waybar.conf ];
+	settings = import ./configs/waybar/waybar.nix;
 	style = concatStrings [ ./configs/waybar/waybarstyle.css ];
   };
 
