@@ -74,7 +74,9 @@ with lib;
   wayland.windowManager.hyprland = {
 	enable = true;
 	
-	extraConfig = concatStrings [ ./configs/hyprland.conf ];
+	extraConfig = "
+		source = ${./configs/hyprland.conf}
+	";
 
   };
 
