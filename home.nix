@@ -49,7 +49,7 @@ with lib;
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-    "~/.config/waybar/config".text = import ./configs/waybar/waybar.conf;
+    "~/.config/waybar/config".text = ./configs/waybar/waybar.conf;
   };
 
   # Home Manager can also manage your environment variables through
@@ -81,6 +81,11 @@ with lib;
 		source = ${./configs/hypr/hyprland.conf}
 	";
 
+  };
+  
+  programs.waybar = {
+	enable = true;
+	settings = [ ./configs/waybar/waybar.conf ];
   };
 
   # Let Home Manager install and manage itself.
