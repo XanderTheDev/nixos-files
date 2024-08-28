@@ -32,7 +32,7 @@
         # timezone = "America/New_York";
 	interval = 1;
 	format = "{:%T}";
-        tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+#       tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
         format-alt = "{:%a %d %B}";
     };
     "cpu" = {
@@ -88,16 +88,16 @@
         };
         on-click = "pavucontrol";
     };
-    "custom/media" = {
-        format = "{icon} {}";
-        return-type = "json";
-        max-length = 40;
-        format-icons = {
-            spotify = "";
-            default = "🎜";
-        };
-        escape = true;
-        exec = "$HOME/.config/waybar/mediaplayer.py 2> /dev/null"; # Script in resources folder
-        # exec = "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null"; # Filter player based on name
-    };
+#    "custom/media" = {
+#        format = "{icon} {}";
+#        return-type = "json";
+#        max-length = 40;
+#        format-icons = {
+#            spotify = "";
+#            default = "🎜";
+#        };
+#        escape = true;
+#        exec = "$HOME/.config/waybar/mediaplayer.py 2> /dev/null"; # Script in resources folder
+#        # exec = "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null"; # Filter player based on name
+#    };
 }
