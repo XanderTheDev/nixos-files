@@ -1,5 +1,6 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
+with lib;
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -72,10 +73,9 @@
 
   wayland.windowManager.hyprland = {
 	enable = true;
-	xwayland.enable = true;
-	systemd.enable = true;
 	
-	extraConfig = import ./configs/hyprland.conf;
+	extraConfig = concatStrings [ ./configs/hyprland.conf ];
+
   };
 
   # Let Home Manager install and manage itself.
