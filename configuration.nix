@@ -36,12 +36,14 @@
   services.displayManager.sddm.wayland.enable = true;
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-     font = "Lat2-Terminus16";
-     keyMap = "us";
-     useXkbConfig = true; # use xkb.options in tty.
-  };
+  # i18n.defaultLocale = "en_US.UTF-8";
+  # console = {
+  #   font = "Lat2-Terminus16";
+  #   useXkbConfig = true; # use xkb.options in tty.
+  # };
+  
+  console.keyMap = "us";
+
 	
   # Enabling Hyprland
   programs.hyprland = {
