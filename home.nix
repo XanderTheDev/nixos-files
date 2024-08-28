@@ -86,6 +86,7 @@ with lib;
   programs.waybar = {
 	enable = true;
 	settings = [ ./configs/waybar/waybar.conf ];
+	style = concatStrings [ ./configs/waybar/waybarstyle.css ];
   };
 
   # Let Home Manager install and manage itself.
