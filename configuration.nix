@@ -98,7 +98,7 @@
     wofi
     xdg-desktop-portal-hyprland
     ags
-
+    neovim
   ];
 
   fonts.packages = with pkgs; [
