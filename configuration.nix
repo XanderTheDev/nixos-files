@@ -97,10 +97,14 @@
     wget
     wofi
     xdg-desktop-portal-hyprland
+    ags
+
   ];
 
   fonts.packages = with pkgs; [
 	nerdfonts
+	roboto
+	vistafonts
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

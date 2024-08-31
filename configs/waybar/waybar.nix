@@ -51,7 +51,7 @@
         format-icons = ["" "" ""];
     };
     "backlight" = {
-        # device = "acpi_video1";
+        device = "acpi_video1";
         format = "{percent}% {icon}";
         format-icons = ["☼" "☼" "𖤓" "𖤓" "☀︎" "☀︎" "🔆" "☀️" "🌞"];
     };
