@@ -1,5 +1,6 @@
-{ config, pkgs, lib, ... }:
+{ inputs, config, pkgs, lib, ... }:
 
+with inputs;
 with lib;
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -88,6 +89,11 @@ with lib;
 	style = concatStrings [ ./configs/waybar/waybarstyle.css ];
 	settings = [ ./configs/waybar/waybar.nix ];
   };
+
+#  programs.ags = {
+#	enable = true;
+#	configDir = ./configs/ags;
+ # };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
