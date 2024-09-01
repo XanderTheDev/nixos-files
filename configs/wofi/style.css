@@ -1,5 +1,5 @@
 window {
 border-radius: 10px;
 margin: 0px;
-border: 1px solid #bd93f9;
+border: 3px linear-gradient(to bottom right, #E06564, #7783A9,#ebc4cb);
 }
