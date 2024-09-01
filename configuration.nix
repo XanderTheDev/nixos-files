@@ -100,23 +100,25 @@
     neovim
     gtk3
     gnome.adwaita-icon-theme
+    mate.mate-icon-theme-faenza
   ];
 
   services.upower.enable = true;
   
   
-  nixpkgs.overlays = [
-  (final: prev:
-    {
-      ags = prev.ags.overrideAttrs (old: {
-        buildInputs = old.buildInputs ++ [ pkgs.libdbusmenu-gtk3 ];
-      });
-    }
-  )
-  ];
+  #nixpkgs.overlays = [
+  #(final: prev:
+  #  {
+  #    ags = prev.ags.overrideAttrs (old: {
+  #      buildInputs = old.buildInputs ++ [ pkgs.libdbusmenu-gtk3 ];
+  #    });
+  #  }
+  #)
+  #];
 
   fonts.packages = with pkgs; [
 	nerdfonts
+        font-awesome
 	roboto
 	vistafonts
   ];
