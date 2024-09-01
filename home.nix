@@ -98,6 +98,7 @@ in {
   
   stylix.targets = {
 	waybar.enable = false;
+	btop.enable = true;
   };
   
   programs.neovim = {

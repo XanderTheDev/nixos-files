@@ -53,6 +53,8 @@
   programs.hyprland = {
   	enable = true;
   };
+
+  programs.thunar.enable = true;
   
   virtualisation.virtualbox.guest.enable = true;
   
@@ -133,8 +135,12 @@
   fonts.packages = with pkgs; [
 	nerdfonts
         font-awesome
+	noto-fonts
+	cantarell-fonts
 	roboto
-	vistafonts
+	fira
+	dejavu_fonts
+	liberation_ttf
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
