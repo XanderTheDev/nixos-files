@@ -94,6 +94,10 @@ with lib;
 	settings = [ ./configs/waybar/waybar.nix ];
   };
   
+  stylix.targets = {
+	waybar.enable = false;
+  };
+  
   programs.neovim = {
 	enable = true;
 	defaultEditor = true;
