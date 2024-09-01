@@ -7,6 +7,10 @@
 	url = "github:nix-community/home-manager?ref=release-24.05";
 	inputs.nixpkgs.follows = "nixpkgs";
     };
+    ags = {
+	url = "github:Aylur/ags";
+	inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ { nixpkgs, home-manager, ... }:
