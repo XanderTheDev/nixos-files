@@ -119,7 +119,9 @@ with lib;
 	window {
 		border-radius: 10px;
 		margin: 0px;
-		border: 1px solid #bd93f9;
+		border-image: linear-gradient(to bottom right, #E06564, #7783A9,#ebc4cb) 1;
+		border-width: 3px;
+		border-style: solid;
 	}
 	";
   };
