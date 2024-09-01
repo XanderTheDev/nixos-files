@@ -11,9 +11,13 @@
 	url = "github:Aylur/ags";
 	inputs.nixpkgs.follows = "nixpkgs";
     };
+    stylix = {
+	url = "github:danth/stylix";
+	inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs @ { nixpkgs, home-manager, ... }:
+  outputs = inputs @ { nixpkgs, home-manager, stylix, ... }:
   let
 	system = "x86_64-linux";
 	host = "nixos";
@@ -47,6 +51,7 @@
 			
 			home-manager.users.xander = import ./home.nix;
 		}
+		stylix.nixosModules.stylix
 	];
     };
 
