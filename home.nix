@@ -54,6 +54,7 @@ with lib;
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+    "~/.config/wofi/style.css".text = ./configs/wofi/style.css;
   };
 
   # Home Manager can also manage your environment variables through
@@ -110,6 +111,11 @@ with lib;
 	enable = true;
 	configDir = ./configs/ags;
 
+  };
+
+  programs.wofi = {
+	enable =true;
+	style = [ ./configs/wofi/style.css ];
   };
 
   # Let Home Manager install and manage itself.
