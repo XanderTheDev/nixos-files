@@ -97,8 +97,22 @@
     wget
     wofi
     xdg-desktop-portal-hyprland
-    ags
     neovim
+    gtk3
+    gnome.adwaita-icon-theme
+  ];
+
+  services.upower.enable = true;
+  
+  
+  nixpkgs.overlays = [
+  (final: prev:
+    {
+      ags = prev.ags.overrideAttrs (old: {
+        buildInputs = old.buildInputs ++ [ pkgs.libdbusmenu-gtk3 ];
+      });
+    }
+  )
   ];
 
   fonts.packages = with pkgs; [

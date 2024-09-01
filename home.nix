@@ -38,6 +38,10 @@ with lib;
     # '')
   ];
 
+  imports = [
+	inputs.ags.homeManagerModules.default	
+  ];
+
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
@@ -89,11 +93,19 @@ with lib;
 	style = concatStrings [ ./configs/waybar/waybarstyle.css ];
 	settings = [ ./configs/waybar/waybar.nix ];
   };
+  
+  programs.neovim = {
+	enable = true;
+	defaultEditor = true;
+	plugins = with pkgs.vimPlugins; [
+		nvchad-ui
+	];
+  };
 
-#  programs.ags = {
-#	enable = true;
-#	configDir = ./configs/ags;
- # };
+  programs.ags = {
+	enable = true;
+	configDir = ./configs/ags;
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
