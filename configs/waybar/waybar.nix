@@ -5,7 +5,18 @@
     spacing = 10; # Gaps between modules (4px)
     modules-left = ["hyprland/workspaces" "hyprland/window" "wlr/taskbar"];
     modules-center = [];
-    modules-right = ["network" "pulseaudio" "backlight" "clock" "cpu" "temperature" "battery" "tray" "custom/power_button" "custom/space"];
+    modules-right = [
+	"network"
+	"pulseaudio"
+	#"backlight"
+	"clock"
+	"cpu"
+	#"temperature"
+	#"battery"
+	"tray"
+	"custom/power_button"
+	"custom/space"
+	];
     
     #"group/laptop" = {
 #	orientation = "horizontal";

@@ -92,7 +92,7 @@ button:hover {
     padding-left: 8px;
 }
 #cpu {
-    border-radius: 15px 0px 0px 15px;
+    border-radius: 15px 15px 15px 15px;
     border-left: 1px solid #bd93f9;
     border-bottom: 1px solid #bd93f9;
     border-top: 1px solid #bd93f9;
@@ -148,7 +148,7 @@ button:hover {
     padding-left: 10px;
 }    
 #pulseaudio {
-    border-radius: 15px 0px 0px 15px;
+    border-radius: 15px 15px 15px 15px;
     border-top: 1px solid #bd93f9;
     border-bottom: 1px solid #bd93f9;
     border-left: 1px solid #bd93f9;
