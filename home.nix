@@ -105,6 +105,7 @@ with lib;
   programs.ags = {
 	enable = true;
 	configDir = ./configs/ags;
+
   };
 
   # Let Home Manager install and manage itself.
