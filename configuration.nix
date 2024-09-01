@@ -92,6 +92,7 @@
     alacritty
     blueman
     brave
+    btop
     git
     gnome.adwaita-icon-theme
     gparted
