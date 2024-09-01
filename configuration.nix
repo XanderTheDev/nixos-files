@@ -109,8 +109,9 @@
     xdg-desktop-portal-hyprland
   ];
 
+  stylix.enable = true;
   stylix.image = ./wallpapers/lake-sunrise.jpg;
-
+  stylix.polarity = "dark";
   services.upower.enable = true;
   
   
