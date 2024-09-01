@@ -53,6 +53,9 @@
   programs.hyprland = {
   	enable = true;
   };
+  
+  virtualisation.virtualbox.guest.enable = true;
+  
   # Compatibility
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
