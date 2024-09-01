@@ -2,7 +2,9 @@
 
 with inputs;
 with lib;
-{
+with config.stylix.fonts; let
+   colors = config.lib.stylix.colors.withHashtag;
+in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "xander";
@@ -96,7 +98,6 @@ with lib;
   
   stylix.targets = {
 	waybar.enable = false;
-	wofi.enable = false;
   };
   
   programs.neovim = {
@@ -111,19 +112,6 @@ with lib;
 	enable = true;
 	configDir = ./configs/ags;
 
-  };
-
-  programs.wofi = {
-	enable = true;
-	style = "
-	window {
-		border-radius: 10px;
-		margin: 0px;
-		border-image: linear-gradient(to bottom right, #E06564, #7783A9,#ebc4cb) 1;
-		border-width: 3px;
-		border-style: solid;
-	}
-	";
   };
 
   # Let Home Manager install and manage itself.
