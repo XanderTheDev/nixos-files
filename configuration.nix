@@ -86,6 +86,7 @@
   
   # System packages
   environment.systemPackages = with pkgs; [
+    alacritty
     blueman
     brave
     git
