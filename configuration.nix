@@ -19,6 +19,10 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
+  # networking.wireless.iwd = {
+#	enable = true;
+#	settings.General.EnableNetworkConfiguration = true;
+  # };
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
   
@@ -82,12 +86,18 @@
   
   # System packages
   environment.systemPackages = with pkgs; [
+    blueman
     brave
     git
+    gnome.adwaita-icon-theme
     gparted
+    gtk3
     killall
     librewolf
+    mate.mate-icon-theme-faenza
     neofetch
+    neovim
+    networkmanagerapplet
     python311
     sddm
     terminator
@@ -97,10 +107,6 @@
     wget
     wofi
     xdg-desktop-portal-hyprland
-    neovim
-    gtk3
-    gnome.adwaita-icon-theme
-    mate.mate-icon-theme-faenza
   ];
 
   services.upower.enable = true;
