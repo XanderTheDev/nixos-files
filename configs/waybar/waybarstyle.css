@@ -78,8 +78,8 @@ button:hover {
     border: 1px solid #bd93f9;
     margin-top: 3px;
     margin-bottom: 3px;
-    padding-right: 10px;
-    padding-left: 8px;
+    padding-right: 9px;
+    padding-left: 9px;
 }
 #battery {
     border-radius: 0px 15px 15px 0px;
@@ -94,11 +94,12 @@ button:hover {
 #cpu {
     border-radius: 15px 15px 15px 15px;
     border-left: 1px solid #bd93f9;
+    border-right: 1px solid #bd93f9;
     border-bottom: 1px solid #bd93f9;
     border-top: 1px solid #bd93f9;
     margin-top: 3px;
     margin-bottom: 3px;
-    padding-right: 10px;
+    padding-right: 13px;
     padding-left: 10px;
 }
 #custom-power_button {
@@ -152,9 +153,10 @@ button:hover {
     border-top: 1px solid #bd93f9;
     border-bottom: 1px solid #bd93f9;
     border-left: 1px solid #bd93f9;
+    border-right: 1px solid #bd93f9;
     margin-top: 3px;
     margin-bottom: 3px;
-    padding-right: 8px;
+    padding-right: 14px;
     padding-left: 10px;
 }
 #wireplumber,
