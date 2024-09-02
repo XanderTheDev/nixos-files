@@ -1,4 +1,8 @@
-* {
+{
+enable = true;
+package = pkgs.waybar;
+style = concatStrings [ "
+	* {
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: NerdFonts, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
     font-size: 13px;
@@ -366,4 +370,7 @@ label:focus {
 
 #scratchpad.empty {
 	background-color: transparent;
+}
+" ];
+settings = [ ./waybar.nix ];
 }
