@@ -89,12 +89,14 @@ in {
 
   };
   
-  programs.waybar = {
-	enable = true;
-	package = pkgs.waybar;
-	style = concatStrings [ ./configs/waybar/waybarstyle.css ];
-	settings = [ ./configs/waybar/waybar.nix ];
-  };
+ # programs.waybar = {
+#	enable = true;
+#	package = pkgs.waybar;
+#	style = concatStrings [ ./configs/waybar/waybarstyle.css ];
+#	settings = [ ./configs/waybar/waybar.nix ];
+  #};
+  
+  programs.waybar = import ./configs/waybar/waybarr.nix;
   
   stylix.targets = {
 	waybar.enable = false;
