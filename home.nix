@@ -499,6 +499,46 @@ label:focus {
 
   };
 
+  programs.wlogout = {
+	enable = true;
+	layout = import ./configs/wlogout/layout.nix;
+	style = ''
+		* {
+			background-image: none;
+			box-shadow: none;
+		}
+		window {
+			background-color: rgba(12, 12, 12, 0.8);
+		}
+		button {
+			border-radius: 200;
+			border-color: #${config.stylix.base16Scheme.base0D};
+			color: #${config.stylix.base16Scheme.base05};
+			margin: 2px 10px 10px 2px;
+			background-color: #${config.stylix.base16Scheme.base00};
+			border-style: solid;
+			border-width: 1px;
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: 25%;
+		}
+		button:focus, button:active {
+			border-radius: 50;
+			background-color: #${config.stylix.base16Scheme.base02};
+			outline-style: none;
+		}
+		#lock {
+			background-image: image("./configs/wlogout/icons/lock.png");
+		}
+		#shutdown {
+			background-image: image("./configs/wlogout/icons/shutdown.png");
+		}
+		#reboot {
+			background-image: image("./configs/wlogout/icons/shutdown.png");
+		}
+	'';
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
