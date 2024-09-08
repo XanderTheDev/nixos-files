@@ -91,7 +91,7 @@
   
   # System packages
   environment.systemPackages = with pkgs; [
-    alacritty
+    bat
     blueman
     brave
     btop
@@ -108,6 +108,7 @@
     python311
     sddm
     terminator
+    tmux
     vim
     w3m
     waybar

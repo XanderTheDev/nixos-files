@@ -484,6 +484,14 @@ label:focus {
 	waybar.enable = false;
 	btop.enable = true;
   };
+
+  programs.btop = {
+	enable = true;
+  };
+  
+  programs.bat = {
+	enable = true;
+  };
   
   programs.neovim = {
 	enable = true;
@@ -537,6 +545,10 @@ label:focus {
 			background-image: image(url("/home/${username}/nixos-files/configs/wlogout/icons/reboot.png"));
 		}
 	'';
+  };
+
+  programs.tmux = {
+	enable = true;
   };
 
   # Let Home Manager install and manage itself.
