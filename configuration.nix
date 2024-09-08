@@ -62,6 +62,9 @@
   # Compatibility
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
+  # Standard editor
+  environment.variables.EDITOR = "vim";
+  
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
