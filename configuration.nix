@@ -95,29 +95,40 @@
     blueman
     brave
     btop
+    exiftool
+    fd
+    ffmpegthumbnailer
     foot
+    fzf
     git
     gitui
     gnome.adwaita-icon-theme
     gparted
     gtk3
+    imagemagick
+    jq
     killall
     librewolf
     mate.mate-icon-theme-faenza
     neofetch
     neovim
     networkmanagerapplet
+    poppler
     python311
+    p7zip
+    ripgrep
     sddm
     terminator
     vim
     w3m
     waybar
     wget
+    wl-clipboard
     wlogout
     wofi
     xdg-desktop-portal-hyprland
     yazi
+    zoxide
   ];
 
   stylix.enable = true;

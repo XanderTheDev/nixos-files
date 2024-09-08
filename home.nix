@@ -504,6 +504,10 @@ label:focus {
   programs.yazi = {
 	enable = true;
   };
+
+  programs.fzf = {
+	enable = true;
+  };
   
   programs.neovim = {
 	enable = true;
