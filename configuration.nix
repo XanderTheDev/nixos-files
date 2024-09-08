@@ -56,8 +56,10 @@
   };
 
   environment.interactiveShellInit = ''
-	alias nixrbfl='nixos-rebuild switch --flake .'
+	alias nixrbfl='sudo nixos-rebuild switch --flake .'
   '';
+
+  security.pam.services.hyprlock = {};
 
   programs.thunar.enable = true;
   
@@ -115,7 +117,7 @@
     gnome.adwaita-icon-theme
     gparted
     gtk3
-    hyprlock
+    inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.hyprlock
     imagemagick
     jq
     killall

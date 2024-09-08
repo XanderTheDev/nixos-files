@@ -88,6 +88,13 @@ in {
 	";
 
   };
+
+  #programs.hyprlock = {
+	#enable = true;
+	#extraConfig = "
+	#	source = ${./configs/hypr/hyprlock.conf}
+	#";
+  #};
   
   programs.waybar = with lib;{
 	enable = true;
