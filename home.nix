@@ -492,6 +492,14 @@ label:focus {
   programs.bat = {
 	enable = true;
   };
+
+  programs.foot = {
+	enable = true;
+  };
+
+  programs.gitui = {
+	enable = true;
+  };
   
   programs.neovim = {
 	enable = true;
