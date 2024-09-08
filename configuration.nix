@@ -55,6 +55,10 @@
   	enable = true;
   };
 
+  environment.interactiveShellInit = ''
+	alias nixrbfl='nixos-rebuild switch --flake .'
+  '';
+
   programs.thunar.enable = true;
   
   virtualisation.virtualbox.guest.enable = true;
@@ -111,6 +115,7 @@
     gnome.adwaita-icon-theme
     gparted
     gtk3
+    hyprlock
     imagemagick
     jq
     killall
@@ -124,7 +129,7 @@
     p7zip
     ripgrep
     sddm
-    terminator
+    spotify
     vim
     w3m
     waybar
