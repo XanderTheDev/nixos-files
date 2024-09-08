@@ -96,6 +96,8 @@
     blueman
     brave
     btop
+    cava
+    cmatrix
     exiftool
     fd
     ffmpegthumbnailer
