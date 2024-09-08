@@ -25,7 +25,7 @@
     "custom/power_button" = {
 	orientation = "horizontal";
 	format = "⏻";
-	on-click = "/usr/bin/wlogout";
+	on-click = "wlogout";
     };
     "custom/space" = {
 	orientation = "horizontal";

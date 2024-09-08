@@ -112,6 +112,7 @@
     w3m
     waybar
     wget
+    wlogout
     wofi
     xdg-desktop-portal-hyprland
   ];
