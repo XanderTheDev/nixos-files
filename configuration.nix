@@ -95,7 +95,9 @@
     blueman
     brave
     btop
+    foot
     git
+    gitui
     gnome.adwaita-icon-theme
     gparted
     gtk3
@@ -108,7 +110,6 @@
     python311
     sddm
     terminator
-    tmux
     vim
     w3m
     waybar
