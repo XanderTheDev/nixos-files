@@ -117,6 +117,7 @@
     wlogout
     wofi
     xdg-desktop-portal-hyprland
+    yazi
   ];
 
   stylix.enable = true;

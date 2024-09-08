@@ -500,6 +500,10 @@ label:focus {
   programs.gitui = {
 	enable = true;
   };
+
+  programs.yazi = {
+	enable = true;
+  };
   
   programs.neovim = {
 	enable = true;
