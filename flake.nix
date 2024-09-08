@@ -32,7 +32,7 @@
   {
 
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-	system = "x86_64-linux";
+	system = "${system}";
     	modules = [ 
 		./configuration.nix
 		

@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, lib, ... }:
+{ username, inputs, config, pkgs, lib, ... }:
 
 with inputs;
 with lib;
@@ -7,8 +7,8 @@ with config.stylix.fonts; let
 in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "xander";
-  home.homeDirectory = "/home/xander";
+  home.username = "${username}";
+  home.homeDirectory = "/home/${username}";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -508,10 +508,10 @@ label:focus {
 			box-shadow: none;
 		}
 		window {
-			background-color: rgba(12, 12, 12, 0.8);
+			background-color: rgba(0, 0, 0, 0.75);
 		}
 		button {
-			border-radius: 200;
+			border-radius: 100;
 			border-color: #${config.stylix.base16Scheme.base0D};
 			color: #${config.stylix.base16Scheme.base05};
 			margin: 2px 10px 10px 2px;
@@ -528,13 +528,13 @@ label:focus {
 			outline-style: none;
 		}
 		#lock {
-			background-image: image("./configs/wlogout/icons/lock.png");
+			background-image: image(url("/home/${username}/nixos-files/configs/wlogout/icons/lock.png"));
 		}
 		#shutdown {
-			background-image: image("./configs/wlogout/icons/shutdown.png");
+			background-image: image(url("/home/${username}/nixos-files/configs/wlogout/icons/shutdown.png"));
 		}
 		#reboot {
-			background-image: image("./configs/wlogout/icons/shutdown.png");
+			background-image: image(url("/home/${username}/nixos-files/configs/wlogout/icons/reboot.png"));
 		}
 	'';
   };
