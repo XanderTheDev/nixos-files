@@ -1,7 +1,7 @@
 # nixos-files
 files for my nixos-installation. DO NOT USE WORK IN PROGRESS!
 
-BTW If you for some reason use this at this point. Use your own hardware configuration, bc this hardware configuration is for virtualbox so this would break your installation if you use it.
+BTW If you for some reason use this at this point. Use your own hardware configuration, bc this hardware configuration is for my laptop I'm testing on so this would (maybe) break your installation if you use it.
 
 If you want to change your username. Change it in flake.nix and in configuration.nix
 
