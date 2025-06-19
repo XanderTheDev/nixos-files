@@ -63,8 +63,6 @@
 
   programs.thunar.enable = true;
   
-  virtualisation.virtualbox.guest.enable = true;
-  
   # Compatibility
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
@@ -102,7 +100,7 @@
   # System packages
   environment.systemPackages = with pkgs; [
     bat
-    blueman
+    #blueman
     brave
     btop
     cava
@@ -114,7 +112,7 @@
     fzf
     git
     gitui
-    gnome.adwaita-icon-theme
+    adwaita-icon-theme
     gparted
     gtk3
     inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.hyprlock
@@ -122,6 +120,7 @@
     jq
     killall
     librewolf
+    libnotify
     mate.mate-icon-theme-faenza
     neofetch
     neovim
@@ -132,6 +131,7 @@
     ripgrep
     sddm
     spotify
+    swaynotificationcenter
     vim
     w3m
     waybar
@@ -141,7 +141,6 @@
     wofi
     xdg-desktop-portal-hyprland
     yazi
-    zoxide
   ];
 
   stylix.enable = true;

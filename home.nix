@@ -194,9 +194,9 @@ button:hover {
     padding-left: 8px;
 }
 #cpu {
-    border-radius: 15px 15px 15px 15px;
+    border-radius: 15px 0px 0px 15px;
     border-left: 1px solid #${config.stylix.base16Scheme.base0D};
-    border-right: 1px solid #${config.stylix.base16Scheme.base0D};
+    border-right: 0px solid #${config.stylix.base16Scheme.base0D};
     border-bottom: 1px solid #${config.stylix.base16Scheme.base0D};
     border-top: 1px solid #${config.stylix.base16Scheme.base0D};
     margin-top: 3px;
@@ -239,7 +239,7 @@ button:hover {
     border-right: 1px solid #${config.stylix.base16Scheme.base0D};
     margin-top: 3px;
     margin-bottom: 3px;
-    padding-right: 10px;
+    padding-right: 8px;
     padding-left: 6px;
 }
 #network {
@@ -247,18 +247,18 @@ button:hover {
     border: 1px solid #${config.stylix.base16Scheme.base0D};
     margin-top: 3px;
     margin-bottom: 3px;
-    padding-right: 8px;
+    padding-right: 14px;
     padding-left: 10px;
 }    
 #pulseaudio {
-    border-radius: 15px 15px 15px 15px;
+    border-radius: 15px 0px 0px 15px;
     border-top: 1px solid #${config.stylix.base16Scheme.base0D};
     border-bottom: 1px solid #${config.stylix.base16Scheme.base0D};
     border-left: 1px solid #${config.stylix.base16Scheme.base0D};
-    border-right: 1px solid #${config.stylix.base16Scheme.base0D};
+    border-right: 0px solid #${config.stylix.base16Scheme.base0D};
     margin-top: 3px;
     margin-bottom: 3px;
-    padding-right: 14px;
+    padding-right: 10px;
     padding-left: 10px;
 }
 #wireplumber,
@@ -490,6 +490,8 @@ label:focus {
   stylix.targets = {
 	waybar.enable = false;
 	btop.enable = true;
+        #swaync.enable = true;
+        mako.enable = false;
   };
 
   programs.btop = {

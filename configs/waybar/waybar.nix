@@ -1,19 +1,24 @@
 {
     layer = "top"; # Waybar at top layer
     position = "top"; # Waybar position (top|bottom|left|right)
-    height = 30; # Waybar height (to be removed for auto height)
-    spacing = 10; # Gaps between modules (4px)
-    modules-left = ["hyprland/workspaces" "hyprland/window" "wlr/taskbar"];
+    height = 32; # Waybar height (to be removed for auto height)
+    spacing = 0; # Gaps between modules (4px)
+    modules-left = ["hyprland/workspaces" "custom/space" "hyprland/window" "custom/space" "wlr/taskbar" "custom/space"];
     modules-center = [];
     modules-right = [
 	"network"
+	"custom/space"
 	"pulseaudio"
-	#"backlight"
+	"backlight"
+	"custom/space"
 	"clock"
+	"custom/space"
 	"cpu"
-	#"temperature"
-	#"battery"
+	"temperature"
+	"battery"
+	"custom/space"
 	"tray"
+	"custom/space"
 	"custom/power_button"
 	"custom/space"
 	];
@@ -29,7 +34,7 @@
     };
     "custom/space" = {
 	orientation = "horizontal";
-	format = " ";
+	format = "   ";
     };
    # "group/hardware" = {
 #	orientation = "horizontal";
@@ -54,12 +59,16 @@
         format = "{}% ";
     };
     "temperature" = {
-        # thermal-zone = 2;
+        thermal-zone = 0;
         # hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
         critical-threshold = 80;
         # format-critical = "{temperatureC}°C {icon}";
         format = "{temperatureC}°C {icon}";
-        format-icons = ["" "" ""];
+        format-icons = [
+	#""
+	""
+	#""
+	];
     };
     "backlight" = {
         device = "acpi_video1";
