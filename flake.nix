@@ -8,10 +8,6 @@
 	url = "github:nix-community/home-manager?ref=release-25.05";
 	inputs.nixpkgs.follows = "nixpkgs";
     };
-    ags = {
-	url = "github:Aylur/ags";
-	inputs.nixpkgs.follows = "nixpkgs";
-    };
     stylix = {
 	url = "github:danth/stylix";
 	inputs.nixpkgs.follows = "nixpkgs";

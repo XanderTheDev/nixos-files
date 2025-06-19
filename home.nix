@@ -40,8 +40,7 @@ in {
     # '')
   ];
 
-  imports = [
-	inputs.ags.homeManagerModules.default	
+  imports = [	
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -524,12 +523,6 @@ label:focus {
 	plugins = with pkgs.vimPlugins; [
 		nvchad-ui
 	];
-  };
-
-  programs.ags = {
-	enable = true;
-	configDir = ./configs/ags;
-
   };
 
   programs.wlogout = {

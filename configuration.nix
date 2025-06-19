@@ -81,6 +81,9 @@
      alsa.enable = true;
      alsa.support32Bit = true;
   };
+
+  services.blueman.enable = true;
+
   security.rtkit.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -129,7 +132,7 @@
     python311
     p7zip
     ripgrep
-    sddm
+    kdePackages.sddm
     spotify
     swaynotificationcenter
     vim
@@ -160,7 +163,6 @@
   #];
 
   fonts.packages = with pkgs; [
-	nerdfonts
         font-awesome
 	noto-fonts
 	cantarell-fonts
