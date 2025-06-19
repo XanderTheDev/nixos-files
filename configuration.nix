@@ -36,10 +36,6 @@
 	};
   };
 
-<<<<<<< HEAD
-=======
-  services.displayManager.gdm.enable = false;
->>>>>>> a8ff6b6df379edd97b232ec8691516d24c75e2a1
   # Enabling sddm
   services.displayManager.sddm.enable = true;
   # Configuring sddm to use wayland
