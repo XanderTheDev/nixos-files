@@ -74,7 +74,7 @@
   services.printing.enable = true;
 
   # Enable sound.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   # OR
   services.pipewire = {
      enable = true;
@@ -193,7 +193,7 @@
   # networking.firewall.enable = false;
 
   # Enable openGL
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
 
   # Enabling flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
