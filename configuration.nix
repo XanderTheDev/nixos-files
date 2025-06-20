@@ -103,6 +103,7 @@
   
   # System packages
   environment.systemPackages = with pkgs; [
+    adwaita-icon-theme
     bat
     #blueman
     brave
@@ -116,7 +117,6 @@
     fzf
     git
     gitui
-    adwaita-icon-theme
     gparted
     gtk3
     hyprshot
@@ -126,6 +126,7 @@
     killall
     librewolf
     libnotify
+    lxqt.pavucontrol-qt
     mate.mate-icon-theme-faenza
     neofetch
     neovim

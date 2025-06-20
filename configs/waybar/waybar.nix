@@ -106,7 +106,7 @@
         format-icons = {
             default = ["" "" ""];
         };
-        on-click = "pavucontrol";
+        on-click = "pavucontrol-qt";
     };
 #    "custom/media" = {
 #        format = "{icon} {}";
