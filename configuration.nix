@@ -119,6 +119,7 @@
     adwaita-icon-theme
     gparted
     gtk3
+    hyprshot
     inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.hyprlock
     imagemagick
     jq
