@@ -454,8 +454,8 @@ label:focus {
   stylix.targets = {
 	waybar.enable = false;
 	btop.enable = true;
-        #swaync.enable = true;
-        mako.enable = false;
+        swaync.enable = true;
+        hyprlock.enable = false;
   };
 
   programs.btop = {
