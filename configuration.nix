@@ -15,11 +15,54 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot = {
+
+    plymouth = {
+      enable = true;
+      # theme = lib.mkForce "rings";
+      # themePackages = with pkgs; [
+        # By default we would install all themes
+        # (adi1090x-plymouth-themes.override {
+          # selected_themes = [ "rings" ];
+        # })
+      # ];
+      theme = lib.mkForce "bgrt";
+    };
+
+    # Enable "Silent boot"
+    consoleLogLevel = 1;
+    initrd.verbose = false;
+    kernelParams = [
+      "quiet"
+      "splash"
+      "boot.shell_on_fail"
+      "udev.log_priority=1"
+      "rd.systemd.show_status=auto"
+      "video=efifb:off"
+    ];
+    # Hide the OS choice for bootloaders.
+    # It's still possible to open the bootloader list by pressing any key
+    # It will just not appear on screen unless a key is pressed
+    loader.timeout = 0;
+
+  };
+
+  services.greetd = {
+   enable = true;
+   settings = rec {
+    initial_session = {
+      command = "Hyprland > /dev/null 2>&1 && plymouth quit";
+      user = "xander";
+    };
+    default_session = initial_session;
+   };
+  }; 
+  
   networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-
+  
   # networking.wireless.iwd = {
 #	enable = true;
 #	settings.General.EnableNetworkConfiguration = true;
@@ -37,9 +80,9 @@
   };
 
   # Enabling sddm
-  services.displayManager.sddm.enable = true;
+  # services.displayManager.sddm.enable = true;
   # Configuring sddm to use wayland
-  services.displayManager.sddm.wayland.enable = true;
+  # services.displayManager.sddm.wayland.enable = true;
 
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
