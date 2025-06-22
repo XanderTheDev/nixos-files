@@ -48,7 +48,7 @@
         # timezone = "America/New_York";
 	interval = 1;
 	format = "{:%T}";
-#       tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+        tooltip-format = "{:%a %d %B / %T}";
         format-alt = "{:%a %d %B}";
     };
     "cpu" = {
@@ -93,10 +93,8 @@
         # interface = "wlp2*"; # (Optional) To force the use of this interface
         format-wifi = "{essid} ";
         format-ethernet = "{ipaddr}/{cidr} ";
-        tooltip-format = "{ifname} via {gwaddr}";
         format-linked = "{ifname} (No IP) ";
         format-disconnected = "Disconnected ⚠";
-        format-alt = "{ifname}: {ipaddr}/{cidr}";
     };
     "pulseaudio" = {
         # scroll-step = 1; # %, can be a float
