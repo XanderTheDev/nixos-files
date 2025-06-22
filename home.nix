@@ -28,6 +28,8 @@ in {
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
+    #".bash_profile".text = ''
+    #'';
   };
 
   home.pointerCursor = {
