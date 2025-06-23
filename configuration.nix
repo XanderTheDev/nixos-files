@@ -153,6 +153,7 @@
     cava
     cmatrix
     exiftool
+    fastfetch
     fd
     ffmpegthumbnailer
     foot
@@ -170,7 +171,6 @@
     libnotify
     lxqt.pavucontrol-qt
     mate.mate-icon-theme-faenza
-    neofetch
     neovim
     networkmanagerapplet
     poppler
