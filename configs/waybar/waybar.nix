@@ -104,7 +104,7 @@
         format-icons = {
             default = ["" "" ""];
         };
-        on-click = "pavucontrol-qt";
+        on-click = "bash -c 'pgrep pavucontrol-qt >/dev/null && pkill pavucontrol-qt || pavucontrol-qt &'";
     };
 #    "custom/media" = {
 #        format = "{icon} {}";
