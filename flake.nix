@@ -24,10 +24,8 @@
 		inherit system;
 		config.allowUnfree = true;
 	};
-
   in
   {
-
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
 	system = "${system}";
 	specialArgs = { inherit inputs; };
@@ -50,7 +48,7 @@
 			
 			home-manager.users.xander = import ./home.nix;
 		}
-		stylix.nixosModules.stylix
+		stylix.nixosModules.stylix 
 	];
     };
 
