@@ -13,7 +13,17 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  
+  boot.loader.grub.enable = false;
+  services.openssh.enable = false;
 
+  systemd.extraConfig = ''
+  	DefaultTimeoutStartSec=10s
+  	DefaultTimeoutStopSec=10s
+  	LogLevel=notice
+  	DefaultDependencies=yes
+  '';
+  
   boot = {
 
     plymouth = {
@@ -29,15 +39,16 @@
     };
 
     # Enable "Silent boot"
-    consoleLogLevel = 1;
+    consoleLogLevel = 3;
     initrd.verbose = false;
     kernelParams = [
       "quiet"
       "splash"
       "boot.shell_on_fail"
-      "udev.log_priority=1"
+      "udev.log_priority=3"
       "rd.systemd.show_status=auto"
       "video=efifb:off"
+      "i915.fastboot=1"
     ];
     # Hide the OS choice for bootloaders.
     # It's still possible to open the bootloader list by pressing any key
@@ -239,7 +250,7 @@
 
   # Enable openGL
   hardware.graphics.enable = true;
-
+  
   # Enabling flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

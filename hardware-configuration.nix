@@ -9,7 +9,7 @@
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" "sr_mod" "rtsx_pci_sdmmc" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [ "ahci" "xhci_pci" "ehci_pci" "usbhid" "i915" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.extraModulePackages = [ ];
