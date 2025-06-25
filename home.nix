@@ -14,9 +14,39 @@ in {
   # introduces backwards incompatible changes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
+  programs.librewolf = {
+    enable = true;
+    settings = {
+      # Start with a blank page
+      "browser.startup.page" = 0;
+
+      # Disable default browser check
+      "browser.shell.checkDefaultBrowser" = false;
+
+      # Disable animations for faster UI response
+      "toolkit.cosmeticAnimations.enabled" = false;
+
+      # Disable welcome / onboarding page
+      "startup.homepage_welcome_url" = "";
+      "startup.homepage_welcome_url.additional" = "";
+
+      # Just in case: ensure Pocket is off (LibreWolf usually disables this already)
+      "extensions.pocket.enabled" = false;
+    };
+  };
+
+  
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
+      (pkgs.writeShellScriptBin "brave" ''
+      exec ${pkgs.brave}/bin/brave \
+        --no-first-run \
+        --disable-extensions \
+        --disable-gpu \
+        --no-default-browser-check \
+        "$@"
+    '')
   ];
 
   imports = [	
