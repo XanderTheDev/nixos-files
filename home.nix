@@ -63,6 +63,35 @@ in {
     		pfetch
 	fi
     '';
+    ".config/hypr/hypridle.conf".text = ''
+	general {
+    		after_sleep_cmd = hyprctl dispatch dpms on
+    		lock_cmd = pidof || hyprlock
+    		before_sleep_cmd = loginctl lock-session
+	}	
+
+	listener {
+    		timeout = 150
+    		on-timeout = brightnessctl -s set 10
+    		on-resume = brightnessctl -r
+	}
+
+	listener {
+    		timeout = 300
+    		on-timeout = pidof || hyprlock
+	}
+
+	listener {
+    		timeout = 330
+    		on-timeout = hyprctl dispatch dpms off
+    		on-resume = hyprctl dispatch dpms on && brightnessctl -r
+	}
+
+	listener {
+    		timeout = 900
+    		on-timeout = [ "$(cat /sys/class/power_supply/AC0/online)" -eq 0 ] && systemctl suspend
+	}
+    '';
   };
 
   home.pointerCursor = {
@@ -94,7 +123,8 @@ in {
 		source = ${./configs/hypr/hyprlock.conf}
 	";
   };
-  
+
+ 
   programs.waybar = with lib;{
 	enable = true;
 	package = pkgs.waybar;
