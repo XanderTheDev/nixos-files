@@ -173,6 +173,7 @@
     gitui
     gparted
     gtk3
+    hypridle
     hyprshot
     inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.hyprlock
     imagemagick
@@ -222,6 +223,7 @@
   fonts.packages = with pkgs; [
         font-awesome
 	noto-fonts
+	nerd-fonts.code-new-roman
 	cantarell-fonts
 	roboto
 	fira
