@@ -63,7 +63,7 @@ in {
     		pfetch
 	fi
 	
-	PS1="\u@\h - \t - \d\n\w - "
+	PS1="\033[1m\u@\h - \t - \d\033[0m\n\w - "
     '';
     ".config/hypr/hypridle.conf".text = ''
 	general {
