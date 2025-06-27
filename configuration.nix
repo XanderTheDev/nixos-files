@@ -223,7 +223,7 @@
   fonts.packages = with pkgs; [
         font-awesome
 	noto-fonts
-	nerd-fonts.code-new-roman
+	nerd-fonts.fira-code
 	cantarell-fonts
 	roboto
 	fira

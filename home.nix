@@ -62,6 +62,8 @@ in {
     	if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]]; then
     		pfetch
 	fi
+	
+	PS1="\u@\h - \t - \d\n\w - "
     '';
     ".config/hypr/hypridle.conf".text = ''
 	general {
@@ -521,6 +523,15 @@ label:focus {
 	btop.enable = true;
         swaync.enable = true;
         hyprlock.enable = false;
+  };
+  
+  stylix.fonts = {
+	monospace = {
+      		package = pkgs.nerd-fonts.fira-code;
+      		name = "FiraCode Nerd Font Mono";
+    	};
+    	sansSerif.name = "FiraCode Nerd Font";
+    	serif.name = "FiraCode Nerd Font";
   };
 
   programs.btop = {
