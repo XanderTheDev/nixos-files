@@ -63,7 +63,28 @@ in {
     		pfetch
 	fi
 	
-	PS1="\033[1m\u@\h - \t - \d\033[0m\n\w - "
+	parse_git_branch () {
+    		git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+	}
+
+	function git_prompt () {
+    	local OUT=
+    	local GIT_ROOT=$(git rev-parse --show-toplevel 2>/dev/null)
+
+    	if [[ -n $GIT_ROOT ]]
+    		then
+        		OUT=" @ $(basename $GIT_ROOT)"
+        		local GIT_BRANCH="$(parse_git_branch)"
+        		if [[ "$GIT_BRANCH" == " ((no branch))" ]]
+        		then
+            			$GIT_BRANCH="($(parse_git_branch))";
+        		fi
+        	OUT="$OUT $GIT_BRANCH"
+    	fi
+    	echo $OUT
+	}
+	
+	PS1="\033[1m\u@\h - \t - \d\033[0m\n\w \$(git_prompt) \$ "
     '';
     ".config/hypr/hypridle.conf".text = ''
 	general {
