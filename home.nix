@@ -73,7 +73,7 @@ in {
 
     	if [[ -n $GIT_ROOT ]]
     		then
-        		OUT=" @ $(basename $GIT_ROOT)"
+        		OUT="  $(basename $GIT_ROOT)"
         		local GIT_BRANCH="$(parse_git_branch)"
         		if [[ "$GIT_BRANCH" == " ((no branch))" ]]
         		then
@@ -84,7 +84,8 @@ in {
     	echo $OUT
 	}
 	
-	PS1="\033[1m\u@\h - \t - \d\033[0m\n\w \$(git_prompt) \$ "
+	PS1="\e[\e[31m\]\e[0m\]\[\e[1;41;97m\]  \e[43;31m\]\[\e[0m\]\[\e[1m\e[43;97m\]\u@\h - \t - \d \\e[0m\]\e[33m\]\e[0m\]\n\
+\[\e[31m\]\w \[\e[97m\]\$(git_prompt) \[\e[0m\]\[\e[31m\]\$ \[\e[0m\]"
     '';
     ".config/hypr/hypridle.conf".text = ''
 	general {
