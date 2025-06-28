@@ -193,6 +193,7 @@
     kdePackages.sddm
     spotify
     swaynotificationcenter
+    trashy
     vim
     w3m
     waybar

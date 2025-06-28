@@ -88,7 +88,27 @@ in {
 \[\e[31m\]\w \[\e[97m\]\$(git_prompt) \[\e[0m\]\[\e[31m\]\$ \[\e[0m\]"
 
     	alias cp='cp -i'
+	alias mv='mv -i'
+	alias ls='ls -aFh --color=always'
+	alias rm='trash'
+	alias mkdir='mkdir -p'
 	alias cat='$HOME/.config/cat'
+	alias svim='sudo vim'
+	alias nrb='sudo nixos-rebuild switch --flake'
+	
+	alias ..='cd ..'
+	alias ...='cd ../..'
+	alias ....='cd ../../..'
+	alias .....='cd ../../../..'
+
+	cd ()
+	{	
+	if [ -n "$1" ]; then
+		builtin cd "$@" && ls
+	else
+		builtin cd ~ && ls
+	fi
+	}
     '';
     ".config/cat".text = ''
 	#!/bin/bash
