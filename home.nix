@@ -86,7 +86,21 @@ in {
 	
 	PS1="\e[\e[31m\]\e[0m\]\[\e[1;41;97m\]  \e[43;31m\]\[\e[0m\]\[\e[1m\e[43;97m\]\u@\h - \t - \d \\e[0m\]\e[33m\]\e[0m\]\n\
 \[\e[31m\]\w \[\e[97m\]\$(git_prompt) \[\e[0m\]\[\e[31m\]\$ \[\e[0m\]"
+
+    	alias cp='cp -i'
+	alias cat='$HOME/.config/cat'
     '';
+    ".config/cat".text = ''
+	#!/bin/bash
+
+	read -p "Use bat? [Y/n] " x
+	if [[ "$x" =~ ^([nN]|no|NO)$ ]]; then
+  		cat "$@"
+	else
+  		bat "$@"
+	fi
+    '';
+    ".config/cat".executable = true;
     ".config/hypr/hypridle.conf".text = ''
 	general {
     		after_sleep_cmd = hyprctl dispatch dpms on
