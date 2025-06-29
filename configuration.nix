@@ -182,10 +182,10 @@
     librewolf
     libnotify
     lxqt.pavucontrol-qt
+    macchina
     mate.mate-icon-theme-faenza
     neovim
     networkmanagerapplet
-    pfetch
     poppler
     python311
     p7zip
