@@ -8,6 +8,7 @@
   imports =
     [
       ./hardware-configuration.nix
+      ./modules/vm.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -146,7 +147,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.xander = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" "libvirtd" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
     ];
   };
@@ -209,8 +210,6 @@
   stylix.image = ./wallpapers/lake-sunrise.jpg;
   stylix.polarity = "dark";
   services.upower.enable = true;
-  
-  
   #nixpkgs.overlays = [
   #(final: prev:
   #  {
