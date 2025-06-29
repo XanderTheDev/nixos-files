@@ -93,6 +93,7 @@ in {
 	alias rm='trash'
 	alias mkdir='mkdir -p'
 	alias cat='$HOME/.config/cat'
+        alias nerdfont-icon-picker='$HOME/.config/nerdfont-icon-picker'
 	alias svim='sudo vim'
 	alias nrb='sudo nixos-rebuild switch --flake'
 	
@@ -150,6 +151,26 @@ in {
     		on-timeout = [ "$(cat /sys/class/power_supply/AC0/online)" -eq 0 ] && systemctl suspend
 	}
     '';
+    ".config/nerdfontlist.txt".source = lists/nerdfont.txt;
+    ".config/nerdfont-icon-picker".text = ''
+	#!/usr/bin/env bash
+
+	# File with icon list: glyph + description
+	ICON_FILE="$HOME/.config/nerdfontlist.txt"
+
+	# Pick using wofi
+	selection=$(cat "$ICON_FILE" | wofi --dmenu --prompt "Nerd Font Icon:")
+
+	# Get the first column (the glyph)
+	glyph=$(echo "$selection" | awk '{print $1}')
+
+	# Copy to clipboard
+	echo -n "$glyph" | wl-copy
+
+	# Optional notification
+	notify-send "Copied glyph: $glyph"
+    '';
+    ".config/nerdfont-icon-picker".executable = true;
   };
 
   home.pointerCursor = {
