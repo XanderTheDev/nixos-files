@@ -118,7 +118,7 @@ in {
 
     	alias cp='cp -i'
 	alias mv='mv -i'
-	alias ls='ls -aFh --color=always'
+	alias ls='eza -G --icons -a --git-ignore'
 	alias rm='trash'
 	alias mkdir='mkdir -p'
 	alias cat='$HOME/.config/cat'

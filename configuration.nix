@@ -168,6 +168,7 @@
     cava
     cmatrix
     exiftool
+    eza
     fastfetch
     fd
     ffmpegthumbnailer
