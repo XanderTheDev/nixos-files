@@ -1,3 +1,5 @@
+{ username, inputs, config, pkgs, lib, ... }:
+
 with inputs;
 with lib;
 with config.stylix.fonts; let
