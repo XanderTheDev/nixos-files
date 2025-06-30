@@ -14,6 +14,7 @@
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
   
+  # Setting keyboard 
   services.xserver = {
 	enable = true;
 	xkb = {
@@ -42,7 +43,8 @@
   programs.hyprland = {
   	enable = true;
   };
-
+  
+  # Making hyprlock work (security)
   security.pam.services.hyprlock = {}; 
 
   # Compatibility
@@ -54,6 +56,7 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Daemon that implements D-bus interfaces for manipulation of storage devices
   services.udisks2.enable = true;
 
   # Enable sound.
@@ -66,8 +69,10 @@
      alsa.support32Bit = true;
   };
 
+  # Enable bluetooth
   services.blueman.enable = true;
 
+  # Enabling security kits
   security.rtkit.enable = true;
   security.polkit.enable = true;
   
@@ -83,9 +88,12 @@
     ];
   };
 
+  # Enable zsh to be available as shell
   programs.zsh.enable = true;
 
   # Enable openGL
   hardware.graphics.enable = true;
+
+  # Software for managing power
   services.upower.enable = true;
 } 

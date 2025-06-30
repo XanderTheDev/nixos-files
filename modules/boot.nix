@@ -6,6 +6,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   
+  # Disabling GRUB and SSH (not needed for me)
   boot.loader.grub.enable = false;
   services.openssh.enable = false;
 
@@ -16,6 +17,7 @@
   	DefaultDependencies=yes
   '';
   
+  # Setting up Plymouth 
   boot = {
 
     plymouth = {
@@ -48,7 +50,8 @@
     loader.timeout = 0;
 
   };
-
+  
+  # Autologin on greetd to Hyprland
   services.greetd = {
    enable = true;
    settings = rec {

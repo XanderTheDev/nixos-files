@@ -6,6 +6,7 @@ with config.stylix.fonts; let
    colors = config.lib.stylix.colors.withHashtag;
 in {
 
+  # All config files and programs for zsh
   home.file = {
     ".zshrc".text = ''
 	if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]]; then

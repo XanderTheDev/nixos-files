@@ -1,7 +1,8 @@
 { lib, pkgs, config, inputs, ... }:
 
 {
-
+  
+  # Enable Thunar
   programs.thunar.enable = true;
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

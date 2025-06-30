@@ -27,6 +27,7 @@ in {
 
     };
     profiles.default = {
+	# Adding search engine to look for nix packages
 	search.engines = {
 		"Nix Packages" = {
 			urls = [{
@@ -41,6 +42,7 @@ in {
 		};
 	};
 	search.force = true;
+	# Adding extensions
 	extensions.packages = with inputs.firefox-addons.packages."x86_64-linux"; [
 		sponsorblock
 		darkreader

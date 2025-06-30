@@ -2,10 +2,12 @@
 
 {
 
+  # Enabling stylix, setting background and setting theme to dark
   stylix.enable = true;
   stylix.image = ../wallpapers/lake-sunrise.jpg;
   stylix.polarity = "dark";
 
+  # Fonts
   fonts.packages = with pkgs; [
         font-awesome
 	noto-fonts

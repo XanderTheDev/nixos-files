@@ -6,6 +6,7 @@ with config.stylix.fonts; let
    colors = config.lib.stylix.colors.withHashtag;
 in {
 
+  # Setting style of waybar and importing settings
   programs.waybar = with lib;{
 	enable = true;
 	package = pkgs.waybar;

@@ -5,7 +5,8 @@ with lib;
 with config.stylix.fonts; let
    colors = config.lib.stylix.colors.withHashtag;
 in {
-
+  
+  # Setting style of wlogout and importing settings of it
   programs.wlogout = {
 	enable = true;
 	layout = import ./layout.nix;

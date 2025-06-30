@@ -7,7 +7,9 @@ with config.stylix.fonts; let
 in {
 
 home.file = {
-    ".config/hypr/hypridle.conf".text = ''
+    
+	# Setting up the idle daemon
+	".config/hypr/hypridle.conf".text = ''
 	general {
     		after_sleep_cmd = hyprctl dispatch dpms on
     		lock_cmd = pidof || hyprlock
@@ -15,27 +17,28 @@ home.file = {
 	}	
 
 	listener {
-    		timeout = 150
+    		timeout = 150 # 2.5 minutes
     		on-timeout = brightnessctl -s set 10
     		on-resume = brightnessctl -r
 	}
 
 	listener {
-    		timeout = 300
+    		timeout = 300 # 5 minutes
     		on-timeout = pidof || hyprlock
 	}
 
 	listener {
-    		timeout = 330
+    		timeout = 330 # 5.5 minutes
     		on-timeout = hyprctl dispatch dpms off
     		on-resume = hyprctl dispatch dpms on && brightnessctl -r
 	}
 
 	listener {
-    		timeout = 900
+    		timeout = 900 # 10 minutes
     		on-timeout = [ "$(cat /sys/class/power_supply/AC0/online)" -eq 0 ] && systemctl suspend
 	}
     '';
+    # Setting the nerdfont list for the nerdfont picker program
     ".config/nerdfontlist.txt".source = ../../lists/nerdfont.txt;
     ".config/nerdfont-icon-picker".text = ''
 	#!/usr/bin/env bash
@@ -58,6 +61,7 @@ home.file = {
     ".config/nerdfont-icon-picker".executable = true;
   };
 
+  # Setting up Hyprland and importing the hyprland config
   wayland.windowManager.hyprland = {
 	enable = true;
 	systemd.enable = true;
@@ -68,7 +72,8 @@ home.file = {
 	";
 
   };
-
+	
+  # Importing the hyprlock config
   programs.hyprlock = {
 	enable = true;
 	extraConfig = "
