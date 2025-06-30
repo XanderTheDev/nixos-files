@@ -81,17 +81,6 @@ in {
   imports = [	
   ];
 
-  programs.zsh = {
-	enable = true;
-	antidote = {
-    		enable = true;
-    		plugins = [''
-      			zsh-users/zsh-autosuggestions
-      			zdharma-continuum/fast-syntax-highlighting
-    		''];
-	};
-  };
-
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
@@ -153,6 +142,12 @@ in {
 	}
 	
 	source $HOME/.config/fzf_binds.zsh
+
+	# Source fast-syntax-highlighting
+	source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh
+
+	# Source zsh-autosuggestions
+	source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
     '';
     ".config/cat".text = ''
 	#!/bin/bash

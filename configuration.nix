@@ -164,7 +164,6 @@
   # System packages
   environment.systemPackages = with pkgs; [
     adwaita-icon-theme
-    antidote
     bat
     #blueman
     brave
@@ -215,6 +214,8 @@
     xdg-desktop-portal-hyprland
     yazi
     zsh
+    zsh-autosuggestions
+    zsh-fast-syntax-highlighting
   ];
 
   stylix.enable = true;
