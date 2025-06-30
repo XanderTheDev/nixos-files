@@ -81,14 +81,25 @@ in {
   imports = [	
   ];
 
+  programs.zsh = {
+	enable = true;
+	antidote = {
+    		enable = true;
+    		plugins = [''
+      			zsh-users/zsh-autosuggestions
+      			zdharma-continuum/fast-syntax-highlighting
+    		''];
+	};
+  };
+
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
-    ".bashrc".text = ''
-    	if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]]; then
+    ".zshrc".text = ''
+	if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]]; then
     		macchina -o host -o distribution -o desktop-environment -o shell -o resolution -o uptime
 	fi
 	
@@ -106,17 +117,18 @@ in {
         		local GIT_BRANCH="$(parse_git_branch)"
         		if [[ "$GIT_BRANCH" == " ((no branch))" ]]
         		then
-            			$GIT_BRANCH="($(parse_git_branch))";
+            			GIT_BRANCH="($(parse_git_branch))";
         		fi
         	OUT="$OUT $GIT_BRANCH"
     	fi
     	echo $OUT
-	}
-	
-	PS1="\e[\e[31m\]\e[0m\]\[\e[1;41;97m\]  \e[43;31m\]\[\e[0m\]\[\e[1m\e[43;97m\]\u@\h - \t - \d \\e[0m\]\e[33m\]\e[0m\]\n\
-\[\e[31m\]\w \[\e[97m\]\$(git_prompt) \[\e[0m\]\[\e[31m\]\$ \[\e[0m\]"
+	}	
+	setopt PROMPT_SUBST
+        
+	PROMPT='%F{red}%f%b%K{red}%F{white}  %f%K{yellow}%F{red}%f%k%b%K{yellow}%F{white}%B%n@%m - %* - %D{%F} %f%k%F{yellow}%f
+%F{red}%~ %f%F{white}$(git_prompt) %f%F{red}$ %f%b'
 
-    	alias cp='cp -i'
+	alias cp='cp -i'
 	alias mv='mv -i'
 	alias ls='eza -G --icons -a --git-ignore'
 	alias rm='trash'
@@ -130,7 +142,7 @@ in {
 	alias ...='cd ../..'
 	alias ....='cd ../../..'
 	alias .....='cd ../../../..'
-
+	
 	cd ()
 	{	
 	if [ -n "$1" ]; then
@@ -139,15 +151,8 @@ in {
 		builtin cd ~ && ls
 	fi
 	}
-
-	export FZF_DEFAULT_COMMAND="fd --type f"
-	source $HOME/.config/fzf_binds.sh
-  	bind -x '"\C-t": _fzf_insert_file'
-  	bind -x '"\C-g": _fzf_open_vim'
-  	bind -x '"\ec": _fzf_cd'
-
-	bind 'set show-all-if-ambiguous on'	
-	bind 'TAB:menu-complete'
+	
+	source $HOME/.config/fzf_binds.zsh
     '';
     ".config/cat".text = ''
 	#!/bin/bash
@@ -209,7 +214,7 @@ in {
 	notify-send "Copied glyph: $glyph"
     '';
     ".config/nerdfont-icon-picker".executable = true;
-    ".config/fzf_binds.sh".source = configs/fzf/fzf_binds.sh;
+    ".config/fzf_binds.zsh".source = configs/fzf/fzf_binds.zsh;
   };
 
   home.pointerCursor = {

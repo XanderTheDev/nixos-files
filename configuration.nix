@@ -150,10 +150,13 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.xander = {
     isNormalUser = true;
+    shell = pkgs.zsh;
     extraGroups = [ "wheel" "networkmanager" "libvirtd" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
     ];
   };
+
+  programs.zsh.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -161,6 +164,7 @@
   # System packages
   environment.systemPackages = with pkgs; [
     adwaita-icon-theme
+    antidote
     bat
     #blueman
     brave
@@ -210,6 +214,7 @@
     wofi
     xdg-desktop-portal-hyprland
     yazi
+    zsh
   ];
 
   stylix.enable = true;
