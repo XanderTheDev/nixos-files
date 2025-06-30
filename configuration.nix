@@ -9,6 +9,7 @@
       ./modules/setup.nix
       ./modules/security.nix
       ./modules/style.nix
+      ./modules/programs.nix
     ];
 
   # Enabling flakes
