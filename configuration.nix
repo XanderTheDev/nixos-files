@@ -201,6 +201,7 @@
     kdePackages.sddm
     spotify
     swaynotificationcenter
+    tor-browser
     trashy
     udiskie
     udisks2
