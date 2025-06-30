@@ -13,7 +13,14 @@ in {
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
-
+   
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "inode/directory" = "thunar.desktop";
+    };
+  };
+  
   programs.librewolf = {
     enable = true;
     settings = {
@@ -32,6 +39,28 @@ in {
 
       # Just in case: ensure Pocket is off (LibreWolf usually disables this already)
       "extensions.pocket.enabled" = false;
+
+    };
+    profiles.default = {
+	search.engines = {
+		"Nix Packages" = {
+			urls = [{
+				template = "https://search.nixos.org/packages";
+				params = [
+					{ name = "type"; value = "packages"; }
+					{ name = "query"; value = "{searchTerms}"; }
+				];
+			}];
+			icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+			definedAliases = [ "@np" ];
+		};
+	};
+	search.force = true;
+	extensions.packages = with inputs.firefox-addons.packages."x86_64-linux"; [
+		sponsorblock
+		darkreader
+		youtube-shorts-block
+	];
     };
   };
 
@@ -717,6 +746,9 @@ label:focus {
 	btop.enable = true;
         swaync.enable = true;
         hyprlock.enable = false;
+	librewolf = {
+		profileNames = [ "default" ];
+	};
   };
   
   stylix.fonts = {

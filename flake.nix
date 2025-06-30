@@ -12,9 +12,13 @@
 	url = "github:danth/stylix/release-25.05";
 	inputs.nixpkgs.follows = "nixpkgs";
     };
+    firefox-addons = {
+	url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+	inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs @ { nixpkgs, home-manager, stylix, ... }:
+  outputs = { nixpkgs, home-manager, stylix, ... }@inputs:
   let
 	system = "x86_64-linux";
 	host = "nixos";
