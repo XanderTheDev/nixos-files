@@ -83,6 +83,8 @@
     ];
   };
 
+  programs.zsh.enable = true;
+
   # Enable openGL
   hardware.graphics.enable = true;
   services.upower.enable = true;
