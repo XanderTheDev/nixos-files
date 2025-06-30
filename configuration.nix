@@ -117,7 +117,7 @@
   security.pam.services.hyprlock = {};
 
   programs.thunar.enable = true;
-  
+   
   # Compatibility
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
@@ -126,6 +126,8 @@
   
   # Enable CUPS to print documents.
   services.printing.enable = true;
+  
+  services.udisks2.enable = true;
 
   # Enable sound.
   services.pulseaudio.enable = false;
@@ -140,7 +142,8 @@
   services.blueman.enable = true;
 
   security.rtkit.enable = true;
-
+  security.polkit.enable = true;
+  
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
@@ -195,6 +198,8 @@
     spotify
     swaynotificationcenter
     trashy
+    udiskie
+    udisks2
     vim
     w3m
     waybar

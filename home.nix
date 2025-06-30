@@ -139,6 +139,12 @@ in {
 		builtin cd ~ && ls
 	fi
 	}
+
+	export FZF_DEFAULT_COMMAND="fd --type f"
+	source $HOME/.config/fzf_binds.sh
+  	bind -x '"\C-t": _fzf_insert_file'
+  	bind -x '"\C-g": _fzf_open_vim'
+  	bind -x '"\ec": _fzf_cd'	
     '';
     ".config/cat".text = ''
 	#!/bin/bash
@@ -200,6 +206,7 @@ in {
 	notify-send "Copied glyph: $glyph"
     '';
     ".config/nerdfont-icon-picker".executable = true;
+    ".config/fzf_binds.sh".source = configs/fzf/fzf_binds.sh;
   };
 
   home.pointerCursor = {
@@ -744,6 +751,7 @@ label:focus {
   stylix.targets = {
 	waybar.enable = false;
 	btop.enable = true;
+	fzf.enable = false;
         swaync.enable = true;
         hyprlock.enable = false;
 	librewolf = {
