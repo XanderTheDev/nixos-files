@@ -144,7 +144,10 @@ in {
 	source $HOME/.config/fzf_binds.sh
   	bind -x '"\C-t": _fzf_insert_file'
   	bind -x '"\C-g": _fzf_open_vim'
-  	bind -x '"\ec": _fzf_cd'	
+  	bind -x '"\ec": _fzf_cd'
+
+	bind 'set show-all-if-ambiguous on'	
+	bind 'TAB:menu-complete'
     '';
     ".config/cat".text = ''
 	#!/bin/bash
