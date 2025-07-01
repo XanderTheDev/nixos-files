@@ -10,6 +10,7 @@
   # System packages
   environment.systemPackages = with pkgs; [
     adwaita-icon-theme
+    anki-bin
     bat
     #blueman
     brave
