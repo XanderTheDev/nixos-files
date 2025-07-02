@@ -18,6 +18,7 @@
     adwaita-icon-theme
     anki-bin
     bat
+    blender
     #blueman
     brave
     btop
