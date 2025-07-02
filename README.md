@@ -8,6 +8,7 @@ If you want to change your username. Change it in flake.nix and in configuration
 To make wlogout (and maybe other programs in the future work) put your nixos-files in your home folder so ~/nixos-files
 
 **Distrobox**
+
 I added some programs via distrobox like the thorium-browser. I will try to keep it that my system keeps working without needing the distrobox programs, but if you want the full setup you can use the arch-snapshot.tar.xz file (that is split up in distrobox/arch-snapshot. I will try to keep it up to date.
 
 To install it:
