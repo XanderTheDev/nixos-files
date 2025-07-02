@@ -1,7 +1,7 @@
 {
     layer = "top"; # Waybar at top layer
     position = "top"; # Waybar position (top|bottom|left|right)
-    height = 32; # Waybar height (to be removed for auto height)
+    height = 48; # Waybar height (to be removed for auto height)
     spacing = 0; # Gaps between modules (4px)
     modules-left = ["hyprland/workspaces" "custom/space" "hyprland/window" "custom/space" "wlr/taskbar" "custom/space"];
     modules-center = [];

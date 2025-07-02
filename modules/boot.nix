@@ -42,7 +42,6 @@
       "udev.log_priority=3"
       "rd.systemd.show_status=auto"
       "video=efifb:off"
-      "i915.fastboot=1"
     ];
     # Hide the OS choice for bootloaders.
     # It's still possible to open the bootloader list by pressing any key

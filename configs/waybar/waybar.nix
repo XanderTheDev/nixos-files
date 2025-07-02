@@ -14,7 +14,7 @@ in {
 	* {
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: NerdFonts, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
+    font-size: 16px;
 }
 
 window#waybar {
@@ -62,8 +62,8 @@ button:hover {
 
 #workspaces button {
     border-radius: 0px;
-    padding-right: 4px;
-    padding-left: 4px;
+    padding-right: 8px;
+    padding-left: 8px;
     background-color: #${config.stylix.base16Scheme.base00};
     color: #${config.stylix.base16Scheme.base05};
 }
@@ -73,7 +73,7 @@ button:hover {
 }
 
 #workspaces button.focused {
-    background-color: #${config.stylix.base16Scheme.base08};
+    background-color: #${config.stylix.base16Scheme.base0C};
     box-shadow: inset 0 -3px #${config.stylix.base16Scheme.base02};
 }
 
@@ -83,110 +83,110 @@ button:hover {
 
 #mode {
     background-color: #64727D;
-    border-bottom: 3px solid #ffffff;
+    border-bottom: 5px solid #ffffff;
 }
 
 #clock {
-    border-radius: 15px;
-    border: 1px solid #${config.stylix.base16Scheme.base0D};
-    margin-top: 3px;
-    margin-bottom: 3px;
-    padding-right: 9px;
-    padding-left: 9px;
+    border-radius: 23px;
+    border: 2px solid #${config.stylix.base16Scheme.base0D};
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-right: 14px;
+    padding-left: 14px;
 }
 #battery {
-    border-radius: 0px 15px 15px 0px;
-    border-top: 1px solid #${config.stylix.base16Scheme.base0D};
-    border-right: 1px solid #${config.stylix.base16Scheme.base0D};
-    border-bottom: 1px solid #${config.stylix.base16Scheme.base0D};
-    margin-top: 3px;
-    margin-bottom: 3px;
-    padding-right: 10px;
-    padding-left: 8px;
+    border-radius: 0px 23px 23px 0px;
+    border-top: 2px solid #${config.stylix.base16Scheme.base0D};
+    border-right: 2px solid #${config.stylix.base16Scheme.base0D};
+    border-bottom: 2px solid #${config.stylix.base16Scheme.base0D};
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-right: 17px;
+    padding-left: 12px;
 }
 #cpu {
-    border-radius: 15px 0px 0px 15px;
-    border-left: 1px solid #${config.stylix.base16Scheme.base0D};
+    border-radius: 23px 0px 0px 23px;
+    border-left: 2px solid #${config.stylix.base16Scheme.base0D};
     border-right: 0px solid #${config.stylix.base16Scheme.base0D};
-    border-bottom: 1px solid #${config.stylix.base16Scheme.base0D};
-    border-top: 1px solid #${config.stylix.base16Scheme.base0D};
-    margin-top: 3px;
-    margin-bottom: 3px;
-    padding-right: 13px;
-    padding-left: 10px;
+    border-bottom: 2px solid #${config.stylix.base16Scheme.base0D};
+    border-top: 2px solid #${config.stylix.base16Scheme.base0D};
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-right: 20px;
+    padding-left: 15px;
 }
 #custom-power_button {
-    border-radius: 15px;
-    border: 1px solid #${config.stylix.base16Scheme.base0D};
-    margin-top: 3px;
-    margin-bottom: 3px;
-    padding-right: 12.5px;
-    padding-left: 9px;
+    border-radius: 23px;
+    border: 2px solid #${config.stylix.base16Scheme.base0D};
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-right: 16px;
+    padding-left: 13px;
 }
 #memory {
-    border-radius: 3px;
-    margin-top: 3px;
-    margin-bottom: 3px;
-    padding-right: 4px;
-    padding-left: 4px;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
 }
 #disk,
 #temperature {
     border-radius: 0px;
-    border-left: 0.05rem white solid;
-    border-right: 0.05rem white solid;
-    border-top: 1px solid #${config.stylix.base16Scheme.base0D};
-    border-bottom: 1px solid #${config.stylix.base16Scheme.base0D};
-    margin-top: 3px;
-    margin-bottom: 3px;
-    padding-right: 8px;
-    padding-left: 8px;
+    border-left: 0.075rem white solid;
+    border-right: 0.075rem white solid;
+    border-top: 2px solid #${config.stylix.base16Scheme.base0D};
+    border-bottom: 2px solid #${config.stylix.base16Scheme.base0D};
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-right: 12px;
+    padding-left: 12px;
 }
 #backlight {
-    border-radius: 0px 15px 15px 0px;
-    border-left: 0.05rem white solid;
-    border-top: 1px solid #${config.stylix.base16Scheme.base0D};
-    border-bottom: 1px solid #${config.stylix.base16Scheme.base0D};
-    border-right: 1px solid #${config.stylix.base16Scheme.base0D};
-    margin-top: 3px;
-    margin-bottom: 3px;
-    padding-right: 8px;
-    padding-left: 6px;
+    border-radius: 0px 23px 23px 0px;
+    border-left: 0.075rem white solid;
+    border-top: 2px solid #${config.stylix.base16Scheme.base0D};
+    border-bottom: 2px solid #${config.stylix.base16Scheme.base0D};
+    border-right: 2px solid #${config.stylix.base16Scheme.base0D};
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-right: 12px;
+    padding-left: 9px;
 }
 #network {
-    border-radius: 15px;
-    border: 1px solid #${config.stylix.base16Scheme.base0D};
-    margin-top: 3px;
-    margin-bottom: 3px;
-    padding-right: 14px;
-    padding-left: 10px;
+    border-radius: 23px;
+    border: 2px solid #${config.stylix.base16Scheme.base0D};
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-right: 21px;
+    padding-left: 13px;
 }    
 #pulseaudio {
-    border-radius: 15px 0px 0px 15px;
-    border-top: 1px solid #${config.stylix.base16Scheme.base0D};
-    border-bottom: 1px solid #${config.stylix.base16Scheme.base0D};
-    border-left: 1px solid #${config.stylix.base16Scheme.base0D};
+    border-radius: 23px 0px 0px 23px;
+    border-top: 2px solid #${config.stylix.base16Scheme.base0D};
+    border-bottom: 2px solid #${config.stylix.base16Scheme.base0D};
+    border-left: 2px solid #${config.stylix.base16Scheme.base0D};
     border-right: 0px solid #${config.stylix.base16Scheme.base0D};
-    margin-top: 3px;
-    margin-bottom: 3px;
-    padding-right: 10px;
-    padding-left: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-right: 15px;
+    padding-left: 15px;
 }
 #wireplumber,
 #custom-media,
 #tray {
-    border-radius: 15px;
-    border: 1px solid #${config.stylix.base16Scheme.base0D};
-    margin-top: 3px;
-    margin-bottom: 3px;
-    padding-right: 10px;
-    padding-left: 10px;
+    border-radius: 23px;
+    border: 2px solid #${config.stylix.base16Scheme.base0D};
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-right: 15px;
+    padding-left: 15px;
 }
 #mode,
 #idle_inhibitor,
 #scratchpad,
 #mpd {
-    padding: 0 10px;
+    padding: 0 15px;
     color: #ffffff;
 }
 
@@ -195,7 +195,7 @@ button:hover {
 }
 
 #workspaces {
-    margin: 0 4px;
+    margin: 0 6px;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
@@ -299,7 +299,7 @@ label:focus {
 #custom-media {
     background-color: #66cc99;
     color: #2a5c45;
-    min-width: 100px;
+    min-width: 150px;
 }
 
 #custom-media.custom-spotify {
@@ -316,7 +316,7 @@ label:focus {
 }
 
 #temperature.critical {
-    background-color: #${config.stylix.base16Scheme.base0A};
+    background-color: #${config.stylix.base16Scheme.base08};
     color: #${config.stylix.base16Scheme.base05};
 }
 
