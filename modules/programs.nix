@@ -7,6 +7,12 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   
+  # Enable virtualisation for distrobox
+  virtualisation.podman = {
+  	enable = true;
+  	dockerCompat = true;
+  };
+    
   # System packages
   environment.systemPackages = with pkgs; [
     adwaita-icon-theme
@@ -17,6 +23,7 @@
     btop
     cava
     cmatrix
+    distrobox
     exiftool
     eza
     fastfetch
