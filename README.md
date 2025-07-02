@@ -6,3 +6,19 @@ BTW If you for some reason use this at this point. Use your own hardware configu
 If you want to change your username. Change it in flake.nix and in configuration.nix
 
 To make wlogout (and maybe other programs in the future work) put your nixos-files in your home folder so ~/nixos-files
+
+**Distrobox**
+I added some programs via distrobox like the thorium-browser. I will try to keep it that my system keeps working without needing the distrobox programs, but if you want the full setup you can use the arch-snapshot.tar file. I will try to keep it up to date.
+To install it:
+- Load into podman
+´´´zsh
+ podman load -i arch-snapshot.tar
+´´´
+- Create a new distrobox
+´´´zsh
+ distrobox create --name arch --image arch-snapshot
+´´´
+- Enter distrobox to set it up
+´´´zsh
+ distrobox enter arch
+´´´
