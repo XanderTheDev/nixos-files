@@ -23,7 +23,7 @@
 		options = "";
 	};
   };
-
+  
   # Enabling sddm
   # services.displayManager.sddm.enable = true;
   # Configuring sddm to use wayland

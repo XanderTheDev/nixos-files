@@ -9,6 +9,8 @@ in {
   # All config files and programs for zsh
   home.file = {
     ".zshrc".text = ''
+	export TERM=foot
+	
 	if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]]; then
     		macchina -o host -o distribution -o desktop-environment -o shell -o resolution -o uptime
 	fi
@@ -47,6 +49,7 @@ in {
         alias nerdfont-icon-picker='$HOME/.config/nerdfont-icon-picker'
 	alias svim='sudo vim'
 	alias nrb='sudo nixos-rebuild switch --flake'
+	alias thorium-browser='distrobox enter arch -- thorium-browser "$@"'
 	
 	alias ..='cd ..'
 	alias ...='cd ../..'

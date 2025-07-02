@@ -24,8 +24,10 @@ in {
   };
 
   # Sets default editor
-  #home.sessionVariables = {
-    # EDITOR = "emacs";
-  #}; 
+  home.sessionVariables = {
+     EDITOR = "vim";
+     BROWSER = "brave";
+     TERMINAL = "foot";
+  }; 
 
 }
