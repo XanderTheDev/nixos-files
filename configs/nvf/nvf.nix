@@ -15,7 +15,8 @@
 		};
                 lsp.enable = true;
 		statusline.lualine.enable = true;
-		telescope.enable = true;
+                telescope.enable = true;
+                notes.neorg.enable = true;
 		autocomplete.nvim-cmp.enable = true;
 	};
 }

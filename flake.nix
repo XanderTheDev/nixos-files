@@ -20,9 +20,12 @@
 	url = "github:notashelf/nvf";
 	inputs.nixpkgs.follows = "nixpkgs";
     };
+    brother-mfc-6490cw-flake = {
+        url = "github:xanderthedev/nixos-files/brother-mfc-6490cw-flake";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, stylix, nvf, ... }@inputs:
+  outputs = { brother-mfc-6490cw-flake, nixpkgs, home-manager, stylix, nvf, ... }@inputs:
   let
 	system = "x86_64-linux";
 	host = "nixos";
@@ -32,9 +35,12 @@
 		inherit system;
 		config.allowUnfree = true;
 	};
+        configHash = builtins.hashString "sha256" (
+                builtins.toString (builtins.readDir ./configs/nvf)
+        );
   in
   {
-    packages."x86_64-linux".nvf = 
+    packages.${system}.nvf = 
 	(nvf.lib.neovimConfiguration {
 	  pkgs = nixpkgs.legacyPackages."x86_64-linux";
 	  modules = [ ./configs/nvf/nvf.nix ];
@@ -64,6 +70,7 @@
 		}
 		stylix.nixosModules.stylix
 		nvf.nixosModules.default
+                brother-mfc-6490cw-flake.nixosModules.${system}.brother-mfc-6490cw-FilterModule
 	];
     };
 

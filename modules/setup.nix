@@ -55,6 +55,10 @@
   
   # Enable CUPS to print documents.
   services.printing.enable = true;
+  services.avahi = {
+        enable = true;
+        nssmdns4 = true;
+  };
 
   # Daemon that implements D-bus interfaces for manipulation of storage devices
   services.udisks2.enable = true;
