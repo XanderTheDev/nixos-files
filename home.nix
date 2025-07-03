@@ -29,7 +29,6 @@ in {
 	./configs/gitui/gitui.nix
 	./configs/yazi/yazi.nix
 	./configs/fzf/fzf.nix
-	./configs/neovim/nvim.nix
 	./configs/wlogout/wlogout.nix
   ];
 

@@ -16,9 +16,13 @@
 	url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
 	inputs.nixpkgs.follows = "nixpkgs";
     };
+    nvf = {
+	url = "github:notashelf/nvf";
+	inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, stylix, ... }@inputs:
+  outputs = { nixpkgs, home-manager, stylix, nvf, ... }@inputs:
   let
 	system = "x86_64-linux";
 	host = "nixos";
@@ -30,6 +34,12 @@
 	};
   in
   {
+    packages."x86_64-linux".nvf = 
+	(nvf.lib.neovimConfiguration {
+	  pkgs = nixpkgs.legacyPackages."x86_64-linux";
+	  modules = [ ./configs/nvf/nvf.nix ];
+	}).neovim;
+    
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
 	system = "${system}";
 	specialArgs = { inherit inputs; };
@@ -52,7 +62,8 @@
 			
 			home-manager.users.xander = import ./home.nix;
 		}
-		stylix.nixosModules.stylix 
+		stylix.nixosModules.stylix
+		nvf.nixosModules.default
 	];
     };
 

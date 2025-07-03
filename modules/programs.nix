@@ -47,7 +47,6 @@
     lxqt.pavucontrol-qt
     macchina
     mate.mate-icon-theme-faenza
-    neovim
     networkmanagerapplet
     poppler
     python311
