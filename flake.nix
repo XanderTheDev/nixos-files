@@ -21,7 +21,7 @@
 	inputs.nixpkgs.follows = "nixpkgs";
     };
     brother-mfc-6490cw-flake = {
-        url = "github:xanderthedev/nixos-files#brother-mfc-6490cw-flake";
+        url = "github:xanderthedev/brother-mfc-6490cw-flake";
     };
   };
 
