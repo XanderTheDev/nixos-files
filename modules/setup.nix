@@ -1,6 +1,6 @@
 { inputs, config, lib, pkgs, ... }:
-
 {
+ 
 
  networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -59,6 +59,7 @@
         enable = true;
         nssmdns4 = true;
   };
+
 
   # Daemon that implements D-bus interfaces for manipulation of storage devices
   services.udisks2.enable = true;
