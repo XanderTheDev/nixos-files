@@ -12,10 +12,10 @@
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_usb_sdmmc" ];
   # Modules to boot with
   boot.initrd.kernelModules = [ "ahci" "xhci_pci" "usbhid" ];
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelModules = [ "kvm-amd" "snd_sof_amd" "snd_sof_pci" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.extraModulePackages = [ ];
-
+  
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/6a2b0dc0-a35a-4cc0-bb0d-1710e1f8f4d4";
       fsType = "ext4";

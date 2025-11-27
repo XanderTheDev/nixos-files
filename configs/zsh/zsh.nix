@@ -10,7 +10,7 @@ in {
   home.file = {
     ".zshrc".text = ''
 	export TERM=foot
-	
+
 	if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]]; then
     		macchina -o host -o distribution -o desktop-environment -o shell -o resolution -o uptime
 	fi
@@ -49,6 +49,7 @@ in {
         alias nerdfont-icon-picker='$HOME/.config/nerdfont-icon-picker'
 	alias svim='sudo vim'
 	alias nrb='sudo nixos-rebuild switch --flake'
+        alias nvf-rebuild='nix profile upgrade nvf'
 	alias thorium-browser='distrobox enter arch -- thorium-browser "$@"'
 	
 	alias ..='cd ..'

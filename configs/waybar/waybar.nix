@@ -57,24 +57,32 @@ button {
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
     background: inherit;
-    box-shadow: inset 0 -3px #BBBBBB;
 }
 
 #workspaces button {
     border-radius: 0px;
+    box-shadow:
+        2px 0 4px rgba(100, 100, 100, 0.3),
+        -2px 0 4px rgba(100, 100, 100, 0.3);
+    border-bottom: 2px solid #${config.stylix.base16Scheme.base0D};
     padding-right: 8px;
     padding-left: 8px;
     background-color: #${config.stylix.base16Scheme.base00};
     color: #${config.stylix.base16Scheme.base05};
 }
 
-#workspaces button:hover {
-    background: #${config.stylix.base16Scheme.base01};
+#workspaces button:last-child {
+    box-shadow: none;
 }
 
-#workspaces button.focused {
-    background-color: #${config.stylix.base16Scheme.base0C};
-    box-shadow: inset 0 -3px #${config.stylix.base16Scheme.base02};
+#workspaces button:last-child {
+    box-shadow: -2px 0 4px rgba(100, 100, 100, 0.3);
+    border-right: 2px solid #${config.stylix.base16Scheme.base0D};
+    border-bottom-right-radius: 23px;
+}
+
+#workspaces button:hover {
+    background: #${config.stylix.base16Scheme.base01};
 }
 
 #workspaces button.urgent {
@@ -96,6 +104,7 @@ button:hover {
 }
 #battery {
     border-radius: 0px 23px 23px 0px;
+    box-shadow: -2px 0 4px rgba(100, 100, 100, 0.3);
     border-top: 2px solid #${config.stylix.base16Scheme.base0D};
     border-right: 2px solid #${config.stylix.base16Scheme.base0D};
     border-bottom: 2px solid #${config.stylix.base16Scheme.base0D};
@@ -133,8 +142,9 @@ button:hover {
 #disk,
 #temperature {
     border-radius: 0px;
-    border-left: 0.075rem white solid;
-    border-right: 0.075rem white solid;
+    box-shadow: 
+        2px 0 4px rgba(100, 100, 100, 0.3),
+        -2px 0 4px rgba(100, 100, 100, 0.3);
     border-top: 2px solid #${config.stylix.base16Scheme.base0D};
     border-bottom: 2px solid #${config.stylix.base16Scheme.base0D};
     margin-top: 5px;
@@ -144,7 +154,6 @@ button:hover {
 }
 #backlight {
     border-radius: 0px 23px 23px 0px;
-    border-left: 0.075rem white solid;
     border-top: 2px solid #${config.stylix.base16Scheme.base0D};
     border-bottom: 2px solid #${config.stylix.base16Scheme.base0D};
     border-right: 2px solid #${config.stylix.base16Scheme.base0D};
@@ -166,7 +175,7 @@ button:hover {
     border-top: 2px solid #${config.stylix.base16Scheme.base0D};
     border-bottom: 2px solid #${config.stylix.base16Scheme.base0D};
     border-left: 2px solid #${config.stylix.base16Scheme.base0D};
-    border-right: 0px solid #${config.stylix.base16Scheme.base0D};
+    box-shadow: 2px 0 4px rgba(100, 100, 100, 0.3);
     margin-top: 5px;
     margin-bottom: 5px;
     padding-right: 15px;
@@ -246,6 +255,8 @@ label:focus {
 
 #cpu {
     background-color: #${config.stylix.base16Scheme.base00};
+    box-shadow: 
+        2px 0 4px rgba(100, 100, 100, 0.3);
     color: #${config.stylix.base16Scheme.base05};
 }
 
@@ -264,6 +275,8 @@ label:focus {
 
 #backlight {
     background-color: #${config.stylix.base16Scheme.base00};
+    box-shadow: 
+        -2px 0 4px rgba(100, 100, 100, 0.3);
     color: #${config.stylix.base16Scheme.base05};
 }
 

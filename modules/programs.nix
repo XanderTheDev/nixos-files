@@ -7,6 +7,11 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   
+  programs.wireshark.enable = true;
+  programs.wireshark.package = pkgs.wireshark;
+  
+  services.flatpak.enable = true;
+
   # Enable virtualisation for distrobox
   virtualisation.podman = {
   	enable = true;
@@ -15,7 +20,9 @@
     
   # System packages
   environment.systemPackages = with pkgs; [
+    firmwareLinuxNonfree
     adwaita-icon-theme
+    alsa-utils
     anki-bin
     bat
     blender
@@ -25,6 +32,7 @@
     cava
     cmatrix
     distrobox
+    espeak-ng
     exiftool
     eza
     fastfetch
@@ -32,29 +40,43 @@
     ffmpegthumbnailer
     foot
     fzf
+    gcc
     git
     gitui
     gparted
     gtk3
     hypridle
     hyprshot
+    inetutils
     inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.hyprlock
     imagemagick
     jq
     killall
     librewolf
     libnotify
+    lutris
     lxqt.pavucontrol-qt
     macchina
+    marksman
     mate.mate-icon-theme-faenza
     networkmanagerapplet
+    nixd
+    nmap
+    ollama
+    onlyoffice-desktopeditors
+    pamixer
     poppler
+    protonvpn-gui
+    pyright
     python311
     p7zip
     ripgrep
+    rust-analyzer
+    rustup
     kdePackages.sddm
     spotify
     swaynotificationcenter
+    thunderbird
     tor-browser
     trashy
     udiskie
@@ -63,6 +85,7 @@
     w3m
     waybar
     wget
+    wireguard-tools
     wl-clipboard
     wlogout
     wofi

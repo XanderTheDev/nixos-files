@@ -39,13 +39,15 @@
   {
     packages.${system}.nvf = 
 	(nvf.lib.neovimConfiguration {
-	  pkgs = nixpkgs.legacyPackages."x86_64-linux";
-	  modules = [ ./configs/nvf/nvf.nix ];
+	 pkgs = nixpkgs.legacyPackages."x86_64-linux";
+	 modules = [ ./configs/nvf/nvf.nix ];
 	}).neovim;
     
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
 	system = "${system}";
-	specialArgs = { inherit inputs; };
+	specialArgs = { 
+                inherit inputs;
+        };
     	modules = [ 
 		./configuration.nix
 		

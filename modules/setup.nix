@@ -1,12 +1,12 @@
 { inputs, config, lib, pkgs, ... }:
 {
- 
-
  networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-  
+
+  networking.firewall.enable = true;
+  networking.firewall.checkReversePath = false;
   # networking.wireless.iwd = {
 #	enable = true;
 #	settings.General.EnableNetworkConfiguration = true;
@@ -54,12 +54,13 @@
   environment.variables.EDITOR = "vim";
   
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing = {
+        enable = true;
+  };
   services.avahi = {
         enable = true;
         nssmdns4 = true;
   };
-
 
   # Daemon that implements D-bus interfaces for manipulation of storage devices
   services.udisks2.enable = true;
@@ -88,7 +89,7 @@
   users.users.xander = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" "networkmanager" "libvirtd" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" "libvirtd" "wireshark" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
     ];
   };
