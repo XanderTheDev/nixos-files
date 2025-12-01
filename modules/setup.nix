@@ -13,7 +13,9 @@
   # };
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
-  
+
+  programs.ssh.startAgent = true;
+
   # Setting keyboard 
   services.xserver = {
 	enable = true;
