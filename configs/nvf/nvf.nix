@@ -1,5 +1,6 @@
 { pkgs, lib, ... }:
 let
+        secrets = import ./secrets.nix;
         llm-nvim = import ./modules/llm.nix { inherit pkgs; };
 in {
         vim.startPlugins = [
@@ -13,8 +14,8 @@ in {
                                 local tools = require("llm.tools")
                                 llm.setup({
                                         api_type = "openai",
-                                        url = "https://your_web_ui_server_domain.com/api/chat/completions",
-                                        fetch_key = "your_api_key",
+                                        url = "${secrets.websiteUrl}",
+                                        fetch_key = "${secrets.llmApiKey}",
                                         model = "gemma3:latest",
                                 })
 
