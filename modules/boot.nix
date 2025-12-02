@@ -10,12 +10,12 @@
   boot.loader.grub.enable = false;
   services.openssh.enable = false;
 
-  systemd.extraConfig = ''
-  	DefaultTimeoutStartSec=10s
-  	DefaultTimeoutStopSec=10s
-  	LogLevel=notice
-  	DefaultDependencies=yes
-  '';
+  systemd.settings.Manager = {
+  	DefaultTimeoutStartSec = "10s";
+  	DefaultTimeoutStopSec = "10s";
+  	LogLevel = "notice";
+  	DefaultDependencies = "yes";
+  };
   
   # Setting up Plymouth 
   boot = {

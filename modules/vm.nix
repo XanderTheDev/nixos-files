@@ -9,10 +9,6 @@
     			package = pkgs.qemu_kvm;
     			runAsRoot = true;
     			swtpm.enable = true;
-    			ovmf = {
-      				enable = true;
-      				packages = [ pkgs.OVMFFull.fd ];
-    			};
   		};
 	};
 	
@@ -28,7 +24,7 @@
 		virt-viewer
 		spice spice-gtk
 		spice-protocol
-		win-virtio
+                virtio-win
 		win-spice
 	];
 

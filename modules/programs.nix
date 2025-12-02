@@ -20,7 +20,7 @@
     
   # System packages
   environment.systemPackages = with pkgs; [
-    firmwareLinuxNonfree
+    linux-firmware
     adwaita-icon-theme
     alsa-utils
     anki-bin

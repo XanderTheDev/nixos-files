@@ -68,8 +68,8 @@ in {
 	
 	source $HOME/.config/fzf_binds.zsh
 
-	# Source fast-syntax-highlighting
-	source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh
+	# Source fast-syntax-highlighting 
+	source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 	# Source zsh-autosuggestions
 	source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
