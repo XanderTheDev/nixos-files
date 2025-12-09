@@ -29,6 +29,7 @@
     #blueman
     brave
     btop
+    calibre
     cava
     cmatrix
     distrobox
@@ -38,7 +39,6 @@
     fastfetch
     fd
     ffmpegthumbnailer
-    foliate
     foot
     fzf
     gcc
