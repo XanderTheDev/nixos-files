@@ -38,6 +38,7 @@
     fastfetch
     fd
     ffmpegthumbnailer
+    foliate
     foot
     fzf
     gcc
