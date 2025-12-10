@@ -17,6 +17,9 @@
 	fira
 	dejavu_fonts
 	liberation_ttf
+        noto-fonts-cjk-sans
+        noto-fonts-cjk-serif
+        corefonts
   ];
 
 }
