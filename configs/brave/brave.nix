@@ -13,7 +13,9 @@ in {
       exec ${pkgs.brave}/bin/brave \
         --no-first-run \
         --disable-extensions \
-        --disable-gpu \
+        --enable-features=VaapiVideoDecoder,VaapiVideoEncoder \
+        --use-gl=desktop \
+        --ignore-gpu-blocklist \
         --no-default-browser-check \
         "$@"
     '')
