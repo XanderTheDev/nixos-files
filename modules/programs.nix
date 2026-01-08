@@ -1,7 +1,10 @@
 { lib, pkgs, config, inputs, ... }:
 
 {
-  
+
+  networking.networkmanager.enable = true;
+  networking.networkmanager.wifi.powersave = false;
+
   # Enable Thunar
   programs.thunar.enable = true;
   # Allow unfree packages
@@ -22,6 +25,7 @@
   environment.systemPackages = with pkgs; [
     linux-firmware
     adwaita-icon-theme
+    mesa
     alsa-utils
     anki-bin
     bat
@@ -55,6 +59,9 @@
     killall
     librewolf
     libnotify
+    libva
+    libvdpau
+    libvdpau-va-gl
     lutris
     lxqt.pavucontrol-qt
     macchina

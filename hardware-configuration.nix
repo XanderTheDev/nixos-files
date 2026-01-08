@@ -14,8 +14,8 @@
   boot.initrd.kernelModules = [ "ahci" "xhci_pci" "usbhid" ];
   boot.kernelModules = [ "kvm-amd" "snd_sof_amd" "snd_sof_pci" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.extraModulePackages = [ ];
-  
+  boot.blacklistedKernelModules = [ "rtw88_8821ce" ];
+
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/6a2b0dc0-a35a-4cc0-bb0d-1710e1f8f4d4";
       fsType = "ext4";
@@ -30,6 +30,11 @@
   swapDevices =
     [ { device = "/dev/disk/by-uuid/18b78c87-e45a-4000-98ae-105011038756"; }
     ];
+
+
+  boot.extraModulePackages = with pkgs; [
+        linuxKernel.packages.linux_6_18.rtl8821ce
+  ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
