@@ -10,10 +10,10 @@ in {
   programs.waybar = with lib;{
 	enable = true;
 	package = pkgs.waybar;
-	style = concatStrings [ "
+	style = concatStrings [ ''
 	* {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: NerdFonts, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-family: "FiraCode Nerd Font", "Font Awesome", Roboto, Helvetica, Arial, sans-serif;
     font-size: 16px;
 }
 
@@ -405,7 +405,7 @@ label:focus {
 	background-color: transparent;
 }
 
-	" ];
+	'' ];
 	settings = [ ./waybar-settings.nix ];
   };
 

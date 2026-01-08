@@ -34,7 +34,7 @@
     };
     "custom/space" = {
 	orientation = "horizontal";
-	format = "   ";
+	format = " ";
     };
    # "group/hardware" = {
 #	orientation = "horizontal";
