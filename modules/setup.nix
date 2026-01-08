@@ -54,9 +54,11 @@
   # Compatibility
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-  # Standard editor
-  environment.variables.EDITOR = "vim";
-  
+  environment.variables = {
+    EDITOR = "vim";
+    WAYLAND_DISPLAY = "wayland-0";  # safe; some apps pick this up
+  };
+
   # Enable CUPS to print documents.
   services.printing = {
         enable = true;
@@ -102,7 +104,12 @@
   programs.zsh.enable = true;
 
   # Enable openGL
-  hardware.graphics.enable = true;
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;   # Optional, but good for 32-bit apps
+    extraPackages = with pkgs; [
+    ];
+  };
 
   # Software for managing power
   services.upower.enable = true;

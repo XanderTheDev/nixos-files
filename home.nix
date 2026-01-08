@@ -17,7 +17,7 @@ in {
   imports = [	
   	./configs/zsh/zsh.nix
 	./configs/librewolf/librewolf.nix
-	./configs/brave/brave.nix
+        ./configs/brave/brave.nix
 	./configs/desktop/settings.nix
 	./configs/hypr/hypr-eco.nix
 	./configs/fastfetch/fastfetch.nix

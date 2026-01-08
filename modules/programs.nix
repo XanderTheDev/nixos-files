@@ -60,6 +60,7 @@
     librewolf
     libnotify
     libva
+    libva-utils
     libvdpau
     libvdpau-va-gl
     lutris
