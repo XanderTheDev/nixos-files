@@ -87,10 +87,12 @@
     swaynotificationcenter
     thunderbird
     tor-browser
+    transmission_4-gtk
     trashy
     udiskie
     udisks2
     vim
+    vlc
     w3m
     waybar
     wget
