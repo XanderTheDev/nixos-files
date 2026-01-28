@@ -13,7 +13,44 @@ in {
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
-   
+
+  xdg = {
+    enable = true;
+    mime.enable = true;
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "text/html" = "brave.desktop";
+        "x-scheme-handler/http" = "brave-browser.desktop";
+        "x-scheme-handler/https" = "brave-browser.desktop";
+        "x-scheme-handler/about" = "brave-browser.desktop";
+        "x-scheme-handler/unknown" = "brave-browser.desktop";
+        "inode/directory" = "thunar.desktop";
+        "text/*" = [
+          "nvim.desktop"
+        ];
+      };
+    };
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-hyprland
+        xdg-desktop-portal-gtk
+      ];
+      config = {
+        common = {
+          default = ["gtk"];
+        };
+        hyprland = {
+          default = [
+            "hyprland"
+            "gtk"
+          ];
+        };
+      };
+    };
+  };
+
   imports = [	
   	./configs/zsh/zsh.nix
 	./configs/librewolf/librewolf.nix

@@ -20,6 +20,9 @@
 	url = "github:notashelf/nvf";
 	inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-flatpak = {
+      url = "github:gmodena/nix-flatpak";
+    };
   };
 
   outputs = { nixpkgs, home-manager, stylix, nvf, ... }@inputs:
@@ -51,6 +54,8 @@
     	modules = [ 
 		./configuration.nix
 		
+                inputs.nix-flatpak.nixosModules.nix-flatpak
+
 		home-manager.nixosModules.home-manager {
 			
 			home-manager.extraSpecialArgs = {

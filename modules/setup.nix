@@ -27,7 +27,31 @@
 		options = "";
 	};
   };
-  
+
+# -------------------------
+# MiniDLNA / DLNA media server
+# -------------------------
+#services.minidlna = {
+#  enable = true;           # Enable the service
+#  openFirewall = true;     # Opens UDP 1900 (SSDP) and TCP 8200 for DLNA discovery
+#
+#  settings = {
+#    # Friendly name shown to clients
+#    friendly_name = "Xander DLNA";
+#
+#    # Media directories
+#    media_dir = [
+#      "V,/srv/media/Movies"      # Videos
+#      "A,/srv/media/Music"       # Audio
+#      "P,/srv/media/Pictures"    # Photos
+#    ];
+#
+#    inotify = "yes";       # Automatically detect new files
+#    log_level = "info";    # Log info-level messages
+#    wide_links = "yes";
+#  };
+#};
+
   # Enabling sddm
   # services.displayManager.sddm.enable = true;
   # Configuring sddm to use wayland

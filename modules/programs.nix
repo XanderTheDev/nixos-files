@@ -101,6 +101,7 @@
     wlogout
     wofi
     xdg-desktop-portal-hyprland
+    xdg-desktop-portal-gtk
     yazi
     zsh
     zsh-autosuggestions
