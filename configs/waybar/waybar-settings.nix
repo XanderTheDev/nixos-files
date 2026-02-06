@@ -6,8 +6,6 @@
     modules-left = ["hyprland/workspaces" "custom/space" "hyprland/window" "custom/space" "wlr/taskbar" "custom/space"];
     modules-center = [];
     modules-right = [
-	"network"
-	"custom/space"
 	"pulseaudio"
 	"backlight"
 	"custom/space"
@@ -17,6 +15,7 @@
 	"temperature"
 	"battery"
 	"custom/space"
+	"network"
 	"tray"
 	"custom/space"
 	"custom/power_button"

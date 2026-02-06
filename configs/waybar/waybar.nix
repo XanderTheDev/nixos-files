@@ -123,6 +123,8 @@ button:hover {
     margin-bottom: 5px;
     padding-right: 20px;
     padding-left: 15px;
+    box-shadow: 
+        2px 0 4px rgba(100, 100, 100, 0.3);
 }
 #custom-power_button {
     border-radius: 23px;
@@ -153,6 +155,7 @@ button:hover {
     padding-left: 12px;
 }
 #backlight {
+    box-shadow: -2px 0 4px rgba(100, 100, 100, 0.3);
     border-radius: 0px 23px 23px 0px;
     border-top: 2px solid #${config.stylix.base16Scheme.base0D};
     border-bottom: 2px solid #${config.stylix.base16Scheme.base0D};
@@ -163,12 +166,18 @@ button:hover {
     padding-left: 9px;
 }
 #network {
-    border-radius: 23px;
-    border: 2px solid #${config.stylix.base16Scheme.base0D};
     margin-top: 5px;
     margin-bottom: 5px;
     padding-right: 21px;
     padding-left: 13px;
+    
+    box-shadow: 
+        2px 0 4px rgba(100, 100, 100, 0.3);
+    border-radius: 23px 0px 0px 23px;
+    border-left: 2px solid #${config.stylix.base16Scheme.base0D};
+    border-right: 0px solid #${config.stylix.base16Scheme.base0D};
+    border-bottom: 2px solid #${config.stylix.base16Scheme.base0D};
+    border-top: 2px solid #${config.stylix.base16Scheme.base0D};
 }    
 #pulseaudio {
     border-radius: 23px 0px 0px 23px;
@@ -184,12 +193,17 @@ button:hover {
 #wireplumber,
 #custom-media,
 #tray {
-    border-radius: 23px;
-    border: 2px solid #${config.stylix.base16Scheme.base0D};
     margin-top: 5px;
     margin-bottom: 5px;
     padding-right: 15px;
     padding-left: 15px;
+
+    border-radius: 0px 23px 23px 0px;
+    box-shadow: -2px 0 4px rgba(100, 100, 100, 0.3);
+    border-top: 2px solid #${config.stylix.base16Scheme.base0D};
+    border-right: 2px solid #${config.stylix.base16Scheme.base0D};
+    border-left: 0px solid #${config.stylix.base16Scheme.base0D};
+    border-bottom: 2px solid #${config.stylix.base16Scheme.base0D};
 }
 #mode,
 #idle_inhibitor,
@@ -255,8 +269,6 @@ label:focus {
 
 #cpu {
     background-color: #${config.stylix.base16Scheme.base00};
-    box-shadow: 
-        2px 0 4px rgba(100, 100, 100, 0.3);
     color: #${config.stylix.base16Scheme.base05};
 }
 
@@ -275,8 +287,6 @@ label:focus {
 
 #backlight {
     background-color: #${config.stylix.base16Scheme.base00};
-    box-shadow: 
-        -2px 0 4px rgba(100, 100, 100, 0.3);
     color: #${config.stylix.base16Scheme.base05};
 }
 
@@ -410,4 +420,3 @@ label:focus {
   };
 
 }
-
