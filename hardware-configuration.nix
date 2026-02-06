@@ -13,7 +13,7 @@
   # Modules to boot with
   boot.initrd.kernelModules = [ "ahci" "xhci_pci" "usbhid" ];
   boot.kernelModules = [ "kvm-amd" "snd_sof_amd" "snd_sof_pci" ];
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.blacklistedKernelModules = [ "rtw88_8821ce" ];
 
   fileSystems."/" =
@@ -31,9 +31,8 @@
     [ { device = "/dev/disk/by-uuid/18b78c87-e45a-4000-98ae-105011038756"; }
     ];
 
-
-  boot.extraModulePackages = with pkgs; [
-        linuxKernel.packages.linux_6_18.rtl8821ce
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+        rtl8821ce
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
