@@ -12,13 +12,15 @@
   
   programs.wireshark.enable = true;
   programs.wireshark.package = pkgs.wireshark;
-  
+
+  virtualisation.docker.enable = true;
+
   services.flatpak.enable = true;
 
   # Enable virtualisation for distrobox
   virtualisation.podman = {
   	enable = true;
-  	dockerCompat = true;
+  	dockerCompat = false;
   };
     
   # System packages
@@ -96,6 +98,7 @@
     w3m
     waybar
     wget
+    winboat
     wireguard-tools
     wl-clipboard
     wlogout
