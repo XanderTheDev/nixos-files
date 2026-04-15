@@ -14,6 +14,15 @@ in {
   # introduces backwards incompatible changes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
+  home.packages = with pkgs; [
+        protonup-ng
+  ];
+
+  home.sessionVariables = {
+        STEAM_EXTRA_COMPAT_TOOLS_PATHS =
+                "\${HOME}/.steam/root/Steam/compatibilitytools.d";
+  };
+
   xdg = {
     enable = true;
     mime.enable = true;

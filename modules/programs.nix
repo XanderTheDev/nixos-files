@@ -5,6 +5,11 @@
   networking.networkmanager.enable = true;
   networking.networkmanager.wifi.powersave = false;
 
+  # Steam
+  programs.steam.enable = true;
+  programs.steam.gamescopeSession.enable = true;
+  programs.gamemode.enable = true;
+
   # Enable Thunar
   programs.thunar.enable = true;
   # Allow unfree packages
@@ -39,6 +44,7 @@
     cava
     cmatrix
     distrobox
+    duckdb
     espeak-ng
     exiftool
     eza
@@ -68,6 +74,7 @@
     lutris
     lxqt.pavucontrol-qt
     macchina
+    mangohud
     marksman
     mate.mate-icon-theme-faenza
     networkmanagerapplet
@@ -98,7 +105,8 @@
     w3m
     waybar
     wget
-    winboat
+    inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.winboat
+    wineWow64Packages.stable
     wireguard-tools
     wl-clipboard
     wlogout

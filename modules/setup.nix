@@ -1,4 +1,12 @@
 { inputs, config, lib, pkgs, ... }:
+let
+  version = lib.trivial.release;     # "25.11"
+  codename = lib.trivial.codeName;   # "xantusia"
+
+  capitalize = s:
+    (lib.strings.toUpper (lib.strings.substring 0 1 s))
+    + (lib.strings.substring 1 (builtins.stringLength s - 1) s);
+in
 {
  networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -16,6 +24,14 @@
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
 
+  environment.etc."os-release".text = lib.mkForce ''
+    NAME="XDOS"
+    ID=nixos
+    PRETTY_NAME="XDOS ${version}"
+    VERSION="${version}"
+    VERSION_ID="${version}"
+  '';
+
   programs.ssh.startAgent = true;
 
   # Setting keyboard 
@@ -31,7 +47,7 @@
 # -------------------------
 # MiniDLNA / DLNA media server
 # -------------------------
-#services.minidlna = {
+# services.minidlna = {
 #  enable = true;           # Enable the service
 #  openFirewall = true;     # Opens UDP 1900 (SSDP) and TCP 8200 for DLNA discovery
 #
@@ -50,7 +66,7 @@
 #    log_level = "info";    # Log info-level messages
 #    wide_links = "yes";
 #  };
-#};
+# };
 
   # Enabling sddm
   # services.displayManager.sddm.enable = true;
@@ -108,6 +124,28 @@
   # Enable bluetooth
   services.blueman.enable = true;
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        # Shows battery charge of connected devices on supported
+        # Bluetooth adapters. Defaults to 'false'.
+        Experimental = true;
+        # When enabled other devices can connect faster to us, however
+        # the tradeoff is increased power consumption. Defaults to
+        # 'false'.
+        FastConnectable = true;
+      };
+      Policy = {
+        # Enable all controllers when they are found. This includes
+        # adapters present on start as well as adapters that are plugged
+        # in later on. Defaults to 'true'.
+        AutoEnable = true;
+      };
+    };
+  };
+
   # Enabling security kits
   security.rtkit.enable = true;
   security.polkit.enable = true;
@@ -119,7 +157,7 @@
   users.users.xander = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" "networkmanager" "libvirtd" "wireshark" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "docker" "wheel" "networkmanager" "libvirtd" "wireshark" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
     ];
   };
