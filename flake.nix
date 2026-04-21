@@ -23,6 +23,9 @@
     nix-flatpak = {
       url = "github:gmodena/nix-flatpak";
     };
+    brave-origin-src = {
+      url = "github:WitteShadovv/nixpkgs/brave-origin";
+    }; 
   };
 
   outputs = { nixpkgs, home-manager, stylix, nvf, ... }@inputs:

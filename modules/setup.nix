@@ -63,6 +63,7 @@ in
 #    ];
 #
 #    inotify = "yes";       # Automatically detect new files
+#    notify_interval = 900;
 #    log_level = "info";    # Log info-level messages
 #    wide_links = "yes";
 #  };

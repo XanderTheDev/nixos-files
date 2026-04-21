@@ -39,6 +39,7 @@
     blender
     #blueman
     brave
+    inputs.brave-origin-src.legacyPackages.${pkgs.system}.brave-origin
     btop
     calibre
     cava
