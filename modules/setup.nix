@@ -103,6 +103,7 @@ in
   # Enable CUPS to print documents.
   services.printing = {
         enable = true;
+        drivers = [ ];
   };
   services.avahi = {
         enable = true;

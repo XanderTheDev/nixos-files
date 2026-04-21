@@ -1,6 +1,8 @@
 { lib, pkgs, config, inputs, ... }:
-
 {
+  
+  # Allow unfree programs
+  nixpkgs.config.allowUnfree = true;
 
   networking.networkmanager.enable = true;
   networking.networkmanager.wifi.powersave = false;
@@ -12,9 +14,7 @@
 
   # Enable Thunar
   programs.thunar.enable = true;
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-  
+
   programs.wireshark.enable = true;
   programs.wireshark.package = pkgs.wireshark;
 
