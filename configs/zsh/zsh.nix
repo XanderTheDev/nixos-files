@@ -73,6 +73,11 @@ in {
 
 	# Source zsh-autosuggestions
 	source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+        if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+                eval "$(ssh-agent -s)"
+        fi
+
+        ssh-add ~/.ssh/id_rsa
     '';
     ".config/cat".text = ''
 	#!/bin/bash
