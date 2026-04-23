@@ -77,7 +77,7 @@ in {
                 eval "$(ssh-agent -s)"
         fi
 
-        ssh-add ~/.ssh/id_rsa
+        ssh-add ~/.ssh/id_rsa &> /dev/null
     '';
     ".config/cat".text = ''
 	#!/bin/bash
