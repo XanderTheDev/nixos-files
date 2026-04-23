@@ -1,4 +1,4 @@
-{ inputs, config, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, mfc6490cw-driver, ... }:
 let
   version = lib.trivial.release;     # "25.11"
   codename = lib.trivial.codeName;   # "xantusia"
@@ -103,8 +103,16 @@ in
   # Enable CUPS to print documents.
   services.printing = {
         enable = true;
-        drivers = [ ];
+        drivers = [ mfc6490cw-driver ];
   };
+
+  hardware.printers.ensurePrinters = [{
+    name = "Brother_MFC-6490CW";
+    location = "Home";
+    deviceUri = "socket://192.168.178.33";
+    model = "brmfc6490cw.ppd";
+  }];
+
   services.avahi = {
         enable = true;
         nssmdns4 = true;

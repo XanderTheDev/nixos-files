@@ -41,18 +41,24 @@
         configHash = builtins.hashString "sha256" (
                 builtins.toString (builtins.readDir ./configs/nvf)
         );
+
+        mfc6490cw-driver = pkgs.callPackage ./pkgs/mfc6490cw-driver.nix {};
   in
   {
-    packages.${system}.nvf = 
-	(nvf.lib.neovimConfiguration {
-	 pkgs = nixpkgs.legacyPackages."x86_64-linux";
-	 modules = [ ./configs/nvf/nvf.nix ];
-	}).neovim;
-    
+    packages = {
+      ${system} = {
+        nvf = (nvf.lib.neovimConfiguration {
+        pkgs = nixpkgs.legacyPackages.${system};
+        modules = [ ./configs/nvf/nvf.nix ];
+        }).neovim;
+      };
+    };
+
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
 	system = "${system}";
 	specialArgs = { 
                 inherit inputs;
+                inherit mfc6490cw-driver;
         };
     	modules = [ 
 		./configuration.nix
