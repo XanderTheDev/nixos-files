@@ -84,6 +84,22 @@
         "type": "github"
       }
     },
+    "brother-mfc6490cw-src": {
+      "locked": {
+        "lastModified": 1777031263,
+        "narHash": "sha256-F9pDwDXn5BOzgEIsJFXoE5taE8PW1ZTDWrzLoOk+qu0=",
+        "owner": "XanderTheDev",
+        "repo": "nixpkgs",
+        "rev": "8d280fea2d358f271c280b839247a0be412ee2f0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "XanderTheDev",
+        "ref": "brother-mfc6490cw",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "firefox-addons": {
       "inputs": {
         "nixpkgs": [
@@ -373,6 +389,7 @@
     "root": {
       "inputs": {
         "brave-origin-src": "brave-origin-src",
+        "brother-mfc6490cw-src": "brother-mfc6490cw-src",
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
         "nix-flatpak": "nix-flatpak",

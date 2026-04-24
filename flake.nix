@@ -25,24 +25,21 @@
     };
     brave-origin-src = {
       url = "github:WitteShadovv/nixpkgs/brave-origin";
-    }; 
+    };
+    brother-mfc6490cw-src = {
+      url = "github:XanderTheDev/nixpkgs/brother-mfc6490cw";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, stylix, nvf, ... }@inputs:
+  outputs = inputs@{ nixpkgs, home-manager, stylix, nvf, ... }:
   let
 	system = "x86_64-linux";
 	host = "nixos";
 	username = "xander";
 	
-	pkgs = import nixpkgs {
-		inherit system;
-		config.allowUnfree = true;
-	};
         configHash = builtins.hashString "sha256" (
                 builtins.toString (builtins.readDir ./configs/nvf)
         );
-
-        mfc6490cw-driver = pkgs.callPackage ./pkgs/mfc6490cw-driver.nix {};
   in
   {
     packages = {
@@ -55,12 +52,14 @@
     };
 
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-	system = "${system}";
-	specialArgs = { 
+        system = system;
+
+        specialArgs = {
                 inherit inputs;
-                inherit mfc6490cw-driver;
+                inherit system;
         };
-    	modules = [ 
+
+        modules = [ 
 		./configuration.nix
 		
                 inputs.nix-flatpak.nixosModules.nix-flatpak

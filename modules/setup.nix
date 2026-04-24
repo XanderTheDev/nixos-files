@@ -1,4 +1,4 @@
-{ inputs, config, lib, pkgs, mfc6490cw-driver, ... }:
+{ system, inputs, config, lib, pkgs, ... }:
 let
   version = lib.trivial.release;     # "25.11"
   codename = lib.trivial.codeName;   # "xantusia"
@@ -6,6 +6,10 @@ let
   capitalize = s:
     (lib.strings.toUpper (lib.strings.substring 0 1 s))
     + (lib.strings.substring 1 (builtins.stringLength s - 1) s);
+  brotherPkgs = import inputs.brother-mfc6490cw-src {
+    system = system;
+    config.allowUnfree = true;
+  };
 in
 {
  networking.hostName = "nixos"; # Define your hostname.
@@ -103,7 +107,7 @@ in
   # Enable CUPS to print documents.
   services.printing = {
         enable = true;
-        drivers = [ mfc6490cw-driver ];
+        drivers = [ brotherPkgs.brother-mfc6490cw ];
   };
 
   hardware.printers.ensurePrinters = [{
