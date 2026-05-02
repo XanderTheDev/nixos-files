@@ -42,7 +42,7 @@ in {
 
 	alias cp='cp -i'
 	alias mv='mv -i'
-	alias ls='eza -G --icons -a --git-ignore'
+	alias ls='eza -G --icons -a'
 	alias rm='trash'
 	alias mkdir='mkdir -p'
 	alias cat='$HOME/.config/cat'
