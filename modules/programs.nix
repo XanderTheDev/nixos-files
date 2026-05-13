@@ -12,6 +12,10 @@
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
 
+  # Direnv
+  programs.direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
+
   # Enable Thunar
   programs.thunar.enable = true;
 
@@ -43,6 +47,7 @@
     btop
     calibre
     cava
+    chafa
     cmatrix
     distrobox
     duckdb

@@ -10,6 +10,9 @@ in {
   home.file = {
     ".zshrc".text = ''
 	export TERM=foot
+        export DIRENV_LOG_FORMAT=""
+        eval "$(direnv hook zsh)"
+        export DIRENV_DUMP_FILE=.direnv/direnv.json
 
 	if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]]; then
     		macchina -o host -o distribution -o desktop-environment -o shell -o resolution -o uptime

@@ -19,6 +19,21 @@ in
 
   services.xserver.videoDrivers = [ "amdgpu" ];
 
+  # Enable caching
+  nix.settings = {
+    substituters = [
+      "https://cache.nixos.org"
+      "https://nix-community.cachix.org"
+    ];
+
+    trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+    keep-outputs = true;
+    keep-derivations = true;
+    eval-cache = true;
+  };
+
   networking.firewall.enable = true;
   networking.firewall.checkReversePath = false;
   # networking.wireless.iwd = {
@@ -51,27 +66,27 @@ in
 # -------------------------
 # MiniDLNA / DLNA media server
 # -------------------------
-# services.minidlna = {
-#  enable = true;           # Enable the service
-#  openFirewall = true;     # Opens UDP 1900 (SSDP) and TCP 8200 for DLNA discovery
-#
-#  settings = {
-#    # Friendly name shown to clients
-#    friendly_name = "Xander DLNA";
-#
-#    # Media directories
-#    media_dir = [
-#      "V,/srv/media/Movies"      # Videos
-#      "A,/srv/media/Music"       # Audio
-#      "P,/srv/media/Pictures"    # Photos
-#    ];
-#
-#    inotify = "yes";       # Automatically detect new files
-#    notify_interval = 900;
-#    log_level = "info";    # Log info-level messages
-#    wide_links = "yes";
-#  };
-# };
+services.minidlna = {
+ enable = true;           # Enable the service
+ openFirewall = true;     # Opens UDP 1900 (SSDP) and TCP 8200 for DLNA discovery
+
+ settings = {
+   # Friendly name shown to clients
+   friendly_name = "Xander DLNA";
+
+   # Media directories
+   media_dir = [
+     "V,/srv/media/Movies"      # Videos
+     "A,/srv/media/Music"       # Audio
+     "P,/srv/media/Pictures"    # Photos
+   ];
+
+   inotify = "yes";       # Automatically detect new files
+   notify_interval = 900;
+   log_level = "info";    # Log info-level messages
+   wide_links = "yes";
+ };
+};
 
   # Enabling sddm
   # services.displayManager.sddm.enable = true;
