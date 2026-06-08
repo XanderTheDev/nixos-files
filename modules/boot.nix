@@ -55,7 +55,7 @@
    enable = true;
    settings = rec {
     initial_session = {
-      command = "Hyprland > /dev/null 2>&1 && plymouth quit";
+      command = "start-hyprland > /dev/null 2>&1 && plymouth quit";
       user = "xander";
     };
     default_session = initial_session;

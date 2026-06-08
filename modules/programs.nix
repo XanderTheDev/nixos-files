@@ -82,7 +82,7 @@
     macchina
     mangohud
     marksman
-    mate.mate-icon-theme-faenza
+    mate-icon-theme-faenza
     networkmanagerapplet
     nixd
     nmap
@@ -90,9 +90,9 @@
     onlyoffice-desktopeditors
     pamixer
     poppler
-    protonvpn-gui
+    proton-vpn
     pyright
-    python311
+    python3
     p7zip
     ripgrep
     rust-analyzer

@@ -66,6 +66,7 @@ home.file = {
 	enable = true;
 	systemd.enable = true;
 	xwayland.enable = true;
+        configType = "hyprlang";
 	
 	extraConfig = "
 		source = ${./hyprland.conf}
