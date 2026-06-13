@@ -2,6 +2,13 @@
 
 {
 
+  systemd.services.NetworkManager-wait-online.enable = false;
+
+  systemd.services.docker.wants = lib.mkForce [];
+  systemd.services.docker.after = lib.mkForce [ "network.target" ];
+  systemd.services.docker.wantedBy = lib.mkForce [];
+  systemd.services.libvirtd.wantedBy = lib.mkForce [];
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -35,6 +42,9 @@
     # Enable "Silent boot"
     consoleLogLevel = 3;
     initrd.verbose = false;
+    initrd.systemd.enable = true;
+    initrd.compressor = "zstd";
+    initrd.compressorArgs = [ "-19" "-T0" ];
     kernelParams = [
       "quiet"
       "splash"
