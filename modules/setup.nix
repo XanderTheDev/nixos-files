@@ -19,6 +19,11 @@ in
 
   services.xserver.videoDrivers = [ "amdgpu" ];
 
+  zramSwap = {
+        enable = true;
+        memoryPercent = 100;
+  };
+
   # Enable caching
   nix.settings = {
     substituters = [

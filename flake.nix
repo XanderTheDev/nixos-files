@@ -29,6 +29,9 @@
     brother-mfc6490cw-src = {
       url = "github:XanderTheDev/nixpkgs/brother-mfc6490cw";
     };
+    cachyos-kernel = {
+      url = "github:xddxdd/nix-cachyos-kernel/release";
+    };
   };
 
   outputs = inputs@{ nixpkgs, home-manager, stylix, nvf, ... }:
@@ -59,7 +62,7 @@
                 inherit system;
         };
 
-        modules = [ 
+        modules = [
 		./configuration.nix
 		
                 inputs.nix-flatpak.nixosModules.nix-flatpak
@@ -84,6 +87,5 @@
 		nvf.nixosModules.default
 	];
     };
-
   };
 }
