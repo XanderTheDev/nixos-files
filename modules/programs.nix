@@ -42,8 +42,6 @@
     bat
     blender
     #blueman
-    brave
-    inputs.brave-origin-src.legacyPackages.${pkgs.system}.brave-origin
     btop
     calibre
     cava
@@ -57,6 +55,7 @@
     fastfetch
     fd
     ffmpegthumbnailer
+    firefox
     foot
     fzf
     gcc
@@ -71,7 +70,6 @@
     imagemagick
     jq
     killall
-    librewolf
     libnotify
     libva
     libva-utils

@@ -23,9 +23,6 @@
     nix-flatpak = {
       url = "github:gmodena/nix-flatpak";
     };
-    brave-origin-src = {
-      url = "github:WitteShadovv/nixpkgs/brave-origin";
-    };
     brother-mfc6490cw-src = {
       url = "github:XanderTheDev/nixpkgs/brother-mfc6490cw";
     };

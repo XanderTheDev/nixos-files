@@ -13,9 +13,6 @@ in {
 	fzf.enable = false;
         swaync.enable = true;
         hyprlock.enable = false;
-	librewolf = {
-		profileNames = [ "default" ];
-	};
   };
   
   # Setting fonts that Stylix should use

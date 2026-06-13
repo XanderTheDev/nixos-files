@@ -1,2 +1,4 @@
 distrobox/arch-snapshot/arch-snapshot.tar.xz
 configs/nvf/secrets.nix
+configs/firefox/search_engine.nix
+configs/firefox/doh_url.nix

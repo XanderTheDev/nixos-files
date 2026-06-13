@@ -23,47 +23,8 @@ in {
                 "\${HOME}/.steam/root/Steam/compatibilitytools.d";
   };
 
-  xdg = {
-    enable = true;
-    mime.enable = true;
-    mimeApps = {
-      enable = true;
-      defaultApplications = {
-        "text/html" = "brave.desktop";
-        "x-scheme-handler/http" = "brave-browser.desktop";
-        "x-scheme-handler/https" = "brave-browser.desktop";
-        "x-scheme-handler/about" = "brave-browser.desktop";
-        "x-scheme-handler/unknown" = "brave-browser.desktop";
-        "inode/directory" = "thunar.desktop";
-        "text/*" = [
-          "nvim.desktop"
-        ];
-      };
-    };
-    portal = {
-      enable = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-hyprland
-        xdg-desktop-portal-gtk
-      ];
-      config = {
-        common = {
-          default = ["gtk"];
-        };
-        hyprland = {
-          default = [
-            "hyprland"
-            "gtk"
-          ];
-        };
-      };
-    };
-  };
-
   imports = [	
   	./configs/zsh/zsh.nix
-	./configs/librewolf/librewolf.nix
-        ./configs/brave/brave.nix
 	./configs/desktop/settings.nix
 	./configs/hypr/hypr-eco.nix
 	./configs/fastfetch/fastfetch.nix
@@ -76,6 +37,7 @@ in {
 	./configs/yazi/yazi.nix
 	./configs/fzf/fzf.nix
 	./configs/wlogout/wlogout.nix
+        ./configs/firefox/firefox.nix
   ];
 
   # Let Home Manager install and manage itself.

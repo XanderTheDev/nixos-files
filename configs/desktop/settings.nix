@@ -6,11 +6,40 @@ with config.stylix.fonts; let
    colors = config.lib.stylix.colors.withHashtag;
 in {
 
-  # Sets Thunar as default file manager
-  xdg.mimeApps = {
+  xdg = {
     enable = true;
-    defaultApplications = {
-      "inode/directory" = "thunar.desktop";
+    mime.enable = true;
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "text/html" = "firefox.desktop";
+        "x-scheme-handler/http" = "firefox.desktop";
+        "x-scheme-handler/https" = "firefox.desktop";
+        "x-scheme-handler/about" = "firefox.desktop";
+        "x-scheme-handler/unknown" = "firefox.desktop";
+        "inode/directory" = "thunar.desktop";
+        "text/*" = [
+          "nvim.desktop"
+        ];
+      };
+    };
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-hyprland
+        xdg-desktop-portal-gtk
+      ];
+      config = {
+        common = {
+          default = ["gtk"];
+        };
+        hyprland = {
+          default = [
+            "hyprland"
+            "gtk"
+          ];
+        };
+      };
     };
   };
 
