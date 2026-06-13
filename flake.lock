@@ -68,22 +68,6 @@
         "type": "github"
       }
     },
-    "brave-origin-src": {
-      "locked": {
-        "lastModified": 1779312273,
-        "narHash": "sha256-ZPyWe7PyY21Vs8u9H6exjTQWc+ONqy9EpQUNLQdHhcg=",
-        "owner": "WitteShadovv",
-        "repo": "nixpkgs",
-        "rev": "2b8106a310a3ac7cb6bc97437d133c4042505e49",
-        "type": "github"
-      },
-      "original": {
-        "owner": "WitteShadovv",
-        "ref": "brave-origin",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "brother-mfc6490cw-src": {
       "locked": {
         "lastModified": 1777031263,
@@ -506,7 +490,6 @@
     },
     "root": {
       "inputs": {
-        "brave-origin-src": "brave-origin-src",
         "brother-mfc6490cw-src": "brother-mfc6490cw-src",
         "cachyos-kernel": "cachyos-kernel",
         "firefox-addons": "firefox-addons",
