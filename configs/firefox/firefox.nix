@@ -20,11 +20,11 @@ with config.stylix.fonts; let
     url = "https://addons.mozilla.org/firefox/downloads/file/4838011/localcdn_fork_of_decentraleyes-2.6.85.xpi";
     hash = "sha256-Yo/K0ZlQylowBePptU3nOELPm/h6XDtUNFKxDBZH+mA=";
   };
-  userAgentSwitcher = pkgs.fetchFirefoxAddon {
-    name = "user-agent-switcher";
-    url = "https://addons.mozilla.org/firefox/downloads/file/4773733/user_agent_string_switcher-0.6.7.xpi";
-    hash = "sha256-l5oEyaOA8QtxWYCTWm8+hw3/88gQDL45PWW0bbgqslc=";
-  };
+  # userAgentSwitcher = pkgs.fetchFirefoxAddon {
+  #   name = "user-agent-switcher";
+  #   url = "https://addons.mozilla.org/firefox/downloads/file/4773733/user_agent_string_switcher-0.6.7.xpi";
+  #   hash = "sha256-l5oEyaOA8QtxWYCTWm8+hw3/88gQDL45PWW0bbgqslc=";
+  # };
   returnYoutubeDislikes = pkgs.fetchFirefoxAddon {
     name = "return-youtube-dislikes";
     url = "https://addons.mozilla.org/firefox/downloads/file/4371820/return_youtube_dislikes-3.0.0.18.xpi";
@@ -90,7 +90,7 @@ in {
         videoBackgroundPlayFix
         noScript
         localCdn
-        userAgentSwitcher
+        # userAgentSwitcher
         returnYoutubeDislikes
       ];
       settings = {
@@ -103,6 +103,7 @@ in {
         "privacy.resistFingerprinting.reduceTimerPrecision.jitter" = true;
         "privacy.resistFingerprinting.randomization.daily_reset.enabled" = true;
         "privacy.resistFingerprinting.randomization.daily_reset.private.enabled" = true;
+        "browser.display.use_document_fonts" = 0;
         "network.cookie.cookiebehavior" = 5;
         "privacy.trackingprotection.enabled" = true;
         "privacy.globalprivacycontrol.enabled" = true;
