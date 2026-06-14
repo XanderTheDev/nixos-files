@@ -44,7 +44,6 @@
     initrd.verbose = false;
     initrd.systemd.enable = true;
     initrd.compressor = "zstd";
-    initrd.compressorArgs = [ "-19" "-T0" ];
     kernelParams = [
       "quiet"
       "splash"
@@ -62,14 +61,13 @@
   
   # Autologin on greetd to Hyprland
   services.greetd = {
-   enable = true;
-   settings = rec {
-    initial_session = {
+  enable = true;
+  settings = rec {
+   initial_session = {
       command = "start-hyprland > /dev/null 2>&1 && plymouth quit";
       user = "xander";
     };
     default_session = initial_session;
    };
   };
-
 }
