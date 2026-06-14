@@ -97,13 +97,13 @@ in {
         "browser.safebrowsing.malware.enabled" = true;
         "browser.safebrowsing.phishing.enabled" = true;
         "privacy.resistFingerprinting" = true;
+        "privacy.resistFingerprinting.letterboxing" = true;
         "privacy.trackingprotection.fingerprinting.enabled" = true;
         "privacy.resistFingerprinting.autoDeclineNoUserInputCanvasPrompts" = true;
         "privacy.resistFingerprinting.randomDataOnCanvasExtract" = true;
         "privacy.resistFingerprinting.reduceTimerPrecision.jitter" = true;
         "privacy.resistFingerprinting.randomization.daily_reset.enabled" = true;
         "privacy.resistFingerprinting.randomization.daily_reset.private.enabled" = true;
-        "browser.display.use_document_fonts" = 0;
         "network.cookie.cookiebehavior" = 5;
         "privacy.trackingprotection.enabled" = true;
         "privacy.globalprivacycontrol.enabled" = true;
