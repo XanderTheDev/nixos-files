@@ -27,8 +27,6 @@
   # Setting up Plymouth 
   boot = {
 
-    supportedFilesystems = [ "cifs" ];
-
     plymouth = {
       enable = true;
       # theme = lib.mkForce "rings";
