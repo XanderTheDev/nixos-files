@@ -51,6 +51,7 @@
     calibre
     cava
     chafa
+    cifs-utils
     cmatrix
     distrobox
     duckdb
