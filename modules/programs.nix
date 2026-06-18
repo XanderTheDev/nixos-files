@@ -4,8 +4,13 @@
   # Allow unfree programs
   nixpkgs.config.allowUnfree = true;
 
-  networking.networkmanager.enable = true;
-  networking.networkmanager.wifi.powersave = false;
+  networking.networkmanager = {
+    enable = true;
+    wifi.powersave = true;
+    plugins = with pkgs; [
+      networkmanager-openvpn
+    ];
+  };
 
   # Steam
   programs.steam.enable = true;
@@ -86,6 +91,7 @@
     nmap
     ollama
     onlyoffice-desktopeditors
+    openvpn3
     pamixer
     poppler
     proton-vpn
