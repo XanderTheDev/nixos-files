@@ -15,16 +15,6 @@ with config.stylix.fonts; let
     url = "https://addons.mozilla.org/firefox/downloads/file/4841405/noscript-13.6.23.xpi";
     hash = "sha256-2Nmxntz3NW+BmvF6zogNvlm43YmMHLi1sGoB5vGYQL0=";
   };
-  localCdn = pkgs.fetchFirefoxAddon {
-    name = "local-cdn";
-    url = "https://addons.mozilla.org/firefox/downloads/file/4838011/localcdn_fork_of_decentraleyes-2.6.85.xpi";
-    hash = "sha256-Yo/K0ZlQylowBePptU3nOELPm/h6XDtUNFKxDBZH+mA=";
-  };
-  # userAgentSwitcher = pkgs.fetchFirefoxAddon {
-  #   name = "user-agent-switcher";
-  #   url = "https://addons.mozilla.org/firefox/downloads/file/4773733/user_agent_string_switcher-0.6.7.xpi";
-  #   hash = "sha256-l5oEyaOA8QtxWYCTWm8+hw3/88gQDL45PWW0bbgqslc=";
-  # };
   returnYoutubeDislikes = pkgs.fetchFirefoxAddon {
     name = "return-youtube-dislikes";
     url = "https://addons.mozilla.org/firefox/downloads/file/4371820/return_youtube_dislikes-3.0.0.18.xpi";
@@ -89,8 +79,6 @@ in {
         addons.youtube-shorts-block
         videoBackgroundPlayFix
         noScript
-        localCdn
-        # userAgentSwitcher
         returnYoutubeDislikes
       ];
       settings = {
@@ -128,6 +116,7 @@ in {
         "app.update.auto" = false;
         "browser.startup.firstrunSkipsHomepage" = true;
         "browser.newtab.preload" = true;
+        "datareporting.usage.uploadEnabled" = false;
       };
     };
   };
