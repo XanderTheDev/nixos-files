@@ -75,7 +75,6 @@ in {
         addons.clearurls
         addons.darkreader
         addons.privacy-badger
-        addons.canvasblocker
         addons.youtube-shorts-block
         videoBackgroundPlayFix
         noScript
@@ -117,6 +116,9 @@ in {
         "browser.startup.firstrunSkipsHomepage" = true;
         "browser.newtab.preload" = true;
         "datareporting.usage.uploadEnabled" = false;
+        "network.http.speculative-parallel-limit" = 6;
+        "network.dns.disablePrefetchFromHTTPS" = false;
+        "dom.security.https_only_mode_send_http_background_request" = true;
       };
     };
   };
