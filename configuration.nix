@@ -1,8 +1,15 @@
 { config, lib, pkgs, inputs, ... }: 
+let
+ dnsConfig =
+   if builtins.pathExists ./modules/dns.nix
+   then ./modules/dns.nix
+   else ./modules/dns-quad9.nix;
+in 
 {
 
   imports =
     [
+      dnsConfig
       ./hardware-configuration.nix
       ./modules/vm.nix
       ./modules/boot.nix
