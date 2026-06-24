@@ -43,6 +43,7 @@
     adwaita-icon-theme
     mesa
     alsa-utils
+    android-tools
     anki-bin
     bat
     blender
