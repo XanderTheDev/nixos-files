@@ -1,5 +1,5 @@
 { pkgs, lib, ... }: {
-  # Override the install script to add GPU bus ID info at the end
+
   environment.etc."motd".text = lib.mkForce ''
     ╔══════════════════════════════════════════════════════╗
     ║           Welcome to the NixOS Installer             ║
@@ -18,6 +18,11 @@
       lsblk                    - list disks
       lspci | grep -E 'VGA|3D' - show GPU bus IDs
       nmtui                    - connect to Wi-Fi
+  '';
+
+  # Print MOTD on shell login since autologin skips it
+  environment.etc."profile.d/motd.sh".text = ''
+    cat /etc/motd
   '';
 
   environment.systemPackages = [
