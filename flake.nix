@@ -80,11 +80,24 @@
           system.includeBuildDependencies = true;
         }
       ]).config.system.build.isoImage;
+      iso-thinkpad = (mkHost "thinkpad" [
+        ./hosts/thinkpad
+        ./installer.nix
+        "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+        {
+          boot.initrd.systemd.enable = nixpkgs.lib.mkForce false;
+          isoImage.squashfsCompression = "zstd -Xcompression-level 6";
+          system.includeBuildDependencies = true;
+        }
+      ]).config.system.build.isoImage;
     };
 
     nixosConfigurations = {
       laptop = mkHost "laptop" [
         ./hosts/laptop
+      ];
+      thinkpad = mkHost "thinkpad" [
+        ./hosts/thinkpad
       ];
     };
   };

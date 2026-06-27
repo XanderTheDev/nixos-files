@@ -26,7 +26,7 @@
   boot.consoleLogLevel = 3;
   boot.initrd.verbose = false;
 
-  boot.loader.timeout = 0;
+  boot.loader.timeout = lib.mkDefault 0;
 
   services.greetd = {
     enable = true;
