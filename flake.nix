@@ -78,7 +78,9 @@
           boot.initrd.systemd.enable = nixpkgs.lib.mkForce false;
           boot.loader.timeout = nixpkgs.lib.mkForce 10;
           isoImage.squashfsCompression = "zstd -Xcompression-level 6";
+          boot.zfs.forceImportRoot = false;
           services.greetd.enable = nixpkgs.lib.mkForce false;
+          programs.hyprland.enable = nixpkgs.lib.mkForce false;
           services.getty.autologinUser = nixpkgs.lib.mkForce "nixos";
         }
       ]).config.system.build.isoImage;
@@ -90,8 +92,11 @@
         {
           boot.initrd.systemd.enable = nixpkgs.lib.mkForce false;
           boot.loader.timeout = nixpkgs.lib.mkForce 10;
+          boot.zfs.forceImportRoot = false;
           isoImage.squashfsCompression = "zstd -Xcompression-level 6";
           services.greetd.enable = nixpkgs.lib.mkForce false;
+          programs.hyprland.enable = nixpkgs.lib.mkForce false;
+          services.getty.autologinUser = nixpkgs.lib.mkForce "nixos";
         }
       ]).config.system.build.isoImage;
     };

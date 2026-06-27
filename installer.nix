@@ -23,47 +23,45 @@
     pkgs.pciutils
     pkgs.networkmanager
     (pkgs.writeShellScriptBin "install-system" ''
-      set -e
-      clear
-      echo "╔══════════════════════════════════════════════════════╗"
-      echo "║             NixOS System Installer                   ║"
-      echo "╚══════════════════════════════════════════════════════╝"
-      echo ""
+          set -e
+          clear
+          echo "╔══════════════════════════════════════════════════════╗"
+          echo "║             NixOS System Installer                   ║"
+          echo "╚══════════════════════════════════════════════════════╝"
+          echo ""
 
-      echo "Available disks:"
-      lsblk -d -o NAME,SIZE,MODEL | grep -v loop
-      echo ""
-      read -p "Target disk (e.g. /dev/nvme0n1): " DISK
+          echo "Available disks:"
+          lsblk -d -o NAME,SIZE,MODEL | grep -v loop
+          echo ""
+          read -p "Target disk (e.g. /dev/nvme0n1): " DISK
 
-      echo ""
-      echo "WARNING: This will ERASE $DISK entirely."
-      read -p "Type 'yes' to confirm: " CONFIRM
-      [ "$CONFIRM" = "yes" ] || { echo "Aborted."; exit 1; }
+          echo ""
+          echo "WARNING: This will ERASE $DISK entirely."
+          read -p "Type 'yes' to confirm: " CONFIRM
+          [ "$CONFIRM" = "yes" ] || { echo "Aborted."; exit 1; }
 
-      echo ""
-      echo "Partitioning $DISK..."
-      sudo disko --mode disko \
-        --override-option "disko.devices.disk.main.device=$DISK" \
-        /iso/nixos-files/hosts/laptop/disks.nix
+          echo ""
+          echo "Partitioning and installing NixOS..."
+          sudo disko-install \
+            --flake /iso/nixos-files#laptop \
+            --disk main "$DISK"
 
-      echo ""
-      echo "Installing NixOS (from local store, no downloads needed)..."
-      sudo nixos-install \
-        --flake /iso/nixos-files#laptop \
-        --no-root-passwd \
-        --cores 0
+          echo ""
+          read -sp "Set password for xander: " PASSWORD
+          echo ""
+          sudo nixos-enter --root /mnt -- bash -c "echo 'xander:$PASSWORD' | chpasswd"
 
-      echo ""
-      read -sp "Set password for xander: " PASSWORD
-      echo ""
-      sudo nixos-enter --root /mnt -- bash -c "echo 'xander:$PASSWORD' | chpasswd"
-
-      echo ""
-      echo "╔══════════════════════════════════════════════════════╗"
-      echo "║                  Install complete!                   ║"
-      echo "╚══════════════════════════════════════════════════════╝"
-      echo ""
-      echo "Run 'reboot' when ready."
+          echo ""
+          echo "╔══════════════════════════════════════════════════════╗"
+          echo "║                  Install complete!                   ║"
+          echo "╚══════════════════════════════════════════════════════╝"
+          echo ""
+          echo "Run 'reboot' when ready."
     '')
   ];
+
+  isoImage.contents = [{
+    source = ./.;
+    target = "/iso/nixos-files";
+  }];
 }
