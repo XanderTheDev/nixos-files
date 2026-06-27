@@ -87,7 +87,6 @@
         {
           boot.initrd.systemd.enable = nixpkgs.lib.mkForce false;
           isoImage.squashfsCompression = "zstd -Xcompression-level 6";
-          system.includeBuildDependencies = true;
         }
       ]).config.system.build.isoImage;
     };
