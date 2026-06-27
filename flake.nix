@@ -85,6 +85,10 @@
           xdg.portal.extraPortals = nixpkgs.lib.mkForce (with nixpkgs.legacyPackages.${system}; [
             xdg-desktop-portal-gtk
           ]);
+          systemd.services.greetd = nixpkgs.lib.mkForce {
+            enable = false;
+            wantedBy = nixpkgs.lib.mkForce [];
+          };
         }
       ]).config.system.build.isoImage;
       iso-thinkpad = (mkHost "thinkpad" [
@@ -103,6 +107,10 @@
           xdg.portal.extraPortals = nixpkgs.lib.mkForce (with nixpkgs.legacyPackages.${system}; [
             xdg-desktop-portal-gtk
           ]);
+          systemd.services.greetd = nixpkgs.lib.mkForce {
+            enable = false;
+            wantedBy = nixpkgs.lib.mkForce [];
+          };
         }
       ]).config.system.build.isoImage;
     };

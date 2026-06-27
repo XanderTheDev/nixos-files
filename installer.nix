@@ -61,7 +61,9 @@
   ];
 
   isoImage.contents = [{
-    source = ./.;
+  source = pkgs.runCommand "nixos-files" {} ''
+      cp -r ${./.} $out
+    '';
     target = "/iso/nixos-files";
   }];
 }
