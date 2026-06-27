@@ -1,7 +1,5 @@
 { pkgs, lib, ... }: {
 
-  # Show helpful info on login
-  users.users.nixos.openssh.authorizedKeys.keys = [];
   services.getty.helpLine = lib.mkForce "";
 
   environment.etc."motd".text = ''
@@ -13,20 +11,17 @@
 
         install-system
 
-    If this is a machine with hybrid GPU (Intel + Nvidia), the
-    installer will show your PCI bus IDs at the end. Write them
-    down — you will need to update modules/hardware/intel-arc-nvidia.nix
-    with the correct values after installing.
-
     Useful commands:
-      lsblk                        - list disks
-      lspci | grep -E 'VGA|3D'     - show GPU bus IDs
-      nmtui                        - connect to Wi-Fi
-      install-system               - start the installer
+      lsblk          - list disks
+      lspci          - show hardware
+      nmtui          - connect to Wi-Fi
   '';
 
   environment.systemPackages = [
     pkgs.disko
+    pkgs.util-linux
+    pkgs.pciutils
+    pkgs.networkmanager
     (pkgs.writeShellScriptBin "install-system" ''
       set -e
       clear
@@ -38,7 +33,7 @@
       echo "Available disks:"
       lsblk -d -o NAME,SIZE,MODEL | grep -v loop
       echo ""
-      read -p "Target disk (e.g. /dev/nvme1n1): " DISK
+      read -p "Target disk (e.g. /dev/nvme0n1): " DISK
 
       echo ""
       echo "WARNING: This will ERASE $DISK entirely."
@@ -68,20 +63,7 @@
       echo "║                  Install complete!                   ║"
       echo "╚══════════════════════════════════════════════════════╝"
       echo ""
-      echo "If this machine has hybrid GPU (Intel + Nvidia), here are"
-      echo "your PCI bus IDs — write these down:"
-      echo ""
-      lspci | grep -E 'VGA|3D'
-      echo ""
-      echo "Update modules/hardware/intel-arc-nvidia.nix with these"
-      echo "values before running nixos-rebuild on this machine."
-      echo ""
       echo "Run 'reboot' when ready."
     '')
   ];
-
-  isoImage.contents = [{
-    source = ./.;
-    target = "/iso/nixos-files";
-  }];
 }

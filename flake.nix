@@ -85,6 +85,7 @@
       iso-thinkpad = (mkHost "thinkpad" [
         ./hosts/thinkpad
         ./installer.nix
+        ./hosts/thinkpad/installer-extra.nix
         "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
         {
           boot.initrd.systemd.enable = nixpkgs.lib.mkForce false;
