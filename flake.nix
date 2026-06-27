@@ -89,6 +89,8 @@
             enable = false;
             wantedBy = nixpkgs.lib.mkForce [];
           };
+          systemd.services."getty@tty1".enable = nixpkgs.lib.mkForce true;
+          systemd.services."getty@tty1".wantedBy = nixpkgs.lib.mkForce [ "getty.target" ];
         }
       ]).config.system.build.isoImage;
       iso-thinkpad = (mkHost "thinkpad" [
@@ -111,6 +113,8 @@
             enable = false;
             wantedBy = nixpkgs.lib.mkForce [];
           };
+          systemd.services."getty@tty1".enable = nixpkgs.lib.mkForce true;
+          systemd.services."getty@tty1".wantedBy = nixpkgs.lib.mkForce [ "getty.target" ];
         }
       ]).config.system.build.isoImage;
     };

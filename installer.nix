@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }: {
+{ pkgs, host, lib, ... }: {
 
   services.getty.helpLine = lib.mkForce "";
 
@@ -43,7 +43,7 @@
           echo ""
           echo "Partitioning and installing NixOS..."
           sudo disko-install \
-            --flake /iso/nixos-files#laptop \
+            --flake /iso/nixos-files#${host} \
             --disk main "$DISK"
 
           echo ""
@@ -64,6 +64,6 @@
   source = pkgs.runCommand "nixos-files" {} ''
       cp -r ${./.} $out
     '';
-    target = "/iso/nixos-files";
+    target = "/nixos-files";
   }];
 }
