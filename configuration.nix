@@ -16,6 +16,8 @@ in
     ./modules/programs.nix
   ];
 
+
+  boot.zfs.forceImportRoot = false;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.copySystemConfiguration = false;
   system.stateVersion = "24.05";
