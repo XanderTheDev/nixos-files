@@ -77,7 +77,7 @@
         {
           boot.initrd.systemd.enable = nixpkgs.lib.mkForce false;
           isoImage.squashfsCompression = "zstd -Xcompression-level 6";
-          system.includeBuildDependencies = true;
+          system.includeBuildDependencies = false;
         }
       ]).config.system.build.isoImage;
       iso-thinkpad = (mkHost "thinkpad" [
