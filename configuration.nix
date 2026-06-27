@@ -17,7 +17,17 @@ in
   ];
 
   xdg.portal.enable = true;
+  xdg.portal.extraPortals = with pkgs; [
+    xdg-desktop-portal-hyprland
+    xdg-desktop-portal-gtk
+  ];
+  xdg.portal.config = {
+    hyprland.default = [ "hyprland" "gtk" ];
+    common.default = [ "gtk" ];
+  };
+
   environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.copySystemConfiguration = false;
   system.stateVersion = "24.05";

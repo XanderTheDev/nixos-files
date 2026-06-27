@@ -82,6 +82,9 @@
           services.greetd.enable = nixpkgs.lib.mkForce false;
           programs.hyprland.enable = nixpkgs.lib.mkForce false;
           services.getty.autologinUser = nixpkgs.lib.mkForce "nixos";
+          xdg.portal.extraPortals = nixpkgs.lib.mkForce (with nixpkgs.legacyPackages.${system}; [
+            xdg-desktop-portal-gtk
+          ]);
         }
       ]).config.system.build.isoImage;
       iso-thinkpad = (mkHost "thinkpad" [
@@ -97,6 +100,9 @@
           services.greetd.enable = nixpkgs.lib.mkForce false;
           programs.hyprland.enable = nixpkgs.lib.mkForce false;
           services.getty.autologinUser = nixpkgs.lib.mkForce "nixos";
+          xdg.portal.extraPortals = nixpkgs.lib.mkForce (with nixpkgs.legacyPackages.${system}; [
+            xdg-desktop-portal-gtk
+          ]);
         }
       ]).config.system.build.isoImage;
     };
