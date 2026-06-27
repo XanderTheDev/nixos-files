@@ -1,4 +1,7 @@
 { lib, ... }: {
+
+  disko.enableConfig = false;
+
   disko.devices = {
     disk.main = {
       type = "disk";

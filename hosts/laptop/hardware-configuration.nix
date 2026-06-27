@@ -13,7 +13,6 @@
   # Modules to boot with
   boot.initrd.kernelModules = [ "ahci" "xhci_pci" "usbhid" ];
   boot.kernelModules = [ "kvm-amd" "snd_sof_amd" "snd_sof_pci" ];
-  boot.kernelPackages = inputs.cachyos-kernel.legacyPackages.${pkgs.system}.linuxPackages-cachyos-latest;
   boot.blacklistedKernelModules = [ "8821ce" ];
 
   fileSystems."/" =
