@@ -26,6 +26,7 @@
   '';
 
   environment.systemPackages = [
+    pkgs.disko
     (pkgs.writeShellScriptBin "install-system" ''
       set -e
       clear

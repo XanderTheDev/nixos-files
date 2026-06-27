@@ -76,8 +76,10 @@
         "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
         {
           boot.initrd.systemd.enable = nixpkgs.lib.mkForce false;
+          boot.loader.timeout = nixpkgs.lib.mkForce 10;
           isoImage.squashfsCompression = "zstd -Xcompression-level 6";
-          system.includeBuildDependencies = false;
+          services.greetd.enable = nixpkgs.lib.mkForce false;
+          services.getty.autologinUser = nixpkgs.lib.mkForce "nixos";
         }
       ]).config.system.build.isoImage;
       iso-thinkpad = (mkHost "thinkpad" [
@@ -86,7 +88,9 @@
         "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
         {
           boot.initrd.systemd.enable = nixpkgs.lib.mkForce false;
+          boot.loader.timeout = nixpkgs.lib.mkForce 10;
           isoImage.squashfsCompression = "zstd -Xcompression-level 6";
+          services.greetd.enable = nixpkgs.lib.mkForce false;
         }
       ]).config.system.build.isoImage;
     };
