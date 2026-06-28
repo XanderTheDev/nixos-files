@@ -2,7 +2,7 @@
 
   environment.etc."motd".text = lib.mkForce ''
     ╔══════════════════════════════════════════════════════╗
-    ║           Welcome to the NixOS Installer             ║
+    ║           Welcome to the XDOS Installer             ║
     ╚══════════════════════════════════════════════════════╝
 
     To install your system, run:

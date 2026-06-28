@@ -4,7 +4,7 @@
 
   environment.etc."motd".text = ''
     ╔══════════════════════════════════════════════════════╗
-    ║           Welcome to the NixOS Installer             ║
+    ║           Welcome to the XDOS Installer             ║
     ╚══════════════════════════════════════════════════════╝
 
     To install your system, run:
@@ -30,7 +30,7 @@
       set -e
       clear
       echo "╔══════════════════════════════════════════════════════╗"
-      echo "║             NixOS System Installer                   ║"
+      echo "║             XDOS System Installer                   ║"
       echo "╚══════════════════════════════════════════════════════╝"
       echo ""
 
