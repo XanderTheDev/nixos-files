@@ -91,7 +91,6 @@
           };
           systemd.services."getty@tty1".enable = nixpkgs.lib.mkForce true;
           systemd.services."getty@tty1".wantedBy = nixpkgs.lib.mkForce [ "getty.target" ];
-          isoImage.edition = "XDOS";
           isoImage.appendToMenuLabel = " 26.05";
         }
       ]).config.system.build.isoImage;
@@ -117,7 +116,6 @@
           };
           systemd.services."getty@tty1".enable = nixpkgs.lib.mkForce true;
           systemd.services."getty@tty1".wantedBy = nixpkgs.lib.mkForce [ "getty.target" ];
-          isoImage.edition = "XDOS";
           isoImage.appendToMenuLabel = " 26.05";
         }
       ]).config.system.build.isoImage;
