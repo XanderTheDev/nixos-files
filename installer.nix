@@ -70,4 +70,8 @@
     '';
     target = "/nixos-files";
   }];
+
+  system.nixos.distroName = "XDOS";
+  system.nixos.distroId = "xdos";
+  system.nixos.label = "XDOS 26.05";
 }

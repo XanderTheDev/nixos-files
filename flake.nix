@@ -91,6 +91,8 @@
           };
           systemd.services."getty@tty1".enable = nixpkgs.lib.mkForce true;
           systemd.services."getty@tty1".wantedBy = nixpkgs.lib.mkForce [ "getty.target" ];
+          isoImage.appendToMenuLabel = " 26.05";
+          isoImage.menuLabel = "XDOS";
         }
       ]).config.system.build.isoImage;
       iso-thinkpad = (mkHost "thinkpad" [
@@ -115,6 +117,8 @@
           };
           systemd.services."getty@tty1".enable = nixpkgs.lib.mkForce true;
           systemd.services."getty@tty1".wantedBy = nixpkgs.lib.mkForce [ "getty.target" ];
+          isoImage.appendToMenuLabel = " 26.05";
+          isoImage.menuLabel = "XDOS";
         }
       ]).config.system.build.isoImage;
     };
