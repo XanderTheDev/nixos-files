@@ -20,11 +20,6 @@
       nmtui                    - connect to Wi-Fi
   '';
 
-  # Print MOTD on shell login since autologin skips it
-  environment.etc."profile.d/motd.sh".text = ''
-    cat /etc/motd
-  '';
-
   environment.systemPackages = [
     (pkgs.writeShellScriptBin "show-gpu-ids" ''
       echo "GPU PCI Bus IDs (needed for intel-arc-nvidia.nix):"

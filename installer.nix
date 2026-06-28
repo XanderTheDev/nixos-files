@@ -17,8 +17,7 @@
       nmtui          - connect to Wi-Fi
   '';
 
-  # Print MOTD on shell login since autologin skips it
-  environment.etc."profile.d/motd.sh".text = ''
+  environment.loginShellInit = ''
     cat /etc/motd
   '';
 
