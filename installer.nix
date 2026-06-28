@@ -73,5 +73,5 @@
 
   system.nixos.distroName = "XDOS";
   system.nixos.distroId = "xdos";
-  system.nixos.label = "XDOS 26.05";
+  system.nixos.label = "XDOS-26.05";
 }
