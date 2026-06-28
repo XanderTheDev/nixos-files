@@ -81,7 +81,13 @@
           boot.zfs.forceImportRoot = false;
           services.greetd.enable = nixpkgs.lib.mkForce false;
           programs.hyprland.enable = nixpkgs.lib.mkForce false;
-          services.getty.autologinUser = nixpkgs.lib.mkForce "nixos";
+          users.users.nixos = nixpkgs.lib.mkForce {};
+          users.users.xdos = {
+            isNormalUser = true;
+            extraGroups = [ "wheel" "networkmanager" ];
+            initialPassword = "";
+          };
+          services.getty.autologinUser = nixpkgs.lib.mkForce "xdos";
           xdg.portal.extraPortals = nixpkgs.lib.mkForce (with nixpkgs.legacyPackages.${system}; [
             xdg-desktop-portal-gtk
           ]);
@@ -106,7 +112,13 @@
           isoImage.squashfsCompression = "zstd -Xcompression-level 6";
           services.greetd.enable = nixpkgs.lib.mkForce false;
           programs.hyprland.enable = nixpkgs.lib.mkForce false;
-          services.getty.autologinUser = nixpkgs.lib.mkForce "nixos";
+          users.users.nixos = nixpkgs.lib.mkForce {};
+          users.users.xdos = {
+            isNormalUser = true;
+            extraGroups = [ "wheel" "networkmanager" ];
+            initialPassword = "";
+          };
+          services.getty.autologinUser = nixpkgs.lib.mkForce "xdos";
           xdg.portal.extraPortals = nixpkgs.lib.mkForce (with nixpkgs.legacyPackages.${system}; [
             xdg-desktop-portal-gtk
           ]);
