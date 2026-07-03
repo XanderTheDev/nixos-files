@@ -108,7 +108,6 @@
       boot.zfs.forceImportRoot = false;
       services.greetd.enable = nixpkgs.lib.mkForce false;
       programs.hyprland.enable = nixpkgs.lib.mkForce false;
-      users.users.nixos = nixpkgs.lib.mkForce {};
       users.users.xdos = {
         isNormalUser = true;
         extraGroups = [ "wheel" "networkmanager" ];
