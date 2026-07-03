@@ -1,16 +1,12 @@
 { lib, ... }: {
-  # TEMPORARY: true instead of false (like hosts/laptop) because there's no
-  # real hardware-configuration.nix yet — see that file. disko needs to
-  # derive fileSystems itself until one exists. This only changes who
-  # computes fileSystems; it does NOT make rebuilds destructive — disko only
-  # formats/partitions when explicitly run via `disko`/`disko-install`, never
-  # as a side effect of `nixos-rebuild switch/boot/test`.
-  disko.enableConfig = true;
-
+  # Unlike the laptop/thinkpad hosts (which have a committed
+  # hardware-configuration.nix and so disable this), generic profiles have no
+  # static per-machine file — disko must generate fileSystems/swapDevices
+  # itself from the partition layout below.
   disko.devices = {
     disk.main = {
       type = "disk";
-      device = lib.mkDefault "/dev/nvme1n1"; # second SSD, confirmed by the installer's disk picker at install time
+      device = lib.mkDefault "/dev/sda"; # overridden at install time via --disk main <path>
       content = {
         type = "gpt";
         partitions = {
@@ -24,7 +20,7 @@
             };
           };
           swap = {
-            size = "16G"; # more RAM so more swap
+            size = "8G";
             content = { type = "swap"; };
           };
           root = {

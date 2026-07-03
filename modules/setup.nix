@@ -1,4 +1,4 @@
-{ system, inputs, config, lib, pkgs, ... }:
+{ system, inputs, config, lib, pkgs, username, ... }:
 let
   version = lib.trivial.release;
   codename = lib.trivial.codeName;
@@ -54,22 +54,22 @@ in {
     };
   };
 
-  # services.minidlna = {
-  #   enable = true;
-  #   openFirewall = true;
-  #   settings = {
-  #     friendly_name = "Xander DLNA";
-  #     media_dir = [
-  #       "V,/srv/media/Movies"
-  #       "A,/srv/media/Music"
-  #       "P,/srv/media/Pictures"
-  #     ];
-  #     inotify = "yes";
-  #     notify_interval = 900;
-  #     log_level = "info";
-  #     wide_links = "yes";
-  #   };
-  # };
+  services.minidlna = {
+    enable = true;
+    openFirewall = true;
+    settings = {
+      friendly_name = "Xander DLNA";
+      media_dir = [
+        "V,/srv/media/Movies"
+        "A,/srv/media/Music"
+        "P,/srv/media/Pictures"
+      ];
+      inotify = "yes";
+      notify_interval = 900;
+      log_level = "info";
+      wide_links = "yes";
+    };
+  };
 
   programs.hyprland.enable = true;
   security.pam.services.hyprlock = {};
@@ -124,7 +124,7 @@ in {
   security.polkit.enable = true;
   services.libinput.enable = true;
 
-  users.users.xander = {
+  users.users.${username} = {
     isNormalUser = true;
     shell = pkgs.zsh;
     extraGroups = [ "docker" "wheel" "networkmanager" "libvirtd" "wireshark" ];

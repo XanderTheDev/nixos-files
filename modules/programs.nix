@@ -95,6 +95,7 @@
     openvpn3
     pamixer
     poppler
+    prismlauncher
     proton-vpn
     pyright
     python3

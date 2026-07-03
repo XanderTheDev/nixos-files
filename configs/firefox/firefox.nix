@@ -119,6 +119,7 @@ in {
         "network.http.speculative-parallel-limit" = 6;
         "network.dns.disablePrefetchFromHTTPS" = false;
         "dom.security.https_only_mode_send_http_background_request" = true;
+        "dom.event.clipboardevents.enabled" = true;
       };
     };
   };

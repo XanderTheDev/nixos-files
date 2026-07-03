@@ -1,4 +1,4 @@
-{ inputs, lib, config, pkgs, ... }: {
+{ inputs, lib, config, pkgs, username, ... }: {
 
   systemd.services.NetworkManager-wait-online.enable = false;
 
@@ -33,7 +33,7 @@
     settings = rec {
       initial_session = {
         command = "start-hyprland > /dev/null 2>&1 && plymouth quit";
-        user = "xander";
+        user = username;
       };
       default_session = initial_session;
     };

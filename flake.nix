@@ -38,7 +38,12 @@
   outputs = inputs@{ nixpkgs, home-manager, stylix, nvf, ... }:
   let
     system = "x86_64-linux";
-    username = "xander";
+
+    userDefaults = { username = "xander"; };
+    userConfig = if builtins.pathExists ./user.nix
+                 then userDefaults // (import ./user.nix)
+                 else userDefaults;
+    inherit (userConfig) username;
 
     configHash = builtins.hashString "sha256" (
       builtins.toString (builtins.readDir ./configs/nvf)
@@ -58,9 +63,68 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "backup";
-          home-manager.users.xander = import ./home.nix;
+          home-manager.users.${username} = import ./home.nix;
         }
       ] ++ extraModules;
+    };
+
+    genericGpuModules = {
+      amd          = [ ./modules/hardware/amd-gpu.nix ];
+      intel        = [ ./modules/hardware/intel-gpu.nix ];
+      nvidia       = [ ./modules/hardware/nvidia.nix ];
+      intel-nvidia = [ ./modules/hardware/prime-intel-nvidia.nix ];
+      amd-nvidia   = [ ./modules/hardware/prime-amd-nvidia.nix ];
+      intel-amd    = [ ./modules/hardware/prime-intel-amd.nix ];
+    };
+
+    genericProfiles = {
+      laptop-amd           = genericGpuModules.amd;
+      laptop-intel         = genericGpuModules.intel;
+      laptop-intel-nvidia  = genericGpuModules.intel-nvidia;
+      laptop-intel-amd     = genericGpuModules.intel-amd;
+      laptop-amd-nvidia    = genericGpuModules.amd-nvidia;
+      desktop-amd          = genericGpuModules.amd;
+      desktop-intel        = genericGpuModules.intel;
+      desktop-nvidia       = genericGpuModules.nvidia;
+      desktop-intel-nvidia = genericGpuModules.intel-nvidia;
+      desktop-intel-amd    = genericGpuModules.intel-amd;
+      desktop-amd-nvidia   = genericGpuModules.amd-nvidia;
+    };
+
+    mkGenericHost = profileId: gpuModules: mkHost profileId ([
+      ./hosts/generic/hardware-defaults.nix
+      ./hosts/generic/disks.nix
+      ./modules/hardware/amd-cpu.nix
+      ./modules/hardware/intel-cpu.nix
+      { networking.hostName = profileId; }
+    ] ++ gpuModules);
+
+    genericHosts = nixpkgs.lib.mapAttrs mkGenericHost genericProfiles;
+
+    isoOverrides = {
+      boot.initrd.systemd.enable = nixpkgs.lib.mkForce false;
+      boot.loader.timeout = nixpkgs.lib.mkForce 10;
+      isoImage.squashfsCompression = "zstd -Xcompression-level 6";
+      boot.zfs.forceImportRoot = false;
+      services.greetd.enable = nixpkgs.lib.mkForce false;
+      programs.hyprland.enable = nixpkgs.lib.mkForce false;
+      users.users.nixos = nixpkgs.lib.mkForce {};
+      users.users.xdos = {
+        isNormalUser = true;
+        extraGroups = [ "wheel" "networkmanager" ];
+        initialPassword = "";
+      };
+      services.getty.autologinUser = nixpkgs.lib.mkForce "xdos";
+      xdg.portal.extraPortals = nixpkgs.lib.mkForce (with nixpkgs.legacyPackages.${system}; [
+        xdg-desktop-portal-gtk
+      ]);
+      systemd.services.greetd = nixpkgs.lib.mkForce {
+        enable = false;
+        wantedBy = nixpkgs.lib.mkForce [];
+      };
+      systemd.services."getty@tty1".enable = nixpkgs.lib.mkForce true;
+      systemd.services."getty@tty1".wantedBy = nixpkgs.lib.mkForce [ "getty.target" ];
+      isoImage.appendToMenuLabel = " 26.05";
     };
   in
   {
@@ -74,61 +138,23 @@
         ./hosts/laptop
         ./installer.nix
         "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-        {
-          boot.initrd.systemd.enable = nixpkgs.lib.mkForce false;
-          boot.loader.timeout = nixpkgs.lib.mkForce 10;
-          isoImage.squashfsCompression = "zstd -Xcompression-level 6";
-          boot.zfs.forceImportRoot = false;
-          services.greetd.enable = nixpkgs.lib.mkForce false;
-          programs.hyprland.enable = nixpkgs.lib.mkForce false;
-          users.users.nixos = nixpkgs.lib.mkForce {};
-          users.users.xdos = {
-            isNormalUser = true;
-            extraGroups = [ "wheel" "networkmanager" ];
-            initialPassword = "";
-          };
-          services.getty.autologinUser = nixpkgs.lib.mkForce "xdos";
-          xdg.portal.extraPortals = nixpkgs.lib.mkForce (with nixpkgs.legacyPackages.${system}; [
-            xdg-desktop-portal-gtk
-          ]);
-          systemd.services.greetd = nixpkgs.lib.mkForce {
-            enable = false;
-            wantedBy = nixpkgs.lib.mkForce [];
-          };
-          systemd.services."getty@tty1".enable = nixpkgs.lib.mkForce true;
-          systemd.services."getty@tty1".wantedBy = nixpkgs.lib.mkForce [ "getty.target" ];
-          isoImage.appendToMenuLabel = " 26.05";
-        }
+        isoOverrides
       ]).config.system.build.isoImage;
       iso-thinkpad = (mkHost "thinkpad" [
         ./hosts/thinkpad
         ./installer.nix
         ./hosts/thinkpad/installer-extra.nix
         "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+        isoOverrides
+      ]).config.system.build.isoImage;
+
+      iso-generic = (mkHost "generic-installer" [
+        ./installer.nix
+        "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+        isoOverrides
         {
-          boot.initrd.systemd.enable = nixpkgs.lib.mkForce false;
-          boot.loader.timeout = nixpkgs.lib.mkForce 10;
-          boot.zfs.forceImportRoot = false;
-          isoImage.squashfsCompression = "zstd -Xcompression-level 6";
-          services.greetd.enable = nixpkgs.lib.mkForce false;
-          programs.hyprland.enable = nixpkgs.lib.mkForce false;
-          users.users.nixos = nixpkgs.lib.mkForce {};
-          users.users.xdos = {
-            isNormalUser = true;
-            extraGroups = [ "wheel" "networkmanager" ];
-            initialPassword = "";
-          };
-          services.getty.autologinUser = nixpkgs.lib.mkForce "xdos";
-          xdg.portal.extraPortals = nixpkgs.lib.mkForce (with nixpkgs.legacyPackages.${system}; [
-            xdg-desktop-portal-gtk
-          ]);
-          systemd.services.greetd = nixpkgs.lib.mkForce {
-            enable = false;
-            wantedBy = nixpkgs.lib.mkForce [];
-          };
-          systemd.services."getty@tty1".enable = nixpkgs.lib.mkForce true;
-          systemd.services."getty@tty1".wantedBy = nixpkgs.lib.mkForce [ "getty.target" ];
-          isoImage.appendToMenuLabel = " 26.05";
+          system.extraDependencies =
+            nixpkgs.lib.mapAttrsToList (_: host: host.config.system.build.toplevel) genericHosts;
         }
       ]).config.system.build.isoImage;
     };
@@ -140,6 +166,6 @@
       thinkpad = mkHost "thinkpad" [
         ./hosts/thinkpad
       ];
-    };
+    } // genericHosts;
   };
 }
