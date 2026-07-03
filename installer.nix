@@ -13,7 +13,7 @@ let
   # Real settings from configs/waybar/waybar-settings.nix, trimmed to modules
   # that don't need Hyprland's IPC (hyprland/workspaces, hyprland/window,
   # wlr/taskbar) or apps we don't ship on the ISO (wlogout, tray, pulseaudio).
-  waybarBaseSettings = import ../configs/waybar/waybar-settings.nix;
+  waybarBaseSettings = import ./configs/waybar/waybar-settings.nix;
   waybarInstallerSettings = waybarBaseSettings // {
     height = 32;
     modules-left = [ "clock" ];
