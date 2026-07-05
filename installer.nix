@@ -1,147 +1,221 @@
-{ pkgs, host, lib, ... }:
+{ pkgs, lib, ... }:
 let
-  pythonEnv = pkgs.python3.withPackages (ps: [ ps.pygobject3 ]);
+  pythonEnv = pkgs.python3.withPackages (ps: [
+    ps.pygobject3
+    ps.pycairo
+  ]);
 
-  # PyGObject needs these typelibs on GI_TYPELIB_PATH to find Gtk 4 at all —
-  # nothing wires this up automatically for plain environment.systemPackages.
-  # (matches the dev shell's shellHook)
-  giTypelibPath = lib.makeSearchPath "lib/girepository-1.0" [
-    pkgs.gtk4 pkgs.libadwaita pkgs.gdk-pixbuf pkgs.pango pkgs.glib
-    pkgs.graphene pkgs.gobject-introspection
+  giPackages = with pkgs; [
+    gtk4
+    libadwaita
+    pango.out
+    cairo
+    glib.out
+    gdk-pixbuf
+    graphene
+    gobject-introspection
+    harfbuzz
+    at-spi2-core
   ];
 
-  # Real settings from configs/waybar/waybar-settings.nix, trimmed to modules
-  # that don't need Hyprland's IPC (hyprland/workspaces, hyprland/window,
-  # wlr/taskbar) or apps we don't ship on the ISO (wlogout, tray, pulseaudio).
-  waybarBaseSettings = import ./configs/waybar/waybar-settings.nix;
-  waybarInstallerSettings = waybarBaseSettings // {
-    height = 32;
-    modules-left = [ "clock" ];
-    modules-right = [ "cpu" "temperature" "battery" "network" ];
-  };
-  waybarConfig = pkgs.writeText "installer-waybar-config.json" (builtins.toJSON waybarInstallerSettings);
+  giTypelibPath = lib.makeSearchPath "lib/girepository-1.0" giPackages;
 
-  # Simplified, static port of configs/waybar/waybar.nix's style: same
-  # Catppuccin Mocha pill look, but with literal hex values instead of
-  # config.stylix.base16Scheme.* — stylix/home-manager isn't wired up for
-  # the ISO's xdos user, so those interpolations aren't available here.
-  waybarStyle = pkgs.writeText "installer-waybar-style.css" ''
+  iconPackages = with pkgs; [
+    adwaita-icon-theme
+    hicolor-icon-theme
+    font-awesome
+    networkmanagerapplet   # provides nm-device-wired, nm-signal-*, etc.
+  ];
+
+  xdgDataDirsPath = lib.makeSearchPath "share" iconPackages;
+
+  installerWrapped = pkgs.runCommand "installer-wrapped" {
+    nativeBuildInputs = [ pkgs.makeWrapper ];
+  } ''
+    mkdir -p $out/bin
+    makeWrapper ${pythonEnv}/bin/python3 $out/bin/installer \
+      --set GI_TYPELIB_PATH "${giTypelibPath}" \
+      --set XDG_DATA_DIRS "${xdgDataDirsPath}" \
+      --add-flags "/iso/nixos-files/installer.py"
+  '';
+
+  waybarConfig = pkgs.writeText "waybar-config.jsonc" ''
+    {
+      "layer": "top",
+      "position": "top",
+      "height": 32,
+      "modules-left": ["clock"],
+      "modules-right": ["network", "pulseaudio", "tray"],
+      "clock": {
+        "format": "{:%H:%M}"
+      },
+      "network": {
+        "format-wifi": "  {essid} ({signalStrength}%)",
+        "format-ethernet": "  Connected",
+        "format-disconnected": "  Disconnected",
+        "tooltip-format": "{ifname}: {ipaddr}",
+        "on-click": "foot -e nmtui"
+      },
+      "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "  Muted",
+        "format-icons": {
+          "default": ["", "", ""]
+        },
+        "on-click": "foot -e alsamixer"
+      },
+      "tray": {
+        "icon-size": 18,
+        "spacing": 8
+      }
+    }
+  '';
+
+  waybarStyle = pkgs.writeText "waybar-style.css" ''
     * {
-      font-family: "FiraCode Nerd Font", "Font Awesome", monospace;
+      font-family: sans-serif;
       font-size: 14px;
     }
-    window#waybar { background-color: transparent; color: #cdd6f4; }
-    #clock, #cpu, #temperature, #battery, #network {
-      background-color: #1e1e2e;
-      color: #cdd6f4;
-      border: 2px solid #89b4fa;
-      border-radius: 23px;
-      margin-top: 5px; margin-bottom: 5px;
-      padding: 0 14px;
+    window#waybar {
+      background: rgba(20, 20, 20, 0.9);
+      color: #ffffff;
     }
-    #battery.critical:not(.charging) { background-color: #f9e2af; color: #1e1e2e; }
-    #temperature.critical { background-color: #f38ba8; color: #1e1e2e; }
+    #network, #pulseaudio, #clock, #tray {
+      padding: 0 10px;
+    }
   '';
 
-  # No Hyprland here on purpose: the shipped Hyprland config opens hyprlock
-  # on start, and live-boot GPU state (proprietary Nvidia not installed yet,
-  # unknown hardware for iso-generic) is less predictable than on an
-  # installed system. labwc is a plain, minimal wlroots compositor — same
-  # wlr-layer-shell protocol waybar already needs, no lock screen, no
-  # Hyprland-specific IPC to go wrong.
-  startGraphicalInstaller = pkgs.writeShellScript "start-graphical-installer" ''
-    set -e
-    export XDG_RUNTIME_DIR="/run/user/$(id -u)"
-    mkdir -p "$XDG_RUNTIME_DIR"
-    export GI_TYPELIB_PATH="${giTypelibPath}"
-
-    dbus-run-session labwc &
-    COMPOSITOR_PID=$!
-
-    for i in $(seq 1 50); do
-      [ -S "$XDG_RUNTIME_DIR/wayland-1" ] && break
-      sleep 0.2
+  labwcAutostart = pkgs.writeText "labwc-autostart" ''
+    until [ -S "$XDG_RUNTIME_DIR/wayland-0" ]; do
+      sleep 0.1
     done
 
-    waybar -c ${waybarConfig} -s ${waybarStyle} &
+    export XDG_DATA_DIRS="${xdgDataDirsPath}:${"$"}{XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
+
+    ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1 &
+
+    # Start waybar first so its tray module registers as the
+    # StatusNotifierWatcher before nm-applet tries to attach to it.
+    ${pkgs.waybar}/bin/waybar -c ${waybarConfig} -s ${waybarStyle} &
     WAYBAR_PID=$!
 
-    ${pythonEnv}/bin/python3 /iso/nixos-files/installer.py
+    sleep 1
+    ${pkgs.networkmanagerapplet}/bin/nm-applet --indicator &
 
-    kill "$WAYBAR_PID" "$COMPOSITOR_PID" 2>/dev/null || true
+    ${installerWrapped}/bin/installer
+
+    kill $WAYBAR_PID 2>/dev/null || true
   '';
-in {
-  services.getty.helpLine = lib.mkForce "";
+in
+{
+  # ------------------------------------------------------------
+  # CORE SESSION
+  # ------------------------------------------------------------
+  services.xserver.enable = false;
+  services.greetd.enable = false;
+  services.seatd.enable = true;
+  services.getty.autologinUser = "xdos";
 
-  environment.etc."motd".text = ''
-    ╔══════════════════════════════════════════════════════╗
-    ║           Welcome to the XDOS Installer               ║
-    ╚══════════════════════════════════════════════════════╝
-    Starting the graphical installer...
-    Ctrl+Alt+F2 for a terminal (install-system for a manual/text install,
-    lsblk/lspci/dmidecode for hardware info, nmtui for Wi-Fi).
-  '';
+  # ------------------------------------------------------------
+  # FONTS
+  # ------------------------------------------------------------
+  fonts.fontconfig.enable = true;
+  fonts.packages = with pkgs; [
+    font-awesome
+    noto-fonts
+    nerd-fonts.fira-code
+    cantarell-fonts
+    roboto
+    fira
+    dejavu_fonts
+    liberation_ttf
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
+    corefonts
+  ];
 
-  environment.loginShellInit = ''
-    cat /etc/motd
-    if [ -z "$WAYLAND_DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
-      exec ${startGraphicalInstaller}
+  # ------------------------------------------------------------
+  # NETWORKING
+  # ------------------------------------------------------------
+  networking.networkmanager.enable = true;
+  users.users.xdos.extraGroups = [ "networkmanager" ];
+
+  programs.bash.loginShellInit = ''
+    if [ "$(tty)" = "/dev/tty1" ]; then
+      unset WAYLAND_DISPLAY
+      unset XDG_SESSION_TYPE
+      export XDG_SESSION_TYPE=wayland
+      export XDG_CURRENT_DESKTOP=labwc
+
+      # VirtualBox's virtual GPU does not correctly implement the
+      # DRM/KMS ioctls wlroots expects (causes "Failed to close buffer
+      # handle" / "drmCloseBufferHandle failed: Invalid argument").
+      # Force software rendering and disable hardware cursor planes.
+      export WLR_RENDERER=pixman
+      export WLR_NO_HARDWARE_CURSORS=1
+
+      exec dbus-run-session labwc > /tmp/labwc.log 2>&1
     fi
   '';
 
+  # ------------------------------------------------------------
+  # LABWC AUTOSTART
+  # ------------------------------------------------------------
+  environment.etc."xdg/labwc/autostart".source = labwcAutostart;
+
+  # ------------------------------------------------------------
+  # PACKAGES
+  # ------------------------------------------------------------
   environment.systemPackages = [
-    pkgs.disko
-    pkgs.util-linux
-    pkgs.pciutils
-    pkgs.dmidecode
-    pkgs.networkmanager
-    pythonEnv
     pkgs.labwc
     pkgs.waybar
     pkgs.foot
+    pkgs.networkmanager
+    pkgs.networkmanagerapplet
+    pkgs.polkit_gnome
+    pkgs.alsa-utils
+    pkgs.dbus
+    pythonEnv
     pkgs.gtk4
     pkgs.libadwaita
-    pkgs.gsettings-desktop-schemas
+    pkgs.gobject-introspection
+    pkgs.dmidecode
+    pkgs.pciutils
+    pkgs.glib
+    pkgs.cairo
+    pkgs.graphene
+    pkgs.pango
+    pkgs.gdk-pixbuf
     pkgs.adwaita-icon-theme
+    pkgs.hicolor-icon-theme
+    pkgs.disko
     (pkgs.writeShellScriptBin "install-system" ''
       set -e
       clear
-      echo "╔══════════════════════════════════════════════════════╗"
-      echo "║             XDOS System Installer (manual/text)     ║"
-      echo "╚══════════════════════════════════════════════════════╝"
-      echo ""
-      echo "Available disks:"
+      echo "XDOS Installer"
       lsblk -d -o NAME,SIZE,MODEL | grep -v loop
-      echo ""
-      read -p "Target disk (e.g. /dev/nvme0n1): " DISK
-      read -p "Flake target (e.g. laptop, thinkpad, laptop-amd, desktop-intel-nvidia): " PROFILE
-      echo ""
-      echo "WARNING: This will ERASE $DISK entirely."
-      read -p "Type 'yes' to confirm: " CONFIRM
-      [ "$CONFIRM" = "yes" ] || { echo "Aborted."; exit 1; }
-      echo ""
-      echo "Partitioning and installing NixOS ($PROFILE)..."
+      read -p "Disk: " DISK
+      read -p "Profile: " PROFILE
+      echo "WILL ERASE $DISK"
+      read -p "type yes: " CONFIRM
+      [ "$CONFIRM" = "yes" ] || exit 1
       sudo disko-install \
         --flake "/iso/nixos-files#$PROFILE" \
         --disk main "$DISK"
+      read -p "Username: " USER
+      read -sp "Password: " PASS
       echo ""
-      read -p "Username to create: " NEWUSER
-      echo "{ username = \"$NEWUSER\"; }" | sudo tee /mnt/etc/nixos-user-hint.nix >/dev/null || true
-      read -sp "Set password for $NEWUSER: " PASSWORD
-      echo ""
-      sudo nixos-enter --root /mnt -- bash -c "echo '$NEWUSER:$PASSWORD' | chpasswd"
-      echo ""
-      echo "╔══════════════════════════════════════════════════════╗"
-      echo "║                  Install complete!                   ║"
-      echo "╚══════════════════════════════════════════════════════╝"
-      echo ""
-      echo "Run 'reboot' when ready."
+      sudo nixos-enter --root /mnt -- bash -c \
+        "echo '$USER:$PASS' | chpasswd"
     '')
   ];
 
+  # ------------------------------------------------------------
+  # ISO FILES
+  # ------------------------------------------------------------
   isoImage.contents = [{
     source = pkgs.runCommand "nixos-files" {} ''
-      cp -r ${./.} $out
+      cp -r --no-preserve=xattr,ownership ${./.} $out
     '';
     target = "/nixos-files";
   }];
@@ -150,3 +224,4 @@ in {
   system.nixos.distroId = "xdos";
   system.nixos.label = "XDOS-26.05";
 }
+

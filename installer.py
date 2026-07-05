@@ -203,7 +203,7 @@ GPU_OPTIONS_BY_CPU = {
     ],
 }
 FORM_OPTIONS = ["laptop", "desktop"]
-TEST_MODE    = True
+TEST_MODE    = False
 
 
 # ─── CSS ──────────────────────────────────────────────────────────────────────
@@ -718,25 +718,36 @@ class XDOSInstaller(Gtk.ApplicationWindow):
     }
 
     def _prepare_install_repo(self, username, profile_id):
-        """/iso/nixos-files is read-only. Copy it to a writable path and drop
-        a user.nix there with the chosen username, plus a prime.nix with real
-        PCI bus IDs for PRIME profiles, so the flake picks both up."""
-        src, dest = "/iso/nixos-files", "/tmp/xdos-install/nixos-files"
-        if os.path.exists(dest):
-            shutil.rmtree(dest)
-        shutil.copytree(src, dest)
-        with open(os.path.join(dest, "user.nix"), "w") as f:
-            f.write(f'{{ username = "{username}"; }}\n')
+      src, dest = "/iso/nixos-files", "/tmp/xdos-install/nixos-files"
+      if os.path.exists(dest):
+          shutil.rmtree(dest)
 
-        attr_map = self.PRIME_BUS_ID_MAP.get(profile_id)
-        if attr_map:
-            detected = detect_gpu_bus_ids()
-            attrs = {attr: detected[gpu_key] for attr, gpu_key in attr_map.items() if gpu_key in detected}
-            if attrs:
-                body = "; ".join(f'{k} = "{v}"' for k, v in attrs.items())
-                with open(os.path.join(dest, "prime.nix"), "w") as f:
-                    f.write(f'{{ {body}; }}\n')
-        return dest
+      # Copy but force all files/dirs to be writable (iso squashfs preserves
+      # read-only permissions from the source, so we override them explicitly).
+      def copy_writable(src, dst, **kwargs):
+        shutil.copy2(src, dst)
+        os.chmod(dst, 0o644)
+
+      shutil.copytree(src, dest, copy_function=copy_writable)
+
+      # Also ensure all directories are writable/executable
+      for root, dirs, files in os.walk(dest):
+        os.chmod(root, 0o755)
+        for f in files:
+            os.chmod(os.path.join(root, f), 0o644)
+
+      with open(os.path.join(dest, "user.nix"), "w") as f:
+        f.write(f'{{ username = "{username}"; }}\n')
+
+      attr_map = self.PRIME_BUS_ID_MAP.get(profile_id)
+      if attr_map:
+        detected = detect_gpu_bus_ids()
+        attrs = {attr: detected[gpu_key] for attr, gpu_key in attr_map.items() if gpu_key in detected}
+        if attrs:
+            body = "; ".join(f'{k} = "{v}"' for k, v in attrs.items())
+            with open(os.path.join(dest, "prime.nix"), "w") as f:
+                f.write(f'{{ {body}; }}\n')
+      return dest
 
     def _run_install(self, hw, disk):
         def append(text): GLib.idle_add(self._append_terminal, text)
@@ -758,8 +769,10 @@ class XDOSInstaller(Gtk.ApplicationWindow):
                 append(f"\n✗ Failed to prepare install repo: {e}\n")
                 return
             cmd = ["sudo", "disko-install",
+                   "--mode", "format",
                    "--flake", f"{repo}#{hw['profile_id']}",
-                   "--disk", "main", disk["path"]]
+                   "--disk", "main", disk["path"],
+                   "--write-efi-boot-entries"]
 
         append(f"$ {' '.join(cmd)}\n\n")
         try:
@@ -767,6 +780,18 @@ class XDOSInstaller(Gtk.ApplicationWindow):
             for line in proc.stdout: append(line)
             proc.wait()
             if proc.returncode == 0:
+                # disko-install unmounts everything on exit, remount root for password step
+                disk_path = disk["path"]
+                # root is the 3rd partition (after ESP and swap)
+                root_partition = f"{disk_path}3" if not disk_path[-1].isdigit() else f"{disk_path}p3"
+                subprocess.run(["sudo", "mount", root_partition, "/mnt"], check=False)
+                # Copy nixos-files to the installed user's home
+                dest_nixos = f"/mnt/home/{self.user_config['username']}/nixos-files"
+                subprocess.run(["sudo", "cp", "-r", repo, dest_nixos], check=False)
+                subprocess.run(["sudo", "nixos-enter", "--root", "/mnt", "--", "chown", "-R",
+                    f"{self.user_config['username']}:{self.user_config['username']}",
+                    f"/home/{self.user_config['username']}/nixos-files"], check=False)
+                
                 set_status("Installation complete!", "status-done")
                 append("\n✓ Installation finished successfully.\n")
                 GLib.idle_add(lambda: self._continue_btn.set_visible(True))

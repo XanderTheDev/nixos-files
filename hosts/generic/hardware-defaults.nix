@@ -1,4 +1,4 @@
-{ ... }: {
+{ inputs, pkgs, ... }: {
   # Generic/unknown hardware: no per-machine hardware-configuration.nix
   # exists, so use broadly-safe defaults. disks.nix (disko) provides
   # fileSystems.* — this only covers the rest of what that file normally
@@ -6,6 +6,9 @@
   boot.initrd.availableKernelModules = [
     "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" "sdhci_pci"
   ];
+ 
+  boot.kernelPackages = inputs.cachyos-kernel.legacyPackages.${pkgs.system}.linuxPackages-cachyos-latest;
+ 
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
   boot.extraModulePackages = [ ];

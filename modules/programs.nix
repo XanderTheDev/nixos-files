@@ -103,7 +103,6 @@
     ripgrep
     rust-analyzer
     rustup
-    kdePackages.sddm
     spotify
     swaynotificationcenter
     thunderbird

@@ -9,13 +9,14 @@
 #   3. Set disko.enableConfig = false in ./disks.nix (like hosts/laptop)
 #   4. Fill in the real Nvidia/Intel PCI bus IDs (prime.nix, or run the
 #      installer again so it detects them)
-{ lib, ... }: {
+{ inputs, pkgs, lib, ... }: {
   boot.initrd.availableKernelModules = [
     "nvme" "xhci_pci" "ahci" "usb_storage" "sd_mod" "thunderbolt"
   ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+  boot.kernelPackages = inputs.cachyos-kernel.legacyPackages.${pkgs.system}.linuxPackages-cachyos-latest;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
