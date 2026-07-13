@@ -32,14 +32,5 @@
           ReadWritePaths = [ "/etc/resolv.conf" ];
         };
         
-        systemd.services.auto-cpufreq.serviceConfig = {
-          ProtectHome = true;
-          ProtectSystem = "strict";
-          PrivateTmp = true;
-          ProtectKernelLogs = true;
-          RestrictNamespaces = true;
-          ReadWritePaths = [ "/var/run/auto-cpufreq.stats" ];
-        };
-
         security.pki.certificateFiles = [ ../caddy-root.crt ];
 }

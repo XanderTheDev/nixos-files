@@ -30,8 +30,37 @@ in {
     eval-cache = true;
   };
 
-  services.i2p = {
-    enable = true;
+  services.i2pd = {
+          enable = true;
+          enableIPv6 = false;
+          address = "127.0.0.1";  # bind address for local services
+          proto = {
+            http = {
+              enable = true;
+              address = "127.0.0.1";
+              port = 7070;
+            };
+            httpProxy = {
+              enable = true;
+              address = "127.0.0.1";
+              port = 4444;
+            };
+            socksProxy = {
+              enable = true;
+              address = "127.0.0.1";
+              port = 4447;
+            };
+            sam = {
+              enable = true;
+              address = "127.0.0.1";
+              port = 7656;
+            };
+            i2cp = {
+              enable = true;
+              address = "127.0.0.1";
+              port = 7654;
+            };
+          };
   };
 
   networking.firewall.enable = true;
