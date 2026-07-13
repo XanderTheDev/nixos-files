@@ -33,7 +33,26 @@ in {
   services.i2pd = {
           enable = true;
           enableIPv6 = false;
+          bandwidth = 30000; 
+          share = 80;   
           address = "127.0.0.1";  # bind address for local services
+
+          outTunnels = {
+              postman-pop3 = {
+                enable = true;
+                address = "127.0.0.1";
+                port = 7660;
+                destination = "pop.postman.i2p";
+              };
+
+              postman-smtp = {
+                enable = true;
+                address = "127.0.0.1";
+                port = 7659;
+                destination = "smtp.postman.i2p";
+              };
+          };
+
           proto = {
             http = {
               enable = true;
