@@ -24,7 +24,7 @@ let
     adwaita-icon-theme
     hicolor-icon-theme
     font-awesome
-    networkmanagerapplet   # provides nm-device-wired, nm-signal-*, etc.
+    networkmanagerapplet
   ];
 
   xdgDataDirsPath = lib.makeSearchPath "share" iconPackages;
@@ -224,4 +224,3 @@ in
   system.nixos.distroId = "xdos";
   system.nixos.label = "XDOS-26.05";
 }
-

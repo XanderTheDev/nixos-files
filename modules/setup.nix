@@ -25,9 +25,13 @@ in {
     trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
-    keep-outputs = true;
-    keep-derivations = true;
+    keep-outputs = false;
+    keep-derivations = false;
     eval-cache = true;
+  };
+
+  services.i2p = {
+    enable = true;
   };
 
   networking.firewall.enable = true;
@@ -54,22 +58,22 @@ in {
     };
   };
 
-  services.minidlna = {
-    enable = true;
-    openFirewall = true;
-    settings = {
-      friendly_name = "Xander DLNA";
-      media_dir = [
-        "V,/srv/media/Movies"
-        "A,/srv/media/Music"
-        "P,/srv/media/Pictures"
-      ];
-      inotify = "yes";
-      notify_interval = 900;
-      log_level = "info";
-      wide_links = "yes";
-    };
-  };
+  # services.minidlna = {
+  #   enable = true;
+  #   openFirewall = true;
+  #   settings = {
+  #     friendly_name = "Xander DLNA";
+  #     media_dir = [
+  #       "V,/srv/media/Movies"
+  #       "A,/srv/media/Music"
+  #       "P,/srv/media/Pictures"
+  #     ];
+  #     inotify = "yes";
+  #     notify_interval = 900;
+  #     log_level = "info";
+  #     wide_links = "yes";
+  #   };
+  # };
 
   programs.hyprland.enable = true;
   security.pam.services.hyprlock = {};
