@@ -62,6 +62,15 @@
     fd
     ffmpegthumbnailer
     firefox
+    (makeDesktopItem {
+      name = "firefox-i2p";
+      desktopName = "Firefox (I2P)";
+      genericName = "Web Browser";
+      exec = "firefox -P i2p %U";
+      icon = "firefox";
+      terminal = false;
+      categories = [ "Network" "WebBrowser" ];
+    })
     foot
     fzf
     gcc

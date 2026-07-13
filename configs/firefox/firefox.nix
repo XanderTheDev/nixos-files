@@ -43,6 +43,8 @@ in {
     configPath = ".mozilla/firefox";
 
     profiles.default = {
+      id = 0;
+      isDefault = true;
       search = {
         force = true;
         default = "Default";
@@ -77,7 +79,6 @@ in {
         addons.privacy-badger
         addons.youtube-shorts-block
         videoBackgroundPlayFix
-        noScript
         returnYoutubeDislikes
       ];
       settings = {
@@ -120,6 +121,81 @@ in {
         "network.dns.disablePrefetchFromHTTPS" = false;
         "dom.security.https_only_mode_send_http_background_request" = true;
         "dom.event.clipboardevents.enabled" = true;
+      };
+    };
+    profiles.i2p = {
+      id = 1;
+      isDefault = false;
+      search = {
+        force = true;
+        default = "Default";
+        engines = {
+          "Default" = {
+            urls = [{ template = searchEngineUrl; }];
+            definedAliases = [ "@b" ];
+          };
+          "google".metaData.hidden = true;
+          "bing".metaData.hidden = true;
+          "amazondotcom-us".metaData.hidden = true;
+          "ebay".metaData.hidden = true;
+        };
+      };
+      extraConfig = builtins.readFile "${pkgs.arkenfox-userjs}/user.js";
+      extensions.packages = [
+        addons.ublock-origin
+        addons.darkreader
+        addons.privacy-badger
+        noScript
+      ];
+      settings = {
+        "browser.safebrowsing.malware.enabled" = true;
+        "browser.safebrowsing.phishing.enabled" = true;
+        "privacy.resistFingerprinting" = true;
+        "privacy.resistFingerprinting.letterboxing" = true;
+        "privacy.trackingprotection.fingerprinting.enabled" = true;
+        "privacy.resistFingerprinting.autoDeclineNoUserInputCanvasPrompts" = true;
+        "privacy.resistFingerprinting.randomDataOnCanvasExtract" = true;
+        "privacy.resistFingerprinting.reduceTimerPrecision.jitter" = true;
+        "privacy.resistFingerprinting.randomization.daily_reset.enabled" = true;
+        "privacy.resistFingerprinting.randomization.daily_reset.private.enabled" = true;
+        "network.cookie.cookiebehavior" = 5;
+        "privacy.trackingprotection.enabled" = true;
+        "privacy.globalprivacycontrol.enabled" = true;
+        "toolkit.telemetry.unified" = false;
+        "toolkit.telemetry.enabled" = false;
+        "browser.ping-centre.telemetry" = false;
+        "extensions.pocket.enabled" = false;
+        "network.prefetch-next" = false;
+        "network.dns.disablePrefetch" = true;
+        "network.predictor.enabled" = false;
+        "dom.security.https_only_mode" = false;
+        "extensions.autoDisableScopes" = 0;
+        "network.trr.mode" = 5;
+        "browser.shell.checkDefaultBrowser" = false;
+        "toolkit.cosmeticAnimations.enabled" = false;
+        "startup.homepage_welcome_url" = "";
+        "startup.homepage_welcome_url.additional" = "";
+        "accessibility.force_disabled" = 1;
+        "app.normandy.enabled" = false;
+        "app.shield.optoutstudies.enabled" = false;
+        "app.update.auto" = false;
+        "browser.startup.firstrunSkipsHomepage" = true;
+        "browser.newtab.preload" = true;
+        "datareporting.usage.uploadEnabled" = false;
+        "network.http.speculative-parallel-limit" = 6;
+        "dom.event.clipboardevents.enabled" = true;
+        "network.proxy.type" = 1;  # 1 = manual proxy configuration
+        "network.proxy.http" = "127.0.0.1";
+        "network.proxy.http_port" = 4444;
+        "network.proxy.ssl" = "127.0.0.1";
+        "network.proxy.ssl_port" = 4444;
+        "network.proxy.share_proxy_settings" = true; 
+        "network.proxy.socks" = "127.0.0.1";
+        "network.proxy.socks_port" = 4447;
+        "network.proxy.socks_version" = 5;
+        "network.proxy.no_proxies_on" = "";
+        "media.peerconnection.enabled" = false;
+        "privacy.spoof_english" = 2;
       };
     };
   };
