@@ -1,4 +1,5 @@
-{ inputs, config, lib, pkgs, ... }: {
+{ inputs, config, lib, pkgs, ... }:
+{
   imports = [
     ./hardware-configuration.nix
     ./disks.nix
@@ -19,6 +20,24 @@
     "rd.systemd.show_status=auto"
     "video=efifb:off"
   ];
+
+  systemd.services.fix-vivobook-mic = {
+    description = "Force correct ALC256 internal mic source";
+    serviceConfig.Type = "oneshot";
+    script = ''
+      ${pkgs.alsa-utils}/bin/amixer -c 1 cset numid=6 2 || true
+      ${pkgs.alsa-utils}/bin/amixer -c 1 cset numid=11 2 || true
+      ${pkgs.alsa-utils}/bin/amixer -c 1 cset numid=8 on || true
+    '';
+  };
+
+  systemd.timers.fix-vivobook-mic = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnBootSec = "3s";
+      OnUnitActiveSec = "3s";
+    };
+  };
 
   services.auto-cpufreq = {
     enable = true;
