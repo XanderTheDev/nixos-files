@@ -30,12 +30,18 @@ in {
     eval-cache = true;
   };
 
+  ### open port for i2pd
+  networking.firewall.allowedUDPPorts = [ 23166 ];
+  networking.firewall.allowedTCPPorts = [ 23166 ];
+
   services.i2pd = {
           enable = true;
           enableIPv6 = false;
-          bandwidth = 30000; 
+          bandwidth = 25000; 
           share = 80;   
           address = "127.0.0.1";  # bind address for local services
+
+          port = 23166;
 
           outTunnels = {
               postman-pop3 = {
@@ -106,22 +112,22 @@ in {
     };
   };
 
-  # services.minidlna = {
-  #   enable = true;
-  #   openFirewall = true;
-  #   settings = {
-  #     friendly_name = "Xander DLNA";
-  #     media_dir = [
-  #       "V,/srv/media/Movies"
-  #       "A,/srv/media/Music"
-  #       "P,/srv/media/Pictures"
-  #     ];
-  #     inotify = "yes";
-  #     notify_interval = 900;
-  #     log_level = "info";
-  #     wide_links = "yes";
-  #   };
-  # };
+  services.minidlna = {
+    enable = true;
+    openFirewall = true;
+    settings = {
+      friendly_name = "Xander DLNA";
+      media_dir = [
+        "V,/srv/media/Movies"
+        "A,/srv/media/Music"
+        "P,/srv/media/Pictures"
+      ];
+      inotify = "yes";
+      notify_interval = 900;
+      log_level = "info";
+      wide_links = "yes";
+    };
+  };
 
   programs.hyprland.enable = true;
   security.pam.services.hyprlock = {};
