@@ -57,15 +57,15 @@ services.elo-mt-usb = {
 - Only tested against an IntelliTouch (SAW) dual-touch controller. The
   driver package also lists TouchPro PCAP controllers as supported, but
   I can't confirm PCAP behavior since I don't own that hardware variant.
-- SAW hardware is physically limited to 2 simultaneous touch points —
+- SAW hardware is physically limited to 2 simultaneous touch points,
   this is a sensing-technology limit, not a driver limitation, so don't
   expect >2 fingers to ever work regardless of driver tweaks.
 - The binary has several paths hardcoded into it at compile time
   (`/etc/opt/elo-mt-usb/config.txt`, `/var/log/elo-mt-usb/`,
-  `/dev/elo-mt-usb/*_fifo`) — the module works around this with
+  `/dev/elo-mt-usb/*_fifo`). The module works around this with
   `environment.etc`, `systemd.tmpfiles.rules`, and an `ExecStartPre`
   script rather than trying to relocate the binary's own paths.
-- Unfree, vendor-redistributed binary — fetched at build time from
+- Unfree, vendor-redistributed binary; fetched at build time from
   Elo's own download URL, not mirrored in this repo. If that URL ever
   moves, the fetch will break; there's no fallback mirror yet.
 
@@ -111,8 +111,8 @@ in {
 ```
 
 **Notes:**
-- Paper size is hardcoded to A4 (see the `sed` calls in the derivation)
-  — I couldn't get paper-format switching working reliably through the
+- Paper size is hardcoded to A4 (see the `sed` calls in the derivation).
+  I couldn't get paper-format switching working reliably through the
   Brother wrapper scripts, and A4 covers the common case, so I didn't
   chase it further.
 - Unfree, vendor-redistributed binary (Brother's own `.deb` packages),
