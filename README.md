@@ -74,7 +74,7 @@ services.elo-mt-usb = {
 ## Brother MFC-6490CW Printer Driver
 
 `pkgs/mfc6490cw-driver.nix` packages Brother's LPR + CUPS wrapper driver
-for the MFC-6490CW — an old, unmaintained vendor `.deb` repackaged for
+for the MFC-6490CW; an old, unmaintained vendor `.deb` repackaged for
 Nix. There's an [open nixpkgs PR](https://github.com/NixOS/nixpkgs/pull/512956)
 for this that's been sitting without a reviewer since April 2026, so
 until that lands (if ever), it lives here.
